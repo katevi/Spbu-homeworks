@@ -1,12 +1,12 @@
 #include <iostream>
 
-int binPow(int aEntered, int nEntered) {
-	if (nEntered == 0)
+int binPow(int number, int degree) {
+	if (degree == 0)
 		return 1;
-	if (nEntered % 2 == 1)
-		return binPow(aEntered, nEntered - 1) * aEntered;
+	if (degree % 2 == 1)
+		return binPow(number, degree - 1) * number;
 	else {
-		int result = binPow(aEntered, nEntered / 2);
+		int result = binPow(number, degree / 2);
 		return result * result;
 	}
 }
