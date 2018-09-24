@@ -1,21 +1,21 @@
 #include <iostream>
 #include <cstring>
+
+void arrayToEnter(char a[256], char text[])
+{
+	std::cout << text;
+	for (int count; count < 256; count++)
+		a[count] = ' ';
+	std::cin >> a;
+}
+
 int main()
 {
-	std::cout << "Enter main string:";
-	char mainString[256];
-	for (int i = 0; i < 256; i++)
-		mainString[i] = ' ';
-	std::cin >> mainString;
-	int lengthMainString = strlen(mainString);
-
-	std::cout << "Enter  substring:";
-	char subString[256];
-	for (int i = 0; i < 256; i++)
-		subString[i] = ' ';
-	std::cin >> subString;
+	char mainString[256]; char subString[256];
+	arrayToEnter(mainString, "Enter the string:");
+	arrayToEnter(subString, "Enter the substring:");
 	int lengthSubString = strlen(subString);
-
+	int lengthMainString = strlen(mainString);
 	int sum = 0;
 	for (int i = lengthSubString - 1; i < lengthMainString; i++)
 	{
