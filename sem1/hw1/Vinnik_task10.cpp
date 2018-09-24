@@ -8,18 +8,18 @@ int main()
 		str[i] = ' ';
 	std::cin >> str;
    
-    	bool isSame = true;
+    bool isSame = true;
 	int length = strlen(str);
 	int count = 0;
 	while (count <= length)
 	{
-	    if (str[count] != str[length-1-count])
+	    if (str[count] != str[length - 1 - count])
 	        isSame = false;
 	   count++;
 	}	
 
 	if (isSame)
 		std::cout << "This string is palindrome";
-	if (!isSame)
+	else
 		std::cout << "This string is not palindrome";
 }
