@@ -16,23 +16,31 @@ int digitsSort(int digits[])
 
 int main()
 {
-    const int _NUMBER = 10;
+    const int numberOfCells = 10;
     std::cout << "Enter the number:";
     int number;
     std::cin >> number;
     
-    int digitsOfNumber[_NUMBER];
-    for (int i = 0; i < _NUMBER; i++)
+    int digitsOfNumber[numberOfCells];
+    for (int i = 0; i < numberOfCells; i++)
     digitsOfNumber[i] = -1;
     
     int i = number;
     int j = 0;
+	int countZero;
     while (i > 0)
     {
-        digitsOfNumber[j] = i % 10;
-        i = i / 10;
-        j = j + 1;
-        
+		if (i % 10 == 0)
+		{
+			countZero++;
+			i = i / 10;
+		}
+		else
+		{
+			digitsOfNumber[j] = i % 10;
+			i = i / 10;
+			j++;
+		}
     }
     
     digitsSort(digitsOfNumber);
@@ -42,6 +50,9 @@ int main()
         i++;
 
     std::cout << "The smallest number formed by the digits of a given number:";
-    for (int j = i; j < _NUMBER; j++)
+	std::cout << digitsOfNumber[i];
+	for (int k = 1; k <= countZero; k++)
+		std::cout << 0;
+    for (int j = i + 1; j < numberOfCells; j++)
         std::cout << digitsOfNumber[j];
 }
