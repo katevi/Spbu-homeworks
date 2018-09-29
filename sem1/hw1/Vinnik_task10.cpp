@@ -7,8 +7,8 @@ int main()
 	for (int i = 0; i < 256; i++)
 		str[i] = ' ';
 	std::cin >> str;
-   
-    bool isSame = true;
+	
+	bool isSame = true;
 	int length = strlen(str);
 	int count = 0;
 	while (count <= length)
