@@ -34,7 +34,7 @@ void waysToOutput(int number, int upperBound, int numberOfCell, int terms[])
 
 int main()
 {
-	std::cout << "Enter the number:";
+	std::cout << "Enter the number: ";
 	int number;
 	std::cin >> number;
 	int arrayOfTerms[50];
