@@ -1,13 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-void arrayZeroing(int array[127])
-{
-	for (int i = 0; i < 127; i++)
-		array[i] = 0;
-}
-
-void countingLetters(int array[127], char *string, int lengthString)
+void countingLetters(int array[], char *string, int lengthString)
 {
 	for (int i = 0; i < lengthString; i++)
 	{
@@ -19,6 +13,7 @@ void countingLetters(int array[127], char *string, int lengthString)
 
 int main()
 {
+	int const numberOfCodes = 127;
 	std::cout << "Enter first string:";
 	char *string1 = new char;
 	std::cin >> string1;
@@ -29,10 +24,8 @@ int main()
 
 	if (strlen(string1) == strlen(string2))
 	{
-		int array1[127];
-		arrayZeroing(array1);
-		int array2[127];
-		arrayZeroing(array2);
+		int array1[numberOfCodes] = {0};
+		int array2[numberOfCodes] = {0};
 
 		int lengthString1 = strlen(string1);
 		int lengthString2 = strlen(string2);
@@ -40,7 +33,7 @@ int main()
 		countingLetters(array2, string2, lengthString2);
 
 		bool isSame = true;
-		for (int i = 0; i < 127; i++)
+		for (int i = 0; i < numberOfCodes; i++)
 			if (array2[i] != array1[i])
 				isSame = false;
 
