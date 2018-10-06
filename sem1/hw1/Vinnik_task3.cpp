@@ -22,22 +22,23 @@ void reverse(int currentArray[], int start, int end)
 
 int main()
 {
+	const int arrayLength = 10;
 	std::cout << "Enter pointer (m)";
 	int m = 0;
 	std::cin >> m;
-	int a[10];
+	int a[arrayLength];
 	std::cout << "Start array (before reverse): ";
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < arrayLength; i++)
 	{
 		a[i] = i;
 		std::cout << a[i] << " ";
 	}
 	std::cout << "\n";
 	reverse(a, 0, m - 1);
-	reverse(a, m, 10 - 1);
-	reverse(a, 0, 10 - 1);
+	reverse(a, m, arrayLength - 1);
+	reverse(a, 0, arrayLength - 1);
 
 	std::cout << "Final array (after reverse): ";
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < arrayLength; i++)
 		std::cout << a[i] << " ";
 }
