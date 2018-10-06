@@ -8,8 +8,7 @@ int min(int a, int b)
 		return b;
 }
 
-int terms[50];
-void waysToOutput(int number, int upperBound, int numberOfCell)
+void waysToOutput(int number, int upperBound, int numberOfCell, int terms[])
 {
 	int i = 0;
 	if (number > 0)
@@ -17,7 +16,7 @@ void waysToOutput(int number, int upperBound, int numberOfCell)
 		for (i = 1; i <= upperBound; i++)
 		{
 			terms[numberOfCell] = i;
-			waysToOutput(number - i, min(i, number - i), numberOfCell + 1);
+			waysToOutput(number - i, min(i, number - i), numberOfCell + 1, terms);
 		}
 	}
 	else
@@ -38,5 +37,8 @@ int main()
 	std::cout << "Enter the number: ";
 	int number;
 	std::cin >> number;
-	waysToOutput(number, number - 1, 0);
+	int terms[50];
+	for (int i = 0; i < 50; i++)
+		terms[i] = 0;
+	waysToOutput(number, number - 1, 0, terms);
 }
