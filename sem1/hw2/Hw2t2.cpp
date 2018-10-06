@@ -37,8 +37,8 @@ int main()
 	std::cout << "Enter the number: ";
 	int number;
 	std::cin >> number;
-	int terms[50];
+	int arrayOfTerms[50];
 	for (int i = 0; i < 50; i++)
-		terms[i] = 0;
-	waysToOutput(number, number - 1, 0, terms);
+		arrayOfTerms[i] = 0;
+	waysToOutput(number, number - 1, 0, arrayOfTerms);
 }
