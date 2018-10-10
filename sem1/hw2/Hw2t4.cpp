@@ -27,7 +27,7 @@ int main()
     
     int i = number;
     int j = 0;
-	int countZero;
+	int countZero = 0;
     while (i > 0)
     {
 		if (i % 10 == 0)
@@ -55,4 +55,5 @@ int main()
 		std::cout << 0;
     for (int j = i + 1; j < numberOfCells; j++)
         std::cout << digitsOfNumber[j];
+	system("pause");
 }
