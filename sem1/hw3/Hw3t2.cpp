@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 
-void countingLetters(int array[], char *string, int lengthString)
+void countingLetters(int array[], char string[], int lengthString)
 {
 	for (int i = 0; i < lengthString; i++)
 	{
@@ -10,25 +10,28 @@ void countingLetters(int array[], char *string, int lengthString)
 	}
 }
 
-
 int main()
 {
 	int const numberOfCodes = 127;
+	std::cout << "Enter length of first string:";
+	int lengthString1 = 0;
+	std::cin >> lengthString1;
 	std::cout << "Enter first string:";
-	char *string1 = new char;
+	char *string1 = new char[lengthString1];
 	std::cin >> string1;
 
+	std::cout << "Enter length of second string:";
+	int lengthString2 = 0;
+	std::cin >> lengthString2;
 	std::cout << "Enter second string:";
-	char *string2 = new char;
+	char *string2 = new char[lengthString2];
 	std::cin >> string2;
 
-	if (strlen(string1) == strlen(string2))
+	if (lengthString2 == lengthString1)
 	{
 		int array1[numberOfCodes] = {0};
 		int array2[numberOfCodes] = {0};
 
-		int lengthString1 = strlen(string1);
-		int lengthString2 = strlen(string2);
 		countingLetters(array1, string1, lengthString1);
 		countingLetters(array2, string2, lengthString2);
 
@@ -37,7 +40,7 @@ int main()
 			if (array2[i] != array1[i])
 				isSame = false;
 
-		if (isSame == true)
+		if (isSame)
 			std::cout << "It is possible to make the second line from the first";
 		else std::cout << "It is impossible to make the second line from the first";
 
