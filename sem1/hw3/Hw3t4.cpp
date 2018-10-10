@@ -1,8 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
 #include <cstdlib>
-=======
->>>>>>> 0c7d8db1326ae83e959ce7e0cddf28325fc3d481
 
 void numberToArray(int array[], int number)
 {
@@ -35,10 +32,7 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 				{
 					B++;
 					arrayHidden[j] = -2;
-<<<<<<< HEAD
 					arrayCurrent[i] = -1;
-=======
->>>>>>> 0c7d8db1326ae83e959ce7e0cddf28325fc3d481
 				}
 			}
 		}
@@ -47,12 +41,8 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 
 int main()
 {
-<<<<<<< HEAD
 	srand(time(NULL));
 	const int constHiddenNumber = rand() % (9999 - 1000 + 1) + 1000;
-=======
-	const int constHiddenNumber = 1402;
->>>>>>> 0c7d8db1326ae83e959ce7e0cddf28325fc3d481
 	int hiddenNumber = constHiddenNumber;
 	int currentNumber = 0;
 	int digitsHiddenNumber[4]{ 0 };
@@ -83,11 +73,7 @@ int main()
 		{
 			A = 4;
 			B = 0;
-<<<<<<< HEAD
 			std::cout << "You lose!" << "Hidden number =" << constHiddenNumber;
-=======
-			std::cout << "You lose!";
->>>>>>> 0c7d8db1326ae83e959ce7e0cddf28325fc3d481
 		}
 	}
 	if (count <= 10)
