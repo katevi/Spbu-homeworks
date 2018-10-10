@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 void numberToArray(int array[], int number)
 {
@@ -31,6 +32,7 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 				{
 					B++;
 					arrayHidden[j] = -2;
+					arrayCurrent[i] = -1;
 				}
 			}
 		}
@@ -39,7 +41,8 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 
 int main()
 {
-	const int constHiddenNumber = 1402;
+	srand(time(NULL));
+	const int constHiddenNumber = rand() % (9999 - 1000 + 1) + 1000;
 	int hiddenNumber = constHiddenNumber;
 	int currentNumber = 0;
 	int digitsHiddenNumber[4]{ 0 };
@@ -70,7 +73,7 @@ int main()
 		{
 			A = 4;
 			B = 0;
-			std::cout << "You lose!";
+			std::cout << "You lose!" << "Hidden number =" << constHiddenNumber;
 		}
 	}
 	if (count <= 10)
