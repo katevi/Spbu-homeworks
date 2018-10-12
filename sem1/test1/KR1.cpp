@@ -45,7 +45,7 @@ int main()
 	int length1 = 0;
 	std::cin >> length1;
 	std::cout << "Enter first stack";
-	int *stack1 = new int[length1];
+	int *stack1 = new int[length1] {0};
 	for (int i = 0; i < length1; i++)
 		std::cin >> stack1[i];
 
@@ -53,22 +53,23 @@ int main()
 	int length2 = 0;
 	std::cin >> length2;
 	std::cout << "Enter first stack";
-	int *stack2 = new int[length2];
+	int *stack2 = new int[length2] {0};
 	for (int i = 0; i < length2; i++)
 		std::cin >> stack2[i];
 
 	int k = 0;
-	int *stack0 = new int[length1 + length2];
+	int *stack0 = new int[length1 + length2]{ 0 };
 	for (int i = 0; i < length1; i++)
 		stack0[i] = stack1[i];
-	for (int i = length1; i < length2; i++)
+	for (int i = length1; i < length2 + length1; i++)
 	{
-		stack0[i] = stack1[k];
+		stack0[i] = stack2[k];
 		k++;
 	}
 	for (int i = 0; i < length1 + length2; i++)
 		std::cout << stack0[i];
 	quickSort(stack0, 0, length1 + length2);
+	std::cout << "Finish stack";
 	for (int i = 0; i < length1 + length2; i++)
 		std::cout << stack0[i] << " ";
 	system("pause");
