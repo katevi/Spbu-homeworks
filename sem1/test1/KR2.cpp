@@ -68,10 +68,10 @@ int main()
 	int k = 0;
 	for (int i = 0; i < length; i++)
 	if (i % 2 == 0)
-		{
-			evenNumbers[k] = numbers[i];
-			k++;
-		}
+	{
+		evenNumbers[k] = numbers[i];
+		k++;
+	}
 
 	sortInsert(evenNumbers, lengthOfEven);
 
