@@ -10,18 +10,16 @@ void numberToArray(int array[], int number)
 	}
 }
 
-void findingA(int arrayHidden[], int arrayCurrent[], int &A)
+void findingBull(int arrayHidden[], int arrayCurrent[], int &bull)
 {
 	for (int i = 0; i < 4; i++)
 		if (arrayCurrent[i] == arrayHidden[i])
 		{
-			A++;
-			arrayCurrent[i] = -1;
-			arrayHidden[i] = -2;
+			bull++;
 		}
 }
 
-void findingB(int arrayHidden[], int arrayCurrent[], int &B)
+void findingCow(int arrayHidden[], int arrayCurrent[], int &cow)
 {
 	for (int i = 0; i < 4; i++)
 		for (int j = 0; j < 4; j++)
@@ -30,9 +28,7 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 			{
 				if (arrayCurrent[i] == arrayHidden[j])
 				{
-					B++;
-					arrayHidden[j] = -2;
-					arrayCurrent[i] = -1;
+					cow++;
 				}
 			}
 		}
@@ -41,38 +37,39 @@ void findingB(int arrayHidden[], int arrayCurrent[], int &B)
 
 int main()
 {
-	srand(time(NULL));
-	const int constHiddenNumber = rand() % (9999 - 1000 + 1) + 1000;
+	int const constHiddenNumber = 7593;
 	int hiddenNumber = constHiddenNumber;
 	int currentNumber = 0;
 	int digitsHiddenNumber[4]{ 0 };
 	int digitsCurrentNumber[4]{ 0 };
 	numberToArray(digitsHiddenNumber, hiddenNumber);
-	int A = 0;
-	int B = 0;
+	int bull = 0;
+	int cow = 0;
 	int count = 1;
 
+	std::cout << "A (bull) - means your number has a number that is the original number and is in the same place as the original number \n";
+	std::cout << "B (cow) - means your number has a number that is the original number, but is not in the same place as the original number \n";
 	std::cout << "You have ten attempts to guess the hidden number. Enter numbers...\n";
-	while (not((A == 4) and (B == 0)))
+	while (!((bull == 4) && (cow == 0)))
 	{
 		if (count <= 10)
 		{
-			A = 0;
-			B = 0;
+			bull = 0;
+			cow = 0;
 			hiddenNumber = constHiddenNumber;
 			numberToArray(digitsHiddenNumber, hiddenNumber);
 			std::cout << count << ". Entered number:";
 			std::cin >> currentNumber;
 			numberToArray(digitsCurrentNumber, currentNumber);
-			findingA(digitsHiddenNumber, digitsCurrentNumber, A);
-			findingB(digitsHiddenNumber, digitsCurrentNumber, B);
-			std::cout << "Result: " << A << "A" << B << "B\n";
+			findingBull(digitsHiddenNumber, digitsCurrentNumber, bull);
+			findingCow(digitsHiddenNumber, digitsCurrentNumber, cow);
+			std::cout << "Result: " << bull << "A" << cow << "B\n";
 			count++;
 		}
 		if (count > 10)
 		{
-			A = 4;
-			B = 0;
+			bull = 4;
+			cow = 0;
 			std::cout << "You lose!" << "Hidden number =" << constHiddenNumber;
 		}
 	}
