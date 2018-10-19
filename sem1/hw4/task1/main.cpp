@@ -19,7 +19,7 @@ int main()
 		add(list, i);
 	cicle(list);
 	deletingElements(list, m - 1);
-	std::cout << "Numbers of soldiers left alive:";
+	std::cout << "Number of soldier left alive:";
 	print(list, m - 1);
 	system("pause");
 }
