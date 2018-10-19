@@ -2,9 +2,7 @@
 
 int main()
 {
-	FILE *file;
-	fopen_s(&file, "cppstudio.txt", "r");   
-
+	FILE *file = fopen("cppstudio.txt", "r");   
 	char currentSymbol = ' ';
 	int count = 0;
 	bool isNotEmpty = false;
@@ -25,5 +23,4 @@ int main()
 	}
 	std::cout << "Number of non-empty rows:" << count;
 	fclose(file);
-	system("pause");
 }
