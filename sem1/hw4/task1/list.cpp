@@ -77,3 +77,10 @@ void cicle(List* list)
 	}
 	current->next = list->first;
 }
+
+void deleteList(List *list)
+{
+	ListElement *current = list->first;
+	delete current;
+	delete list;
+}

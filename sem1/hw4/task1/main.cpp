@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "list.h"
-#include "list.cpp"
 #include <iostream>
-
+#include "list.cpp"
 
 int main()
 {
@@ -21,5 +20,6 @@ int main()
 	deletingElements(list, m - 1);
 	std::cout << "Number of soldier left alive:";
 	print(list, m - 1);
+	deleteList(list);
 	system("pause");
 }
