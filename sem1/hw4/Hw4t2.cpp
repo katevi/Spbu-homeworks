@@ -36,10 +36,11 @@ int readingFile(struct subScriber array[100])
 
 void saveToFile()
 {
-	int c;
+	int c = 0;
 	FILE *tempFile = fopen("buffer.txt", "r");
 	FILE *finalFile = fopen("Telephones.txt", "a");
-	while ((c = getc(tempFile)) != EOF) {
+	while ((c = getc(tempFile)) != EOF) 
+	{
 		fputc(c, finalFile);
 	}
 	fclose(tempFile);
