@@ -72,7 +72,8 @@ void deletingElements(List *list, int m)
 void cicle(List* list)
 {
 	ListElement* current = list->first;
-	while (current->next != nullptr) {
+	while (current->next != nullptr) 
+	{
 		current = current->next;
 	}
 	current->next = list->first;
