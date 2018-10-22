@@ -9,20 +9,21 @@ int main()
 	char currentSymbol = ' ';
 	int count = 0;
 	bool isNotEmpty = false;
-	if (file == NULL) perror("Error opening file");
+	if (file == NULL) 
+		perror("Error opening file");
 	else
 	{
 		while (!feof(file))
 		{
 			currentSymbol = fgetc(file);
-			if ((currentSymbol != ' ') and (currentSymbol != '\n') and (currentSymbol != '\t'))
+			if ((currentSymbol != ' ') && (currentSymbol != '\n') && (currentSymbol != '\t'))
 				isNotEmpty = true;
-			if ((currentSymbol == '\n') and (isNotEmpty))
+			if ((currentSymbol == '\n') && (isNotEmpty))
 			{
 				count++;
 				isNotEmpty = false;
 			}
-			if ((currentSymbol == EOF) and (isNotEmpty) and (count > 0))
+			if ((currentSymbol == EOF) && (isNotEmpty) and (count > 0))
 				count++;
 		}
 	}
