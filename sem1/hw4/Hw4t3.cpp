@@ -29,5 +29,4 @@ int main()
 	}
 	std::cout << "Number of non-empty rows:" << count;
 	fclose(file);
-	system("pause");
 }
