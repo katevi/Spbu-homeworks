@@ -39,5 +39,4 @@ int main()
 	}
 
 	fclose(file);
-	system("pause");
 }
