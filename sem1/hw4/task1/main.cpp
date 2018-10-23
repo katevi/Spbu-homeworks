@@ -17,7 +17,7 @@ int main()
 	for (int i = 0; i < n; i++)
 		add(list, i);
 	cicle(list);
-	deletingElements(list, m - 1);
+	deleteElements(list, m - 1);
 	std::cout << "Number of soldier left alive:";
 	print(list, m - 1);
 	deleteList(list);

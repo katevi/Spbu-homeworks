@@ -10,7 +10,7 @@ void print(List *list, int n)
 {
 	int i = 0;
 	ListElement *current = list->first;
-	while (i < n)
+	for (int i = 0; i < n; i++)
 	{
 		i++;
 		std::cout << current->value << " ";
@@ -22,10 +22,9 @@ int size(List* list)
 {
 	ListElement *current = list->first;
 	int length = 0;
-	while (current->next != list->first)
+	for (current->next; current->next != list->first; current = current->next)
 	{
 		++length;
-		current = current->next;
 	}
 	return length;
 }
@@ -48,7 +47,7 @@ void add(List* list, int x)
 	return;
 }
 
-void deletingElements(List *list, int m)
+void deleteElements(List *list, int m)
 {
 	ListElement *current = list->first;
 	int i = 0;
