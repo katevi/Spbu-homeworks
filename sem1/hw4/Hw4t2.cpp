@@ -2,13 +2,13 @@
 #include <iostream>
 #include <cstdio>
 
-struct subScriber {
+struct Subscriber {
 	char name[50];
 	char surname[50];
 	char number[50];
 };
 
-int readingFile(struct subScriber array[100])
+int readingFile(Subscriber array[])
 {
 	int countCell = 0;
 	FILE *file = fopen("Telephones.txt", "r");
@@ -16,22 +16,16 @@ int readingFile(struct subScriber array[100])
 		std::cout << "No subscribers. Please, add somebody before press 2 or 3.";
 	else
 	{
-		int i = 0;
 		while (!feof(file))
 		{
-			if (i % 3 == 0)
-				fgets(array[countCell].number, 50, file);
-			if (i % 3 == 1)
-				fgets(array[countCell].name, 50, file);
-			if (i % 3 == 2)
-			{
-				fgets(array[countCell].surname, 50, file);
-				countCell++;
-			}
-			i++;
+			fgets(array[countCell].number, 50, file);
+			fgets(array[countCell].name, 50, file);
+			fgets(array[countCell].surname, 50, file);
+			countCell++;
 		}
 	}
 	return countCell;
+	fclose(file);
 }
 
 void saveToFile()
@@ -39,15 +33,14 @@ void saveToFile()
 	int c = 0;
 	FILE *tempFile = fopen("buffer.txt", "r");
 	FILE *finalFile = fopen("Telephones.txt", "a");
-	while ((c = getc(tempFile)) != EOF) 
-	{
+	while ((c = getc(tempFile)) != EOF) {
 		fputc(c, finalFile);
 	}
 	fclose(tempFile);
 	fclose(finalFile);
 }
 
-void addingSubscriber(struct subScriber newSubscriber)
+void addingSubscriber(Subscriber newSubscriber)
 {
 	FILE *file = fopen("buffer.txt", "a");
 	std::cout << "Enter name:";
@@ -66,7 +59,7 @@ void addingSubscriber(struct subScriber newSubscriber)
 	std::cout << "The subscriber was successfully added into buffer. \n";
 }
 
-void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], struct subScriber arrayOfSubscribers[100])
+void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], Subscriber arrayOfSubscribers[])
 {
 	std::cout << "Enter the name:";
 	std::cin >> nameOfSubscriber;
@@ -76,10 +69,12 @@ void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], struct s
 	countCell = readingFile(arrayOfSubscribers);
 	bool isSameName = true;
 	bool isCoincidence = false;
+	int lengthOfName = strlen(nameOfSubscriber);
 	for (int i = 0; i < countCell; i++)
 	{
-		for (int j = 0; j < strlen(nameOfSubscriber); j++)
-			if ((nameOfSubscriber[j] != arrayOfSubscribers[i].name[j]) || (surnameOfSubscriber[j] != arrayOfSubscribers[i].surname[j]))
+		for (int j = 0; j < lengthOfName; j++)
+			if ((nameOfSubscriber[j] != arrayOfSubscribers[i].name[j]) 
+			|| (surnameOfSubscriber[j] != arrayOfSubscribers[i].surname[j]))
 				isSameName = false;
 		if (isSameName)
 		{
@@ -92,7 +87,7 @@ void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], struct s
 		std::cout << "Subscriber not found.\n";
 }
 
-void findingName(char numberOfSubscriber[], struct subScriber arrayOfSubscribers[100])
+void findingName(char numberOfSubscriber[], Subscriber arrayOfSubscribers[])
 {
 	std::cout << "Enter telephone number:";
 	std::cin >> numberOfSubscriber;
@@ -100,9 +95,10 @@ void findingName(char numberOfSubscriber[], struct subScriber arrayOfSubscribers
 	bool isCoincidence = false;
 	int countCell = 0;
 	countCell = readingFile(arrayOfSubscribers);
+	int lengthOfNumber = strlen(numberOfSubscriber);
 	for (int i = 0; i < countCell; i++)
 	{
-		for (int j = 0; j < strlen(numberOfSubscriber); j++)
+		for (int j = 0; j < lengthOfNumber; j++)
 			if (numberOfSubscriber[j] != arrayOfSubscribers[i].number[j])
 			{
 				isSameName = false;
@@ -124,13 +120,11 @@ int main()
 	std::cout << "Welcome to the interactive phone book! Press: \n '0' - if you want to exit \n '1' - if you want to add subscriber \n '2' - if you want to find number \n '3' - if you want to find name \n '4' - if you want to save it into the file \n";
 	int option = 0;
 	std::cin >> option;
-	struct subScriber arrayOfSubscribers[100]{ "","" };
+	Subscriber arrayOfSubscribers[100]{ "","" };
 	char nameCurrent[50];
 	char numberCurrent[50];
 	char surnameCurrent[50];
-	FILE *file = fopen("Telephones.txt", "r");
-
-	if ((option > 4) or (option < 0))
+	if ((option > 4) || (option < 0))
 		std::cout << "Choose 0, 1, 2, 3 or 4!";
 	else
 	{
@@ -140,7 +134,7 @@ int main()
 			{
 				case 1:
 				{
-					struct subScriber newSubscriber { };
+					Subscriber newSubscriber { };
 					addingSubscriber(newSubscriber);
 					break;
 				}
@@ -172,6 +166,4 @@ int main()
 		}
 		std::cout << "Phone book exit...";
 	}
-	
-	system("pause");
 }
