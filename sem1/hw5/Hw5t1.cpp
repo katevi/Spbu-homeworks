@@ -34,4 +34,7 @@ int main()
 			if (j == sideOfArray - 1)
 				std::cout << "\n";
 		}
+	for (int i = 0; i < sideOfArray; i++)
+		delete[] numbers[i];
+	delete[] numbers;
 }
