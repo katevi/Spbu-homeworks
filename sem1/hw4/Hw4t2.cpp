@@ -1,8 +1,8 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
+#include <cstring>
 #include <cstdio>
 
-struct Subscriber {
+struct Subscriber 
+{
 	char name[50];
 	char surname[50];
 	char number[50];
@@ -13,7 +13,9 @@ int readingFile(Subscriber array[])
 	int countCell = 0;
 	FILE *file = fopen("Telephones.txt", "r");
 	if (file == NULL)
-		std::cout << "No subscribers. Please, add somebody before press 2 or 3.";
+	{
+		printf("No subscribers. Please, add somebody before press 2 or 3.");
+	}
 	else
 	{
 		while (!feof(file))
@@ -33,7 +35,8 @@ void saveToFile()
 	int c = 0;
 	FILE *tempFile = fopen("buffer.txt", "r");
 	FILE *finalFile = fopen("Telephones.txt", "a");
-	while ((c = getc(tempFile)) != EOF) {
+	while ((c = getc(tempFile)) != EOF) 
+	{
 		fputc(c, finalFile);
 	}
 	fclose(tempFile);
@@ -43,12 +46,12 @@ void saveToFile()
 void addingSubscriber(Subscriber newSubscriber)
 {
 	FILE *file = fopen("buffer.txt", "a");
-	std::cout << "Enter name:";
-	std::cin >> newSubscriber.name;
-	std::cout << "Enter surname:";
-	std::cin >> newSubscriber.surname;
-	std::cout << "Enter number:";
-	std::cin >> newSubscriber.number;
+	printf("Enter name:");
+	scanf("%s", newSubscriber.name);
+	printf("Enter surname:");
+	scanf("%s", newSubscriber.surname);
+	printf("Enter number:");
+	scanf("%s", newSubscriber.number);
 	fputs(newSubscriber.number, file);
 	fputs("\n", file);
 	fputs(newSubscriber.name, file);
@@ -56,15 +59,15 @@ void addingSubscriber(Subscriber newSubscriber)
 	fputs(newSubscriber.surname, file);
 	fputs("\n", file);
 	fclose(file);
-	std::cout << "The subscriber was successfully added into buffer. \n";
+	printf("The subscriber was successfully added into buffer. \n");
 }
 
 void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], Subscriber arrayOfSubscribers[])
 {
-	std::cout << "Enter the name:";
-	std::cin >> nameOfSubscriber;
-	std::cout << "Enter the surname:";
-	std::cin >> surnameOfSubscriber;
+	printf("Enter the name:");
+	scanf("%s", nameOfSubscriber);
+	printf("Enter the surname:");
+	scanf("%s", surnameOfSubscriber);
 	int countCell = 0;
 	countCell = readingFile(arrayOfSubscribers);
 	bool isSameName = true;
@@ -73,24 +76,28 @@ void findingNumber(char nameOfSubscriber[], char surnameOfSubscriber[], Subscrib
 	for (int i = 0; i < countCell; i++)
 	{
 		for (int j = 0; j < lengthOfName; j++)
-			if ((nameOfSubscriber[j] != arrayOfSubscribers[i].name[j]) 
-			|| (surnameOfSubscriber[j] != arrayOfSubscribers[i].surname[j]))
+			if ((nameOfSubscriber[j] != arrayOfSubscribers[i].name[j])
+				|| (surnameOfSubscriber[j] != arrayOfSubscribers[i].surname[j]))
+			{
 				isSameName = false;
+			}
 		if (isSameName)
 		{
-			std::cout << nameOfSubscriber << "\n" << surnameOfSubscriber << "\n" << arrayOfSubscribers[i].number;
+			printf("%s\n%s\n%s", nameOfSubscriber, surnameOfSubscriber, arrayOfSubscribers[i].number);
 			isCoincidence = true;
 		}
 		isSameName = true;
 	}
 	if (!isCoincidence)
-		std::cout << "Subscriber not found.\n";
+	{
+		printf("Subscriber not found.\n");
+	}
 }
 
 void findingName(char numberOfSubscriber[], Subscriber arrayOfSubscribers[])
 {
-	std::cout << "Enter telephone number:";
-	std::cin >> numberOfSubscriber;
+	printf("Enter telephone number:");
+	scanf("%s", numberOfSubscriber);
 	bool isSameName = true;
 	bool isCoincidence = false;
 	int countCell = 0;
@@ -105,27 +112,31 @@ void findingName(char numberOfSubscriber[], Subscriber arrayOfSubscribers[])
 			}
 		if (isSameName)
 		{
-			std::cout << numberOfSubscriber << "\n" << arrayOfSubscribers[i].name << arrayOfSubscribers[i].surname;
+			printf("%s\n%s%s", numberOfSubscriber, arrayOfSubscribers[i].name, arrayOfSubscribers[i].surname);
 			isCoincidence = true;;
 		}
 		isSameName = true;
 	}
 	if (!isCoincidence)
-		std::cout << "Subscriber not found.\n";
+	{
+		printf("Subscriber not found.\n");
+	}
 }
 
 int main()
 {
 	remove("buffer.txt");
-	std::cout << "Welcome to the interactive phone book! Press: \n '0' - if you want to exit \n '1' - if you want to add subscriber \n '2' - if you want to find number \n '3' - if you want to find name \n '4' - if you want to save it into the file \n";
+	printf("Welcome to the interactive phone book! Press: \n '0' - if you want to exit \n '1' - if you want to add subscriber \n '2' - if you want to find number \n '3' - if you want to find name \n '4' - if you want to save it into the file \n");
 	int option = 0;
-	std::cin >> option;
+	scanf("%d", &option);
 	Subscriber arrayOfSubscribers[100]{ "","" };
 	char nameCurrent[50];
 	char numberCurrent[50];
 	char surnameCurrent[50];
 	if ((option > 4) || (option < 0))
-		std::cout << "Choose 0, 1, 2, 3 or 4!";
+	{
+		printf("Choose 0, 1, 2, 3 or 4!");
+	}
 	else
 	{
 		while (option != 0)
@@ -152,18 +163,18 @@ int main()
 				{
 					saveToFile();
 					remove("buffer.txt");
-					std::cout << "Saved successfully. \n";
+					printf("Saved successfully. \n");
 					break;
 				}
 				default:
 				{
-					std::cout << "Choose 0, 1, 2, 3 or 4!";
+					printf("Choose 0, 1, 2, 3 or 4!");
 					break;
 				}
 			}
-			std::cout << "Enter option:";
-			std::cin >> option;
+			printf("Enter option:");
+			scanf("%d", &option);
 		}
-		std::cout << "Phone book exit...";
+		printf("Phone book exit...");
 	}
 }
