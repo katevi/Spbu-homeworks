@@ -3,84 +3,67 @@
 
 List *createList()
 {
-    return new List {nullptr};
+	return new List {0, nullptr, nullptr };
 }
 
-void print(List *list, int n)
+void print(List *list)
 {
-	int i = 0;
-	ListElement *current = list->first;
-	for (int i = 0; i < n; i++)
+	ListElement *current = list->head;
+	for (int i = list->size; i > 0; i--)
 	{
-		i++;
 		std::cout << current->value << " ";
 		current = current->next;
 	}
 }
 
-int size(List* list)
+void add(List* list, int number)
 {
-	ListElement *current = list->first;
-	int length = 0;
-	for (current->next; current->next != list->first; current = current->next)
+	list->size++;
+	ListElement *current = new ListElement;
+	current->next = list->head;
+	current->value = number;
+	if (list->head != NULL)
 	{
-		++length;
+		list->tail->next = current;
+		list->tail = current;
 	}
-	return length;
-}
-
-void add(List* list, int x)
-{
-	ListElement* current = list->first;
-	if (list->first == nullptr)
+	else
 	{
-		list->first = new ListElement{ x, list->first };
-		return;
+		list->head = current;
+		list->tail = current;
 	}
-	while ((current->next) && (current->next->value < x))
-	{
-		current = current->next;
-	}
-
-	ListElement* newElement = new ListElement{ x, nullptr };
-	current->next = newElement;
-	return;
 }
 
 void deleteElements(List *list, int m)
 {
-	ListElement *current = list->first;
+	ListElement *current = list->head;
 	int i = 0;
-	int t = size(list);
-	while (t >= 1)
+	while (list->size > 1)
 	{
 		i++;
 		if (i % m == 0)
 		{
-			if (current->next == list->first)
-				list->first = current->next->next;
+			if (current->next == list->head)
+			{
+				list->head = current->next->next;
+			}
 			ListElement *elementToDelete = current->next;
 			current->next = current->next->next;
 			delete elementToDelete;
-			t--;
+			list->size--;
 		}
 		current = current->next;
 	}
 }
 
-void cicle(List* list)
-{
-	ListElement* current = list->first;
-	while (current->next != nullptr) 
-	{
-		current = current->next;
-	}
-	current->next = list->first;
-}
-
 void deleteList(List *list)
 {
-	ListElement *current = list->first;
-	delete current;
+	ListElement *current = list->head;
+	for (int i = list->size; i > 0; i--)
+	{
+		ListElement *nextElement = current->next;
+		delete current;
+		current = nextElement;
+	}
 	delete list;
 }

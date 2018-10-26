@@ -1,22 +1,21 @@
 #pragma once
 
-struct ListElement {
+struct ListElement 
+{
     int value;
     ListElement *next;
 };
 
-struct List {
-    ListElement *first;
+struct List 
+{
+	int size;
+	ListElement *head { nullptr };
+	ListElement *tail { nullptr };
 };
 
 List *createList();
 void deleteList(List *list);
 
 void add(List *list, int value);
-void remove(List *list, int value);
-int getElement(List *list, int index);
-int size(List *list);
-
-void print(List *list, int n);
-void deletingElements(List *list, int m);
-void cicle(List *list);
+void print(List *list);
+void deleteElements(List *list, int m);

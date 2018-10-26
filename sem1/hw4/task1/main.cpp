@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include "list.h"
 #include <iostream>
-#include "list.cpp"
+#include <stdio.h>
 
 int main()
 {
@@ -14,12 +13,13 @@ int main()
 	std::cin >> m;
 
 	List *list = createList();
-	for (int i = 0; i < n; i++)
+	for (int i = 1; i <= n; i++)
+	{
 		add(list, i);
-	cicle(list);
+	}
+
 	deleteElements(list, m - 1);
 	std::cout << "Number of soldier left alive:";
-	print(list, m - 1);
+	print(list);
 	deleteList(list);
-	system("pause");
 }
