@@ -56,5 +56,4 @@ int main()
 	}
 	std::cout << "Value of this expression = " << pop(stackOfNumbers);
 	delete(stackOfNumbers);
-	system("pause");
 }
