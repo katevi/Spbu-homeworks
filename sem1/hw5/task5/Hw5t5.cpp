@@ -6,7 +6,9 @@
 void writePriority1Operand(StackChar* stack, std::string array, int i, std::string &finalString)
 {
 	if ((getLastElementChar(stack) == '+') || (getLastElementChar(stack) == '-') || (getLastElementChar(stack) == '(') || (isEmptyChar(stack)))
+	{
 		pushChar(stack, array[i]);
+	}
 	else
 	{
 		finalString = finalString + popChar(stack);
@@ -17,7 +19,9 @@ void writePriority1Operand(StackChar* stack, std::string array, int i, std::stri
 void writePriority2Operand(StackChar* stack, std::string array, int i, std::string &finalString)
 {
 	if (isEmptyChar(stack))
+	{
 		pushChar(stack, array[i]);
+	}
 	else
 	{
 		while ((getLastElementChar(stack) != '(') && (!isEmptyChar(stack)))
@@ -39,7 +43,9 @@ std::string fromExpressionToPostfix()
 	for (int i = 0; i < lengthOfExpression; i++)
 	{
 		if ((int(expression[i]) > 47) && (int(expression[i]) < 58))
+		{
 			finalString = finalString + expression[i];
+		}
 		else
 		{
 			if ((expression[i] == '+') || (expression[i] == '-'))
@@ -89,7 +95,9 @@ void fromPostfixToAnswer(std::string finalString)
 		else
 		{
 			if ((finalString[i] == '-') && (countOfNumbers == 1))
+			{
 				pushFloat(stackOfNumbers, -popFloat(stackOfNumbers));
+			}
 			else
 			{
 				a = popFloat(stackOfNumbers);

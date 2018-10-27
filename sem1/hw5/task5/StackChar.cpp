@@ -13,7 +13,9 @@ void pushChar(StackChar* stack, char x)
 char popChar(StackChar* stack)
 {
 	if (isEmptyChar(stack))
+	{
 		std::cout << "Stack ended. ";
+	}
 	else
 	{
 		StackElementChar* getElement = stack->first;
@@ -27,7 +29,9 @@ char popChar(StackChar* stack)
 char getLastElementChar(StackChar *stack)
 {
 	if (!isEmptyChar(stack))
+	{
 		return stack->first->value;
+	}
 }
 
 bool isEmptyChar(StackChar *stack)
@@ -38,7 +42,9 @@ bool isEmptyChar(StackChar *stack)
 void deleteStackChar(StackChar* stack) 
 {
 	if (isEmptyChar(stack))
+	{
 		return;
+	}
 	while (!isEmptyChar(stack))
 	{
 		StackElementChar* getElement = stack->first;
