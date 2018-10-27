@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Stack.h"
+#include <string>
 
 int main()
 {
-	char postfixForm[100];
+	std::string postfixForm;
 	std::cout << "Enter postfix form (without tabs): ";
-	std::cin >> postfixForm;
+	std::getline(std::cin, postfixForm);
 	Stack* stackOfNumbers = createStack();
-	int lengthOfPostfixForm = strlen(postfixForm);
+	int lengthOfPostfixForm = postfixForm.length();
 	float a = 0;
 	float b = 0;
 	float c = 0;
