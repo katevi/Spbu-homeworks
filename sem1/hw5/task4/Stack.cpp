@@ -13,7 +13,9 @@ void push(Stack* stack, float x)
 float pop(Stack* stack)
 {
 	if (isEmpty(stack))
+	{
 		std::cout << "Stack ended. ";
+	}
 	else
 	{
 		StackElement* getElement = stack->first;
@@ -27,7 +29,9 @@ float pop(Stack* stack)
 float getLastElement(Stack *stack)
 {
 	if (!isEmpty(stack))
+	{
 		return stack->first->value;
+	}
 }
 
 bool isEmpty(Stack *stack)
@@ -38,7 +42,9 @@ bool isEmpty(Stack *stack)
 void deleteStack(Stack* stack) 
 {
 	if (isEmpty(stack))
+	{
 		return;
+	}
 	while (!isEmpty(stack))
 	{
 		StackElement* getElement = stack->first;

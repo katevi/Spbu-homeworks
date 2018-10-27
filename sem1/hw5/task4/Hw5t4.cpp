@@ -23,7 +23,9 @@ int main()
 		else
 		{
 			if ((postfixForm[i] == '-') && (countOfNumbers == 1))
+			{
 				push(stackOfNumbers, -pop(stackOfNumbers));
+			}
 			else
 			{
 				a = pop(stackOfNumbers);
