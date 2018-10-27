@@ -130,5 +130,4 @@ int main()
 	std::string finalString;
 	finalString = fromExpressionToPostfix();
 	fromPostfixToAnswer(finalString);
-	system("pause");
 }
