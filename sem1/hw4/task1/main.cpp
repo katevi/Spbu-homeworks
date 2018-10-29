@@ -2,6 +2,28 @@
 #include <iostream>
 #include <stdio.h>
 
+void deleteElements(List *list, int m)
+{
+	ListElement *current = list->head;
+	int i = 0;
+	while (list->size > 1)
+	{
+		i++;
+		if (i % m == 0)
+		{
+			if (current->next == list->head)
+			{
+				list->head = current->next->next;
+			}
+			ListElement *elementToDelete = current->next;
+			current->next = current->next->next;
+			delete elementToDelete;
+			list->size--;
+		}
+		current = current->next;
+	}
+}
+
 int main()
 {
 	std::cout << "Enter n - the number of soldiers:";
@@ -17,7 +39,6 @@ int main()
 	{
 		add(list, i);
 	}
-
 	deleteElements(list, m - 1);
 	std::cout << "Number of soldier left alive:";
 	print(list);

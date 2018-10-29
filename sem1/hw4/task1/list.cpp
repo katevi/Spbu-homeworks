@@ -3,7 +3,7 @@
 
 List *createList()
 {
-	return new List {0, nullptr, nullptr };
+	return new List {0, nullptr};
 }
 
 void print(List *list)
@@ -20,39 +20,27 @@ void add(List* list, int number)
 {
 	list->size++;
 	ListElement *current = new ListElement;
-	current->next = list->head;
-	current->value = number;
-	if (list->head != NULL)
+	ListElement *newElement = new ListElement {number, list->head};
+	if (list->head == nullptr)
 	{
-		list->tail->next = current;
-		list->tail = current;
+		list->head = newElement;
 	}
 	else
 	{
-		list->head = current;
-		list->tail = current;
-	}
-}
-
-void deleteElements(List *list, int m)
-{
-	ListElement *current = list->head;
-	int i = 0;
-	while (list->size > 1)
-	{
-		i++;
-		if (i % m == 0)
+		current = list->head;
+		if (list->size == 2)
 		{
-			if (current->next == list->head)
-			{
-				list->head = current->next->next;
-			}
-			ListElement *elementToDelete = current->next;
-			current->next = current->next->next;
-			delete elementToDelete;
-			list->size--;
+			list->head->next = newElement;
+			newElement->next = current;
 		}
-		current = current->next;
+		else
+		{
+			while (current->next != list->head)
+			{
+				current = current->next;
+			}
+			current->next = newElement;
+		}
 	}
 }
 
