@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 
-void deleteElements(List *list, int m)
+void toKillTheSoldier(List *list, int m)
 {
 	ListElement *current = list->head;
 	int i = 0;
@@ -39,7 +39,7 @@ int main()
 	{
 		add(list, i);
 	}
-	deleteElements(list, m - 1);
+	toKillTheSoldier(list, m - 1);
 	std::cout << "Number of soldier left alive:";
 	print(list);
 	deleteList(list);
