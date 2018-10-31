@@ -54,5 +54,4 @@ int main()
 	while (!isEmpty(stack))
 		std::cout << pop(stack) << " ";
 	deleteStack(stack);
-	system("pause");
 }
