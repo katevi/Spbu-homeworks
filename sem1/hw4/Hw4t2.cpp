@@ -1,14 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 #include <cstdio>
+#include "list.h"
 
-struct Subscriber 
-{
-	char name[50];
-	char surname[50];
-	char number[50];
-};
-
-int readingFile(Subscriber array[])
+/*int readingFile(Subscriber array[])
 {
 	int countCell = 0;
 	FILE *file = fopen("Telephones.txt", "r");
@@ -20,17 +15,18 @@ int readingFile(Subscriber array[])
 	{
 		while (!feof(file))
 		{
+			add(list, )
 			fgets(array[countCell].number, 50, file);
 			fgets(array[countCell].name, 50, file);
-			fgets(array[countCell].surname, 50, file);
+			//fgets(array[countCell].surname, 50, file);
 			countCell++;
 		}
 	}
 	return countCell;
 	fclose(file);
-}
+}*/
 
-void saveToFile()
+/*void saveToFile()
 {
 	int c = 0;
 	FILE *tempFile = fopen("buffer.txt", "r");
@@ -121,11 +117,25 @@ void findingName(char numberOfSubscriber[], Subscriber arrayOfSubscribers[])
 	{
 		printf("Subscriber not found.\n");
 	}
-}
+}*/
 
 int main()
 {
-	remove("buffer.txt");
+	List *list = createList();
+	char name[10];
+	char number[10];
+	for (int i = 0; i < 3; i++)
+	{
+		std::cin >> name;
+		std::cin >> number;
+		//std::cout << name;
+		//std::cout << number;
+		add(list, number, name);
+	}
+	printf("%d", size(list));
+	print(list);
+	system("pause");
+	/*remove("buffer.txt");
 	printf("Welcome to the interactive phone book! Press: \n '0' - if you want to exit \n '1' - if you want to add subscriber \n '2' - if you want to find number \n '3' - if you want to find name \n '4' - if you want to save it into the file \n");
 	int option = 0;
 	scanf("%d", &option);
@@ -176,5 +186,5 @@ int main()
 			scanf("%d", &option);
 		}
 		printf("Phone book exit...");
-	}
+	}*/
 }
