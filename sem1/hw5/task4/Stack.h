@@ -1,17 +1,14 @@
 #pragma once
 #include <iostream>
-
-struct StackElement 
+struct StackElement
 {
 	float value;
 	StackElement* next;
 };
-
-struct Stack 
+struct Stack
 {
 	StackElement* first;
 };
-
 Stack* createStack();
 void push(Stack* stack, float x);
 float pop(Stack* stack);
