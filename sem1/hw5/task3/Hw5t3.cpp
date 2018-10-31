@@ -1,79 +1,58 @@
 #include <iostream>
 #include "Stack.h"
-#include <string>
 
-void writePriority1Operand(Stack* stack, std::string array, int i, std::string &finalString)
+void writePriority1Operand(Stack* stack, char array[], int i)
 {
 	if ((getLastElement(stack) == '+') || (getLastElement(stack) == '-') || (getLastElement(stack) == '(') || (isEmpty(stack)))
-	{
 		push(stack, array[i]);
-	}
 	else
 	{
-		finalString = finalString + pop(stack);
+		std::cout << pop(stack) << " ";
 		push(stack, array[i]);
 	}
 }
 
-void writePriority2Operand(Stack* stack, std::string array, int i, std::string &finalString)
+void writePriority2Operand(Stack* stack, char array[], int i)
 {
 	if (isEmpty(stack))
-	{
 		push(stack, array[i]);
-	}
 	else
 	{
 		while ((getLastElement(stack) != '(') && (!isEmpty(stack)))
-		{
-			finalString = finalString + pop(stack);
-		}
+			std::cout << pop(stack) << " ";
 		push(stack, array[i]);
 	}
 }
 
 int main()
 {
-	std::string expression;
-	std::string finalString;
+	char expression[100]{ ' ' };
 	std::cout << "Enter expression:\n";
-	std::getline(std::cin, expression);
+	std::cin >> expression;
 	Stack* stack = createStack();
 	std::cout << "Reverse polish notation:\n";
-	int lengthOfExpression = expression.length();
-	for (int i = 0; i < lengthOfExpression; i++)
+	for (int i = 0; i < strlen(expression); i++)
 	{
 		if ((int(expression[i]) > 47) && (int(expression[i]) < 58))
-		{
-			finalString = finalString + expression[i];
-		}
+			std::cout << expression[i] << " ";
 		else
 		{
 			if ((expression[i] == '+') || (expression[i] == '-'))
-			{
-				writePriority2Operand(stack, expression, i, finalString);
-			}
+				writePriority2Operand(stack, expression, i);
 			if ((expression[i] == '*') || (expression[i] == '/'))
-			{
-				writePriority1Operand(stack, expression, i, finalString);
-			}
+				writePriority1Operand(stack, expression, i);
 			if (expression[i] == '(')
-			{
 				push(stack, expression[i]);
-			}
 			if (expression[i] == ')')
 			{
 				while (getLastElement(stack) != '(')
-				{
-					finalString = finalString + pop(stack);
-				}
+					std::cout << pop(stack) << " ";
 				pop(stack);
 			}
 		}
 	}
 	while (!isEmpty(stack))
-	{
-		finalString = finalString + pop(stack);
-	}
-	std::cout << finalString;
+		std::cout << pop(stack) << " ";
 	deleteStack(stack);
+	system("pause");
 }
