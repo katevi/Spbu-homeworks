@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdio.h>
 
-void toKillTheSoldier(List *list, int m)
+void findingLastSoldier(List *list, int m)
 {
 	int i = 0;
 	while (printListSize(list) > 1)
@@ -32,7 +32,7 @@ int main()
 	{
 		add(list, i);
 	}
-	toKillTheSoldier(list, m - 1);
+	findingLastSoldier(list, m - 1);
 	std::cout << "Number of soldier left alive:";
 	print(list);
 	deleteList(list);
