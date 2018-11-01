@@ -2,6 +2,7 @@
 #include <cstring>
 #include <cstdio>
 #include "list.h"
+#include <iostream>
 
 /*int readingFile(Subscriber array[])
 {
@@ -122,15 +123,17 @@ void findingName(char numberOfSubscriber[], Subscriber arrayOfSubscribers[])
 int main()
 {
 	List *list = createList();
-	char name[10];
-	char number[10];
+	char name{' ' };
+	char* number = new char;
+//	int number = 0;
 	for (int i = 0; i < 3; i++)
 	{
 		std::cin >> name;
-		std::cin >> number;
+		//std::cin >> number;
 		//std::cout << name;
 		//std::cout << number;
-		add(list, number, name);
+		add(list, name);
+		name = ' ';
 	}
 	printf("%d", size(list));
 	print(list);
