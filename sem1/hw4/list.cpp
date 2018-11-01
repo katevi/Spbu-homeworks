@@ -1,6 +1,9 @@
 #include "list.h"
-#include <cstdio>
+#include <stdio.h>
 #include <iostream>
+#include <fstream>
+
+using namespace std;
 
 List *createList()
 {
@@ -9,32 +12,29 @@ List *createList()
 
 void deleteList(List *list)
 {
-	ListElement *current = list->first;
+	Subscriber *current = list->first;
 	while (current)
 	{
-		ListElement *nextElement = current->next;
+		Subscriber *nextElement = current->next;
 		delete current;
 		current = nextElement;
 	}
-	delete list->first;
 	delete list;
 }
 
-void print(List *list)
+void printOfList(List *list)
 {
-	ListElement *current = list->first;
-	std::cout << current->name; //<< "#" << current->number << "%";
-	for (int i = 0; i < size(list); i++)
+	Subscriber *current = list->first;
+	for (int i = 0; i < sizeOfList(list); i++)
 	{
-		//printf("%s\n", current->number);
-		printf("%ñ\n", current->name);
+		std::cout << current->name << " " << current->number << "\n";
 		current = current->next;
 	}
 }
 
-int size(List *list)
+int sizeOfList(List *list)
 {
-	ListElement *current = list->first;
+	Subscriber *current = list->first;
 	int length = 0;
 	while (current)
 	{
@@ -44,34 +44,104 @@ int size(List *list)
 	return length;
 }
 
-/*int getElement(List *list, int index)
+void addingSubscriberInList(List *list, char* name, char* number)
 {
-	ListElement *current = list->first;
-	int count = 0;
-	while (current)
-	{
-		if (count == index)
-			return current->value;
-		count += 1;
-		current = current->next;
-	}
-	return -1;
-}*/
-
-void add(List *list, char name)
-{
-	ListElement *current = list->first;
+	Subscriber *newSubscriber = new Subscriber {number, name, nullptr};
+	Subscriber *current = list->first;
 	if (list->first == nullptr)
 	{
-		list->first = new ListElement{ name, list->first};
+		list->first = newSubscriber;
 		return;
 	}
 	while (current->next)
 	{
 		current = current->next;
 	}
-	//ListElement *newElement = new ListElement{name, number, nullptr};
-	current->next = new ListElement{ name, nullptr };
-	//std::cout << current->next->name;
+	current->next = newSubscriber;
 	return;
+}
+
+void findingNumberInList(List* list, char* name)
+{
+	Subscriber *current = list->first;
+	int length = strlen(name);
+	while (current)
+	{
+		bool isSame = true;
+		for (int i = 0; i < length; i++)
+		{
+			if (current->name[i] != name[i])
+				isSame = false;
+		}
+		if (isSame)
+		{
+			std::cout << current->name << " " << current->number << "\n";
+		}
+		current = current->next;
+	}
+}
+
+void findingNameInList(List* list, char* number)
+{
+	Subscriber *current = list->first;
+	int length = strlen(number);
+	while (current)
+	{
+		bool isSame = true;
+		for (int i = 0; i < length; i++)
+		{
+			if (current->number[i] != number[i])
+				isSame = false;
+		}
+		if (isSame)
+		{
+			std::cout << current->name << " " << current->number << "\n";
+			return;
+		}
+		current = current->next;
+	}
+}
+
+void savingListToFile(List* list)
+{
+	ofstream file;
+	file.open("Telephones.txt", ios::out);
+	if ((sizeOfList(list) == 0))
+	{
+		std::cout << "Phonebook is empty. If you want to save something, please, add subscribers before.";
+		ofstream ofs("Telephones.txt", ios::out);
+		return;
+	}
+	else
+	{
+		Subscriber* current = list->first;
+		while (current)
+		{
+			file << current->number << "\n";
+			file << current->name << "\n";
+			current = current->next;
+		}
+	}
+	file.close();
+	std::cout << "Saved successfully. \n";
+}
+
+void readingListFromFile(List *&list)
+{
+	ifstream file;
+	file.open("Telephones.txt");
+	if (!file)
+	{
+		std::cout << "Phonebook is empty. Please, add subscribers before.";
+		ofstream ofs("Telephones.txt");
+		return;
+	}
+	while (!(file.eof()))
+	{
+		char* number = new char[10];
+		char* name = new char[10];
+		file.getline(number, 10);
+		file.getline(name, 10);
+		addingSubscriberInList(list, number, name);
+	}
 }
