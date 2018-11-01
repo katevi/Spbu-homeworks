@@ -55,3 +55,25 @@ void deleteList(List *list)
 	}
 	delete list;
 }
+
+int printListSize(List *list)
+{
+	return list->size;
+}
+
+void listSizeDecrease(List *list)
+{
+	list->size--;
+}
+
+void killTheSoldier(List* list)
+{
+	ListElement* temp = list->head->next;
+	list->head->next = list->head->next->next;
+	delete temp;
+}
+
+void changingPosition(List* list)
+{
+	list->head = list->head->next;
+}
