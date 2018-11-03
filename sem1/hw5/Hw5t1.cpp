@@ -43,6 +43,15 @@ void fillingTheArray(int **numbers, int sideOfArray)
 	numbers[numberOfCoils][numberOfCoils] = 1;
 }
 
+void arrayDelete(int** &numbers, int sideOfArray)
+{
+	for (int i = 0; i < sideOfArray; i++)
+	{
+		delete[] numbers[i];
+	}
+	delete[] numbers;
+}
+
 int main()
 {
 	int sideOfArray = 0;
@@ -57,10 +66,5 @@ int main()
 	fillingTheArray(numbers, sideOfArray);
 	std::cout << "Array, obtained by spiraling from the center: \n";
 	printTheArray(numbers, sideOfArray);
-
-	for (int i = 0; i < sideOfArray; i++)
-	{
-		delete[] numbers[i];
-	}
-	delete[] numbers;
+	arrayDelete(numbers, sideOfArray);
 }
