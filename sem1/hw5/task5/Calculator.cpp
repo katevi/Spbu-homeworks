@@ -44,7 +44,7 @@ void fromExpressionToPostfix(char finalString[])
 	int count = 0;
 	for (int i = 0; i < lengthOfExpression; i++)
 	{
-		if ((int(expression[i]) > 47) && (int(expression[i]) < 58))
+		if ((expression[i] >= '0') && (expression[i] <= '9'))
 		{
 			finalString[count] = expression[i];
 			count++;
@@ -67,7 +67,6 @@ void fromExpressionToPostfix(char finalString[])
 			{
 				while (getLastElementChar(stack) != '(')
 				{
-					i++;
 					finalString[count] = popChar(stack);
 					count++;
 				}
