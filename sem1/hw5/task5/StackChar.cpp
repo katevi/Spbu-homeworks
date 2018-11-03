@@ -45,11 +45,13 @@ void deleteStackChar(StackChar* stack)
 	{
 		return;
 	}
-	while (!isEmptyChar(stack))
+	StackElementChar* current = stack->first;
+	while (current)
 	{
-		StackElementChar* getElement = stack->first;
-		stack->first = stack->first->next;
-		delete getElement;
+		StackElementChar* nextElement = current->next;
+		delete current;
+		current = nextElement;
 	}
+	delete stack->first;
 	delete stack;
 }

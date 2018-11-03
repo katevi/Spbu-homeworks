@@ -45,11 +45,14 @@ void deleteStackFloat(StackFloat* stack)
 	{
 		return;
 	}
-	while (!isEmptyFloat(stack))
+	StackElementFloat* current = stack->first;
+	while (current)
 	{
-		StackElementFloat* getElement = stack->first;
-		stack->first = stack->first->next;
-		delete getElement;
+		StackElementFloat* nextElement = current->next;
+		delete current;
+		current = nextElement;
 	}
+
+	delete stack->first;
 	delete stack;
 }
