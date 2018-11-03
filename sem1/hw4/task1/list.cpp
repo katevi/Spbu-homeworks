@@ -19,7 +19,6 @@ void print(List *list)
 void add(List* list, int number)
 {
 	list->size++;
-	ListElement *current = new ListElement;
 	ListElement *newElement = new ListElement {number, list->head};
 	if (list->head == nullptr)
 	{
@@ -27,7 +26,7 @@ void add(List* list, int number)
 	}
 	else
 	{
-		current = list->head;
+		ListElement *current = list->head;
 		if (list->size == 2)
 		{
 			list->head->next = newElement;
@@ -66,14 +65,14 @@ void listSizeDecrease(List *list)
 	list->size--;
 }
 
-void killTheSoldier(List* list)
+void deleteElement(List* list)
 {
 	ListElement* temp = list->head->next;
 	list->head->next = list->head->next->next;
 	delete temp;
 }
 
-void changingPosition(List* list)
+void movePositionOfElement(List* list)
 {
 	list->head = list->head->next;
 }

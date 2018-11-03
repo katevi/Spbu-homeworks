@@ -10,10 +10,10 @@ void findingLastSoldier(List *list, int m)
 		i++;
 		if (i % m == 0)
 		{
-			killTheSoldier(list);
+			deleteElement(list);
 			listSizeDecrease(list);
 		}
-		changingPosition(list);
+		movePositionOfElement(list);
 	}
 }
 
@@ -36,5 +36,4 @@ int main()
 	std::cout << "Number of soldier left alive:";
 	print(list);
 	deleteList(list);
-	system("pause");
 }
