@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Stack.h"
+#include <string.h>
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
 	int countOfNumbers = 0;
 	for (int i = 0; i < lengthOfPostfixForm; i++)
 	{
-		if ((float(postfixForm[i]) > 47) && (float(postfixForm[i]) < 58))
+		if ((postfixForm[i] >= '0') && (postfixForm[i] <= '9'))
 		{
 			countOfNumbers++;
 			push(stackOfNumbers, float(postfixForm[i]) - 48);

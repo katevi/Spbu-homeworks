@@ -26,7 +26,9 @@ float pop(Stack* stack)
 float getLastElement(Stack *stack)
 {
 	if (!isEmpty(stack))
+	{
 		return stack->first->value;
+	}
 }
 
 bool isEmpty(Stack *stack)
@@ -37,13 +39,15 @@ bool isEmpty(Stack *stack)
 void deleteStack(Stack* stack)
 {
 	if (isEmpty(stack))
-		return;
-	while (!isEmpty(stack))
 	{
-		StackElement* getElement = stack->first;
-		stack->first = stack->first->next;
-		delete getElement;
+		return;
 	}
-	delete stack->first;
+	StackElement* current = stack->first;
+	while (current)
+	{
+		StackElement* nextElement = current->next;
+		delete current;
+		current = nextElement;
+	}
 	delete stack;
 }
