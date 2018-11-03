@@ -26,32 +26,44 @@ void writePriority2Operand(Stack* stack, char array[], int i)
 
 int main()
 {
-	char expression[100]{ ' ' };
+	char expression[100] {' '};
 	std::cout << "Enter expression:\n";
 	std::cin >> expression;
 	Stack* stack = createStack();
 	std::cout << "Reverse polish notation:\n";
 	for (int i = 0; i < strlen(expression); i++)
 	{
-		if ((int(expression[i]) > 47) && (int(expression[i]) < 58))
+		if ((expression[i] >= '0') && (expression[i] <= '9'))
+		{
 			std::cout << expression[i] << " ";
+		}
 		else
 		{
 			if ((expression[i] == '+') || (expression[i] == '-'))
+			{
 				writePriority2Operand(stack, expression, i);
+			}
 			if ((expression[i] == '*') || (expression[i] == '/'))
+			{
 				writePriority1Operand(stack, expression, i);
+			}
 			if (expression[i] == '(')
+			{
 				push(stack, expression[i]);
+			}
 			if (expression[i] == ')')
 			{
 				while (getLastElement(stack) != '(')
+				{
 					std::cout << pop(stack) << " ";
+				}
 				pop(stack);
 			}
 		}
 	}
 	while (!isEmpty(stack))
+	{
 		std::cout << pop(stack) << " ";
+	}
 	deleteStack(stack);
 }
