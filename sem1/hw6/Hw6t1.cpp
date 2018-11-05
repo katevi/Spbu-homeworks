@@ -31,5 +31,4 @@ int main()
 		printWithoutDegrees(polynomial);
 		deleteList(polynomial);
 	}
-	system("pause");
 }

@@ -6,7 +6,9 @@
 int lengthOfNumber(int number)
 {
 	if ((number == 0) || (number == 1))
+	{
 		return 0;
+	}
 	int length = 0;
 	int temp = number;
 	while (temp > 0)
@@ -20,71 +22,148 @@ int lengthOfNumber(int number)
 void printWithoutDegrees(Polynomial *polynomial)
 {
 	elementOfPolynomial *current = polynomial->first;
-	if (lengthOfNumber(polynomial->first->coefficient))
+	bool isFirst = true;
+	while (current)
 	{
-		if (polynomial->first->sign == '+')
+		if (current->degree == 0)
 		{
-			std::cout << polynomial->first->coefficient << "x ";
+			if (current->coefficient != 0)
+			{
+				std::cout << current->sign << current->coefficient;
+			}
 		}
 		else
 		{
-			std::cout << polynomial->first->sign << polynomial->first->coefficient << "x ";
+			if (isFirst)
+			{
+				if (current->coefficient == 1)
+				{
+					if (current->sign == '-')
+					{
+						std::cout << "-x";
+					}
+					else
+					{
+						std::cout << "x";
+					}
+				}
+				else
+				{
+					if (current->sign == '-')
+					{
+						std::cout << "-" << current->coefficient << "x";
+					}
+					else
+					{
+						std::cout << current->coefficient << "x";
+					}
+				}
+				isFirst = false;
+			}
+			else
+			{
+				if (current->coefficient != 0)
+				{
+					if (current->coefficient == 1)
+					{
+						if (current->sign == '-')
+						{
+							std::cout << "-x";
+						}
+						else
+						{
+							std::cout << "+x";
+						}
+					}
+					else
+					{
+						if (current->sign == '-')
+						{
+							std::cout << "-" << current->coefficient << "x";
+						}
+						else
+						{
+							std::cout << "+" << current->coefficient << "x";
+						}
+					}
+				}
+			}
 		}
-	}
-	else
-	{
-		if (polynomial->first->sign == '-')
+		if (current->coefficient >= 1)
 		{
-			std::cout << polynomial->first->sign << "x ";
+			for (int i = 0; i < lengthOfNumber(current->degree); i++)
+			{
+				std::cout << " ";
+			}
 		}
-		else
-		{
-			std::cout << "x ";
-		}
-	}
-
-	while (current->next)
-	{
 		current = current->next;
-		if ((current->degree == 0) && (current->coefficient != 0))
-			std::cout <<current->sign << current->coefficient;
-		else
-		{
-			if ((current->coefficient != 0) && (current->coefficient != 1))
-			{
-				std::cout << current->sign << current->coefficient << "x ";
-			}
-			if (current->coefficient == 1)
-			{
-				std::cout << current->sign << "x ";
-			}
-		}
 	}
 }
 
 void printDegrees(Polynomial *polynomial)
 {
 	elementOfPolynomial *current = polynomial->first;
-	for (int i = 0; i <= lengthOfNumber(polynomial->first->coefficient); i++)
-		{
-			std::cout << " ";
-		}
-	if (polynomial->first->sign == '-')
-		std::cout << " ";
-	std::cout << polynomial->first->degree;
-
-	while (current->next->degree > 1)
+	bool isFirst = true;
+	while (current->degree > 1)
 	{
-		current = current->next;
-		if ((current->coefficient != 0))
+		if (current->coefficient != 0)
 		{
-			for (int i = 0; i <= lengthOfNumber(current->coefficient) + 1; i++)
+			if (isFirst)
 			{
-				std::cout << " ";
+				if ((lengthOfNumber(current->coefficient) == 0))
+				{
+					if (current->sign == '-')
+					{
+						for (int i = 0; i < 2; i++)
+						{
+							std::cout << " ";
+						}
+					}
+					else
+					{
+						std::cout << " ";
+					}
+				}
+				else
+				{
+					if (current->sign == '-')
+					{
+						for (int i = 0; i < lengthOfNumber(current->coefficient) + 2; i++)
+						{
+							std::cout << " ";
+						}
+					}
+					else
+					{
+						for (int i = 0; i < lengthOfNumber(current->coefficient) + 1; i++)
+						{
+							std::cout << " ";
+						}
+					}
+				}
+				std::cout << current->degree;
+				isFirst = false;
 			}
-			std::cout << current->degree;
+			else
+			{
+				if ((lengthOfNumber(current->coefficient) == 0))
+				{
+					for (int i = 0; i < 2; i++)
+					{
+						std::cout << " ";
+					}
+				}
+				else
+				{
+					for (int i = 0; i < lengthOfNumber(current->coefficient) + 2; i++)
+					{
+						std::cout << " ";
+					}
+				}
+				std::cout << current->degree;
+			}
 		}
-	
+		current = current->next;
 	}
 	std::cout << "\n";
 }
