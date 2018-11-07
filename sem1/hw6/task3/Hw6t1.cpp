@@ -11,7 +11,7 @@ int main()
 		std::cout << "It's not a polynomial!";
 	else
 	{
-		int *arrayOfCoefficients = new int[number];
+		int *arrayOfCoefficients = new int[number + 1];
 		std::cout << "Enter the coefficients of the polynomial from x:";
 		Polynomial *polynomial = createList();
 		char sign = ' ';
@@ -30,5 +30,6 @@ int main()
 		printDegrees(polynomial);
 		printWithoutDegrees(polynomial);
 		deleteList(polynomial);
+		delete[] arrayOfCoefficients;
 	}
 }
