@@ -1,12 +1,12 @@
 #include "Stack.h"
 Stack* createStack()
 {
-	return new Stack{ nullptr };
+	return new Stack {nullptr};
 }
 
 void push(Stack* stack, float x)
 {
-	stack->first = new StackElement{ x, stack->first };
+	stack->first = new StackElement {x, stack->first};
 }
 
 float pop(Stack* stack)
