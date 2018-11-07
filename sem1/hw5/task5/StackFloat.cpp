@@ -1,4 +1,5 @@
 #include "StackFloat.h"
+#include "string.h"
 
 StackFloat* createStackFloat()
 {
@@ -44,6 +45,7 @@ void deleteStackFloat(StackFloat* stack)
 	if (isEmptyFloat(stack))
 	{
 		return;
+		delete stack;
 	}
 	StackElementFloat* current = stack->first;
 	while (current)

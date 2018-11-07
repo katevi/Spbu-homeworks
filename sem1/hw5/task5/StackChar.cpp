@@ -1,4 +1,5 @@
 #include "StackChar.h"
+#include "string.h"
 
 StackChar* createStackChar()
 {
