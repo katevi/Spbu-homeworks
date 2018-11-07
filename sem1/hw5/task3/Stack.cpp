@@ -21,7 +21,7 @@ char pop(Stack* stack)
 	{
 		StackElement* getElement = stack->first;
 		stack->first = getElement->next;
-		int result = getElement->value;
+		char result = getElement->value;
 		delete getElement;
 		return result;
 	}
@@ -45,15 +45,14 @@ void deleteStack(Stack* stack)
 	if (isEmpty(stack))
 	{
 		return;
+		delete stack;
 	}
-	StackElement* current = stack->first;
+	StackElement *current = stack->first;
 	while (current)
 	{
-		StackElement* nextElement = current->next;
+		StackElement *nextElement = current->next;
 		delete current;
 		current = nextElement;
 	}
-
-	delete stack->first;
 	delete stack;
 }

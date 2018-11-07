@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Stack.h"
-#include <string.h>
 
 void writePriority1Operand(Stack* stack, char array[], int i)
 {
