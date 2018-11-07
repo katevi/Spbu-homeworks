@@ -3,12 +3,12 @@
 
 StackChar* createStackChar()
 {
-	return new StackChar{ nullptr };
+	return new StackChar {nullptr};
 }
 
 void pushChar(StackChar* stack, char x)
 {
-	stack->first = new StackElementChar{ x, stack->first };
+	stack->first = new StackElementChar {x, stack->first};
 }
 
 char popChar(StackChar* stack)
@@ -45,6 +45,7 @@ void deleteStackChar(StackChar* stack)
 	if (isEmptyChar(stack))
 	{
 		return;
+		deleteStackChar(stack);
 	}
 	StackElementChar* current = stack->first;
 	while (current)

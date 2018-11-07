@@ -3,12 +3,12 @@
 
 StackFloat* createStackFloat()
 {
-	return new StackFloat{ nullptr };
+	return new StackFloat {nullptr};
 }
 
 void pushFloat(StackFloat* stack, float x)
 {
-	stack->first = new StackElementFloat{ x, stack->first };
+	stack->first = new StackElementFloat {x, stack->first};
 }
 
 float popFloat(StackFloat* stack)
