@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 using namespace std;
 
@@ -16,6 +17,8 @@ void deleteList(List *list)
 	while (current)
 	{
 		Subscriber *nextElement = current->next;
+		delete current->name;
+		delete current->number;
 		delete current;
 		current = nextElement;
 	}
@@ -44,7 +47,7 @@ int sizeOfList(List *list)
 	return length;
 }
 
-void addingSubscriberInList(List *list, char* name, char* number)
+void addSubscriberInList(List *list, char* number, char* name)
 {
 	Subscriber *newSubscriber = new Subscriber {number, name, nullptr};
 	Subscriber *current = list->first;
@@ -61,7 +64,7 @@ void addingSubscriberInList(List *list, char* name, char* number)
 	return;
 }
 
-void findingNumberInList(List* list, char* name)
+void findNumberInList(List* list, char* name)
 {
 	Subscriber *current = list->first;
 	int length = strlen(name);
@@ -83,7 +86,7 @@ void findingNumberInList(List* list, char* name)
 	}
 }
 
-void findingNameInList(List* list, char* number)
+void findNameInList(List* list, char* number)
 {
 	Subscriber *current = list->first;
 	int length = strlen(number);
@@ -106,7 +109,7 @@ void findingNameInList(List* list, char* number)
 	}
 }
 
-void savingListToFile(List* list)
+void saveListToFile(List* list)
 {
 	ofstream file;
 	file.open("Telephones.txt", ios::out);
@@ -130,7 +133,7 @@ void savingListToFile(List* list)
 	std::cout << "Saved successfully. \n";
 }
 
-void readingListFromFile(List *&list)
+void readListFromFile(List *&list)
 {
 	ifstream file;
 	file.open("Telephones.txt");
@@ -146,6 +149,6 @@ void readingListFromFile(List *&list)
 		char* name = new char[10];
 		file.getline(number, 10);
 		file.getline(name, 10);
-		addingSubscriberInList(list, number, name);
+		addSubscriberInList(list, number, name);
 	}
 }
