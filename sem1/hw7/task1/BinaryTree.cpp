@@ -65,19 +65,23 @@ Node* deleteNode(Node* node, int x)
 	}
 	else if ((node->left != nullptr) && (node->right != nullptr))
 	{
-		node->value = minimumNode(node->right)->value;
+		node->value = (minimumNode(node->right))->value;
 		node->right = deleteNode(node->right, node->value);
 	}
 	else
+	{
 		if (node->left != nullptr)
 		{
 			node = node->left;
+			//return node;
 		}
 		else
 		{
 			node = node->right;
+			//return node;
 		}
-	return node;
+		return node;
+	}
 }
 
 void treePrint(Node* node) 

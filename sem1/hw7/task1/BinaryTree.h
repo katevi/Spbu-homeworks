@@ -18,7 +18,7 @@ void removeTree(Node* node);
 
 void addNode(Node* &node, int x);
 Node* deleteNode(Node* node, int x);
-bool isBelong(Node* node, int x);
+//bool isBelong(Node* node, int x);
 
 /*void printInAscendingOrder(BinaryTree* tree);
 void printInDescendingOrder(BinaryTree* tree);

@@ -11,8 +11,7 @@ int main()
 		std::cin >> x;
 		addNode(tree->root, x);
 	}
-	Node *result = minimumNode(tree->root);
-	//std::cout << "\n" << result->value;
+	std::cout << minimumNode(tree->root)->value;
 	treePrint(tree->root);
 	std::cout << "Enter element to delete";
 	std::cin >> x;
