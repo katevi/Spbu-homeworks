@@ -17,11 +17,20 @@ void removeTree(BinaryTree* tree);
 void removeTree(Node* node);
 
 void addNode(Node* &node, int x);
-Node* deleteNode(Node* node, int x);
-//bool isBelong(Node* node, int x);
+void addNode(BinaryTree* &tree, int x);
+void removeNode(Node* &node, int x);
+void removeNode(Node* &node);
+void removeNode(BinaryTree* tree, int x);
 
-/*void printInAscendingOrder(BinaryTree* tree);
-void printInDescendingOrder(BinaryTree* tree);
-void printAsTree(BinaryTree* tree);*/
+
+bool exists(Node* node, int x);
+bool exists(BinaryTree* tree, int x);
+
 Node* minimumNode(Node* node);
-void treePrint(Node* node);
+
+void descendingOrderPrint(Node* node);
+void descendingOrderPrint(BinaryTree* tree);
+void ascendingOrderPrint(Node* node);
+void ascendingOrderPrint(BinaryTree* tree);
+void preorderPrint(Node* node);
+void preorderPrint(BinaryTree* tree);

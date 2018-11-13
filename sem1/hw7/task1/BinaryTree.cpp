@@ -8,15 +8,18 @@ BinaryTree *createTree()
 void removeTree(BinaryTree* tree)
 {
 	if (tree && tree->root)
+	{
 		removeTree(tree->root);
+	}
 	delete tree;
-
 }
 
 void removeTree(Node* node)
 {
 	if (node == nullptr)
+	{
 		return;
+	}
 	removeTree(node->left);
 	removeTree(node->right);
 	delete node;
@@ -33,10 +36,19 @@ void addNode(Node *&node, int x)
 	{
 		addNode(node->right, x);
 	}
-	else if (x < node->value)
+	if (x < node->value)
 	{
 		addNode(node->left, x);
 	}
+	if (x == node->value)
+	{
+		return;
+	}
+}
+
+void addNode(BinaryTree* &tree, int x)
+{
+	addNode(tree->root, x);
 }
 
 Node* minimumNode(Node* node)
@@ -46,63 +58,189 @@ Node* minimumNode(Node* node)
 		return minimumNode(node->left);
 	}
 	else
+	{
 		return node;
+	}
 }
 
-Node* deleteNode(Node* node, int x)
+void removeNode(Node *&node)
 {
-	if (node == nullptr)
+	if ((node->left == nullptr) && (node->right == nullptr))
 	{
-		return node;
+		delete node;
+		node = nullptr;
+		return;
 	}
-	if (x < node->value)
+
+	if ((node->left != nullptr) && (node->right == nullptr))
 	{
-		node->left = deleteNode(node->left, x);
+		Node *toDelete = node;
+		node = node->left;
+		delete toDelete;
+		return;
 	}
-	else if (x > node->value)
+
+	if ((node->left == nullptr) && (node->right != nullptr))
 	{
-		node->right = deleteNode(node->right, x);
+		Node *toDelete = node;
+		node = node->right;
+		delete toDelete;
+		return;
 	}
-	else if ((node->left != nullptr) && (node->right != nullptr))
+
+	if ((node->left != nullptr) && (node->right != nullptr))
 	{
-		node->value = (minimumNode(node->right))->value;
-		node->right = deleteNode(node->right, node->value);
-	}
-	else
-	{
-		if (node->left != nullptr)
-		{
-			node = node->left;
-			//return node;
-		}
-		else
-		{
-			node = node->right;
-			//return node;
-		}
-		return node;
+		Node **temp = &node->right;
+		minimumNode(*temp);
+		node->value = (*temp)->value;
+		removeNode(*temp);
+		return;
 	}
 }
-
-void treePrint(Node* node) 
-{
-	if (node != nullptr) 
-	{
-		std::cout << node->value;
-		treePrint(node->left);
-		treePrint(node->right);
-	}
-}
-
-/*bool isBelong(Node* node, int x)
+void removeNode(Node *&node, int value)
 {
 	if (node == nullptr)
 	{
 		return;
 	}
-	if (node->value == x)
-		return true;
+	if (node->value == value)
+	{
+		removeNode(node);
+		return;
+	}
+
+	if (node->value > value)
+	{
+		removeNode(node->left, value);
+	}
 	else
-	isBelong(node->left, x);
-	isBelong(node->right, x);
-}*/
+	{
+		removeNode(node->right, value);
+	}
+}
+
+void removeNode(BinaryTree* tree, int x)
+{
+	removeNode(tree->root, x);
+}
+
+void ascendingOrderPrint(Node* node) 
+{
+	if (node != nullptr) 
+	{
+		ascendingOrderPrint(node->left);
+		std::cout << node->value << " ";
+		ascendingOrderPrint(node->right);
+	}
+}
+
+void ascendingOrderPrint(BinaryTree* tree)
+{
+	if (tree->root != nullptr)
+	{
+		ascendingOrderPrint(tree->root);
+	}
+	else
+	{
+		std::cout << "Tree is empty.";
+	}
+}
+
+void descendingOrderPrint(Node* node)
+{
+	if (node != nullptr)
+	{
+		descendingOrderPrint(node->right);
+		std::cout << node->value << " ";
+		descendingOrderPrint(node->left);
+	}
+}
+
+void descendingOrderPrint(BinaryTree* tree)
+{
+	if (tree->root != nullptr)
+	{
+		descendingOrderPrint(tree->root);
+	}
+	else
+	{
+		std::cout << "Tree is empty.";
+	}
+}
+
+void preorderPrint(Node* node)
+{
+	if (node != nullptr)
+	{
+		std::cout << " (" << node->value;
+		if (node->left == nullptr)
+		{
+			std::cout << " null ";
+		}
+		else
+		{
+			preorderPrint(node->left);
+		}
+		if (node->right == nullptr)
+		{
+			std::cout << " null";
+		}
+		else
+		{
+			preorderPrint(node->right);
+		}
+		std::cout << ") ";
+	}
+}
+
+void preorderPrint(BinaryTree* tree)
+{
+	if (tree->root != nullptr)
+	{
+		preorderPrint(tree->root);
+	}
+	else
+	{
+		std::cout << "Tree is empty.";
+	}
+}
+
+bool exists(Node* node, int x)
+{
+	if (node == nullptr)
+	{
+		return false;
+	}
+	
+	if (node->value == x)
+	{
+		return true;
+	}
+	if (node->value < x)
+	{
+		if (node->right)
+		{
+			return exists(node->right, x);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	if (node->value > x)
+	{
+		if (node->left)
+		{
+			return exists(node->left, x);
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+bool exists(BinaryTree* tree, int x)
+{
+	return exists(tree->root, x);
+}
