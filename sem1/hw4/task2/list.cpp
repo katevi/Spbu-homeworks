@@ -17,8 +17,8 @@ void deleteList(List *list)
 	while (current)
 	{
 		Subscriber *nextElement = current->next;
-		delete current->name;
-		delete current->number;
+		delete[] current->name;
+		delete[] current->number;
 		delete current;
 		current = nextElement;
 	}
@@ -112,11 +112,12 @@ void findNameInList(List* list, char* number)
 void saveListToFile(List* list)
 {
 	ofstream file;
-	file.open("Telephones.txt", ios::out);
+	char nameOfFile[] = "Telephones.txt";
+	file.open(nameOfFile, ios::out);
 	if ((sizeOfList(list) == 0))
 	{
 		std::cout << "Phonebook is empty. If you want to save something, please, add subscribers before.";
-		ofstream ofs("Telephones.txt", ios::out);
+		ofstream ofs(nameOfFile, ios::out);
 		return;
 	}
 	else
@@ -136,11 +137,12 @@ void saveListToFile(List* list)
 void readListFromFile(List *&list)
 {
 	ifstream file;
-	file.open("Telephones.txt");
+	char nameOfFile[] = "Telephones.txt";
+	file.open(nameOfFile);
 	if (!file)
 	{
 		std::cout << "Phonebook is empty. Please, add subscribers before.";
-		ofstream ofs("Telephones.txt");
+		ofstream ofs(nameOfFile);
 		return;
 	}
 	while (!(file.eof()))
