@@ -40,8 +40,8 @@ void deleteStack(Stack* stack)
 {
 	if (isEmpty(stack))
 	{
-		return;
 		delete stack;
+		return;
 	}
 	StackElement* current = stack->first;
 	while (current)
