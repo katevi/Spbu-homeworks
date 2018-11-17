@@ -44,8 +44,8 @@ void deleteStackChar(StackChar* stack)
 {
 	if (isEmptyChar(stack))
 	{
-		return;
 		deleteStackChar(stack);
+		return;
 	}
 	StackElementChar* current = stack->first;
 	while (current)

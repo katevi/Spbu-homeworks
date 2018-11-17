@@ -44,8 +44,8 @@ void deleteStackFloat(StackFloat* stack)
 {
 	if (isEmptyFloat(stack))
 	{
-		return;
 		delete stack;
+		return;
 	}
 	StackElementFloat* current = stack->first;
 	while (current)
