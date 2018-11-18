@@ -17,5 +17,4 @@ int main()
 	std::cout << "Result: " << calculate(tree);
 	removeTree(tree);
 	file.close();
-	system("pause");
 }
