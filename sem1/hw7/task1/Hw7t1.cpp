@@ -1,25 +1,11 @@
 #include <iostream>
 #include "BinaryTree.h"
+#include "Set.h"
 
-void addElement(BinaryTree* tree)
-{
-	std::cout << "Enter element to add (int value):";
-	int x = 0;
-	std::cin >> x;
-	addNode(tree, x);
-}
-
-void deleteElement(BinaryTree* tree)
-{
-	std::cout << "Enter element to delete (int value):";
-	int x = 0;
-	std::cin >> x;
-	removeNode(tree, x);
-}
 
 int main()
 {
-	BinaryTree* tree = createTree();
+	Set* set = createSet();
 	std::cout << "Hello! Please, press:\n";
 	std::cout << "1 - if you want to add element to tree\n";
 	std::cout << "2 - if you want to delete element from tree\n";
@@ -36,27 +22,27 @@ int main()
 		{
 		case 1:
 		{
-			addElement(tree);
+			addElement(set);
 			break;
 		}
 		case 2:
 		{
-			deleteElement(tree);
+			deleteElement(set);
 			break;
 		}
 		case 3:
 		{
-			ascendingOrderPrint(tree);
+			ascendingOrderPrint(set);
 			break;
 		}
 		case 4:
 		{
-			descendingOrderPrint(tree);
+			descendingOrderPrint(set);
 			break;
 		}
 		case 5:
 		{
-			preorderPrint(tree);
+			preorderPrint(set);
 			break;
 		}
 		default:
@@ -72,5 +58,5 @@ int main()
 			std::cout << "Exit...";
 		}
 	}
-	removeTree(tree);
+	removeSet(set);
 }
