@@ -49,20 +49,6 @@ void addNode(BinaryTree* &tree, int x)
 	addNode(tree->root, x);
 }
 
-Node* searchMinimumNode(Node* node)
-{
-	if (node->left != nullptr)
-	{
-		return searchMinimumNode(node->left);
-	}
-	else
-	{
-		return node;
-		std::cout << node->value;
-	}
-}
-
-
 void removeNode(Node *&node)
 {
 	if ((node->left == nullptr) && (node->right == nullptr))
@@ -91,7 +77,10 @@ void removeNode(Node *&node)
 	if ((node->left != nullptr) && (node->right != nullptr))
 	{
 		Node **temp = &node->right;
-		searchMinimumNode(*temp);
+		while ((*temp)->left != nullptr)
+		{
+			temp = &(*temp)->left;
+		}
 		node->value = (*temp)->value;
 		removeNode(*temp);
 		updateHeight(node);

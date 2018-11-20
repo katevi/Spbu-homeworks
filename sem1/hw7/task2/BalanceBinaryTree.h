@@ -26,8 +26,6 @@ void removeNode(BinaryTree* &tree, int x);
 bool exists(Node* node, int x);
 bool exists(BinaryTree* tree, int x);
 
-Node* searchMinimumNode(Node* node);
-
 void descendingOrderPrint(Node* node);
 void descendingOrderPrint(BinaryTree* tree);
 void ascendingOrderPrint(Node* node);
