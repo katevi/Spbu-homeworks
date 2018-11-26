@@ -5,14 +5,6 @@ BinaryTree *createTree()
 	return new BinaryTree {nullptr};
 }
 
-void removeTree(BinaryTree* tree)
-{
-	if (tree && tree->root)
-	{
-		removeTree(tree->root);
-	}
-	delete tree;
-}
 
 void removeTree(Node* node)
 {
@@ -23,6 +15,15 @@ void removeTree(Node* node)
 	removeTree(node->left);
 	removeTree(node->right);
 	delete node;
+}
+
+void removeTree(BinaryTree* tree)
+{
+	if (tree && tree->root)
+	{
+		removeTree(tree->root);
+	}
+	delete tree;
 }
 
 void addNode(Node *&node, int x)
