@@ -1,6 +1,5 @@
 #include <iostream>
 #include "String.h"
-#include <conio.h>
 
 int main()
 {
@@ -28,7 +27,7 @@ int main()
 	int lengthOfString1 = length(string1);
 	std::cout << "Length of string1 by function:" << lengthOfString1 << "\n\n";
 
-	stringComparison(string1, string2);
+	std::cout << "Result of comparison: " << stringComparison(string1, string2) <<"\n";
 
 	char* charString = convertToChar(string1);
 	std::cout << "String converterted to char:" << charString << "\n\n";
@@ -40,4 +39,5 @@ int main()
 	deleteString(substring);
 	deleteString(string1);
 	deleteString(string2);
+	system("pause");
 }

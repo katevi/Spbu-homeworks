@@ -12,40 +12,47 @@ String* createString(char* currentString)
 	return newString;
 }
 
-void deleteString(String *& string)
+void deleteString(String *string)
 {
-	delete[] string;
+	delete[] string->string;
+	delete string;
 }
 
-void concatenate(String* string, String* stringToAdd)
+void concatenate(String* baseString, String* addedString)
 {
-	int previousLength = string->length;
-	string->length = string->length + stringToAdd->length;
-	char* previousString = new char[previousLength + 1];
-	previousString = string->string;
-	string->string = new char[string->length + 1];
-	for (int i = 0; i < previousLength; i++)
-	{
-		string->string[i] = previousString[i];
-	}
-	int j = 0;
-	for (int i = previousLength; i < string->length; i++)
-	{
-		string->string[i] = stringToAdd->string[j];
-		j++;
-	}
-	string->string[string->length] = '\0';
+	baseString->length = baseString->length + addedString->length;
+	char* concatenatedString = new char[baseString->length + 1];
+
+	strcpy(concatenatedString, baseString->string);
+	strcat(concatenatedString, addedString->string);
+	concatenatedString[baseString->length] = '\0';
+
+	delete[] baseString->string;
+	baseString->string = concatenatedString;
 }
 
 String* clone(String* string)
 {
-	String* stringCopy = new String {string->string, string->length};
+	char* newCharString = new char[string->length + 1];
+	for (int i = 0; i < string->length; i++)
+	{
+		newCharString[i] = string->string[i];
+	}
+	newCharString[string->length] = '\0';
+	String* stringCopy = new String {newCharString, string->length};
 	return stringCopy;
 }
 
 bool isEmpty(String* string)
 {
-	return !(string->length);
+	if (string->length > 0)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 int length(String* string)
@@ -53,24 +60,9 @@ int length(String* string)
 	return string->length;
 }
 
-void stringComparison(String* string1, String* string2)
+int stringComparison(String* string1, String* string2)
 {
-	if (string1->length < string2->length)
-		std::cout << string1->string << " < " << string2->string << "\n\n";
-	if (string1->length > string2->length)
-		std::cout << string1->string << " > " << string2->string << "\n\n";
-	if ((string1->length == string2->length))
-	{
-		int i = 0;
-		for (i = 0; i < string1->length; i++)
-			if (string1->string[i] != string2->string[i])
-			{
-				std::cout << string1->string << " != " << string2->string << "\n\n";
-				break;
-			}
-		if (i == string1->length)
-			std::cout << string1->string << " = " << string2->string << "\n\n";
-	}
+	return strcmp(string1->string, string2->string);
 }
 
 String* createSubstring(String* baseString, int firstPosition, int lastPosition)
