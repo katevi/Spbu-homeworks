@@ -26,6 +26,7 @@ void deleteElement(Set* set)
 void removeSet(Set* set)
 {
 	removeTree(set->tree);
+	delete set;
 }
 
 void preorderPrint(Set* set)

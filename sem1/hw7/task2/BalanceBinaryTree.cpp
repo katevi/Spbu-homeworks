@@ -5,14 +5,67 @@ BinaryTree *createTree()
 	return new BinaryTree {nullptr};
 }
 
-void removeTree(BinaryTree* tree)
+//Balance functions
+
+int height(Node *node)
 {
-	if (tree && tree->root)
-	{
-		removeTree(tree->root);
-	}
-	delete tree;
+	return node ? node->height : 0;
 }
+
+int balanceFactor(Node *node)
+{
+	return height(node->right) - height(node->left);
+}
+
+void updateHeight(Node *&node)
+{
+	int heightLeft = height(node->left);
+	int heightRight = height(node->right);
+	node->height = ((heightLeft > heightRight) ? heightLeft : heightRight) + 1;
+}
+
+
+void rotateRight(Node* &root)
+{
+	Node* pivot = root->left;
+	root->left = pivot->right;
+	pivot->right = root;
+	updateHeight(root);
+	updateHeight(pivot);
+	root = pivot;
+}
+
+void rotateLeft(Node* &root)
+{
+	Node* pivot = root->right;
+	root->right = pivot->left;
+	pivot->left = root;
+	updateHeight(root);
+	updateHeight(pivot);
+	root = pivot;
+}
+
+void balance(Node* &pivot)
+{
+	updateHeight(pivot);
+
+	if (balanceFactor(pivot) == 2)
+	{
+		if (balanceFactor(pivot->right) < 0)
+			rotateRight(pivot->right);
+
+		rotateLeft(pivot);
+	}
+
+	if (balanceFactor(pivot) == -2)
+	{
+		if (balanceFactor(pivot->left) > 0)
+			rotateLeft(pivot->left);
+
+		rotateRight(pivot);
+	}
+}
+
 
 void removeTree(Node* node)
 {
@@ -23,6 +76,15 @@ void removeTree(Node* node)
 	removeTree(node->left);
 	removeTree(node->right);
 	delete node;
+}
+
+void removeTree(BinaryTree* tree)
+{
+	if (tree && tree->root)
+	{
+		removeTree(tree->root);
+	}
+	delete tree;
 }
 
 void addNode(Node *&node, int x)
@@ -234,67 +296,6 @@ bool exists(Node* node, int x)
 bool exists(BinaryTree* tree, int x)
 {
 	return exists(tree->root, x);
-}
-
-//Balance functions
-
-int height(Node *node)
-{
-	return node ? node->height : 0;
-}
-
-int balanceFactor(Node *node)
-{
-	return height(node->right) - height(node->left);
-}
-
-void updateHeight(Node *&node)
-{
-	int heightLeft = height(node->left);
-	int heightRight = height(node->right);
-	node->height = ((heightLeft > heightRight) ? heightLeft : heightRight) + 1;
-}
-
-
-void rotateRight(Node* &root)
-{
-	Node* pivot = root->left;
-	root->left = pivot->right;
-	pivot->right = root;
-	updateHeight(root);
-	updateHeight(pivot);
-	root = pivot;
-}
-
-void rotateLeft(Node* &root) 
-{
-	Node* pivot = root->right;
-	root->right = pivot->left;
-	pivot->left = root;
-	updateHeight(root);
-	updateHeight(pivot);
-	root = pivot;
-}
-
-void balance(Node* &pivot)
-{
-	updateHeight(pivot);
-
-	if (balanceFactor(pivot) == 2)
-	{
-		if (balanceFactor(pivot->right) < 0)
-			rotateRight(pivot->right);
-
-		rotateLeft(pivot);
-	}
-
-	if (balanceFactor(pivot) == -2)
-	{
-		if (balanceFactor(pivot->left) > 0)
-			rotateLeft(pivot->left);
-
-		rotateRight(pivot);
-	}
 }
 
 
