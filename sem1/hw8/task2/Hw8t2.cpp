@@ -39,5 +39,4 @@ int main()
 	deleteString(substring);
 	deleteString(string1);
 	deleteString(string2);
-	system("pause");
 }
