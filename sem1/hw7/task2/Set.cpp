@@ -7,19 +7,13 @@ Set* createSet()
 	return new Set {tree};
 }
 
-void addElement(Set* set)
+void addElement(Set* set, int x)
 {
-	std::cout << "Enter element to add (int value):";
-	int x = 0;
-	std::cin >> x;
 	addNode(set->tree, x);
 }
 
-void deleteElement(Set* set)
+void deleteElement(Set* set, int x)
 {
-	std::cout << "Enter element to delete (int value):";
-	int x = 0;
-	std::cin >> x;
 	removeNode(set->tree, x);
 }
 
