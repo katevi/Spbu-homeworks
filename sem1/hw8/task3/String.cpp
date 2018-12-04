@@ -98,7 +98,8 @@ String* createSubstring(String* baseString, int firstPosition, int lastPosition)
 
 char* convertToChar(String* string)
 {
-	char* stringChar = new char[string->length];
-	stringChar = string->string;
+	char* stringChar = new char[string->length + 1];
+	for (int i = 0; i <= string->length; i++)
+		stringChar[i] = string->string[i];
 	return stringChar;
 }
