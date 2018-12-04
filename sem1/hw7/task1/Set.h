@@ -8,8 +8,8 @@ struct Set{
 };
 
 Set* createSet();
-void addElement(Set* set);
-void deleteElement(Set* set);
+void addElement(Set* set, int x);
+void deleteElement(Set* set, int x);
 void removeSet(Set* set);
 void preorderPrint(Set* set);
 void descendingOrderPrint(Set* set);

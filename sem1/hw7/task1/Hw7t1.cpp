@@ -22,12 +22,18 @@ int main()
 		{
 		case 1:
 		{
-			addElement(set);
+			std::cout << "Enter element to add (int value):";
+			int x = 0;
+			std::cin >> x;
+			addElement(set, x);
 			break;
 		}
 		case 2:
 		{
-			deleteElement(set);
+			std::cout << "Enter element to delete (int value):";
+			int x = 0;
+			std::cin >> x;
+			deleteElement(set, x);
 			break;
 		}
 		case 3:
