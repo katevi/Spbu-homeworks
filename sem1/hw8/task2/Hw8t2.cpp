@@ -32,11 +32,12 @@ int main()
 	char* charString = convertToChar(string1);
 	std::cout << "String converterted to char:" << charString << "\n\n";
 
-	String* substring = createSubstring(string1, 0, 11);
+	String* substring = createSubstring(string2, 0, 11);
 	std::cout << "Substring:" << substring->string << "\n\n";
 
 	deleteString(copyString1);
 	deleteString(substring);
 	deleteString(string1);
 	deleteString(string2);
+	delete[] charString;
 }
