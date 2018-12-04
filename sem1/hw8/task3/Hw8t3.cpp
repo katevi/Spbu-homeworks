@@ -7,8 +7,7 @@ using namespace std;
 
 bool isLetter(char symbol)
 {
-	return !(symbol == ' ' || symbol == '?' || symbol == '!' || symbol == ',' 
-		|| symbol == ';' || symbol == '.' || symbol == '-' || symbol == '\0' || symbol == ':' || symbol == '"');
+	return (symbol >= 'a' && symbol <= 'z' || symbol >= 'A' && symbol <= 'Z');
 }
 
 int main()
@@ -44,6 +43,7 @@ int main()
 	std::cout << "Number of empty cells: " << emptyCells(table) << "\n";
 	std:cout << "Average number of samples:" << averageNumberOfSamples(table) << "\n";
 	outputWordWithMaxSample(table);
+	delete[] wordChar;
 	deleteTable(table);
 	file.close();
 }

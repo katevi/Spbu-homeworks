@@ -78,7 +78,7 @@ void addElement(HashTable *table, String *string)
 	newElement->nextElement = table->bucket[(index + shift) % table->size];
 	table->bucket[(index + shift) % table->size] = newElement;
 	table->currentSize++;
-	//debugPrinting(hashTable, index, shift, attempt);
+	//debugPrinting(table, index, shift, attempt);
 }
 
 void debugPrinting(HashTable* table, int index, int shift, int attempt)
@@ -86,25 +86,37 @@ void debugPrinting(HashTable* table, int index, int shift, int attempt)
 	std::cout << table->bucket[index + shift]->word->string << " index=" << index << " shift=" << shift << " attempt=" << attempt << " finalIndex=" << (index + shift) % table->size << "\n";
 }
 
-bool exists(HashTable* table, String* string)
+bool isAllVisited(bool visitedCells[], int size)
 {
-	int index = hash(string, table->size);
-	TableElement* tmp = table->bucket[index];
-	if (table->bucket[index] == nullptr)
+	bool result = true;
+	for (int i = 0; i < size; i++)
 	{
-		return false;
-	}
-	else
-	{
-		if (isSame(table->bucket[index]->word, string))
-		{
-			return true;
-		}
-		else
+		if (visitedCells[i] = false)
 		{
 			return false;
 		}
 	}
+	return true;
+}
+
+bool exists(HashTable* table, String* string)
+{
+	bool* visitedCells = new bool[table->size] {true};
+	int index = hash(string, table->size);
+	TableElement* tmp = table->bucket[index];
+	int attempt = 0;
+	if (table->bucket[index] == nullptr)
+		return false;
+	if (isSame(table->bucket[index]->word, string))
+		return true;
+	while (isAllVisited(visitedCells, table->size))
+	{
+		attempt++; 
+		index = hash(string, table->size) + attempt * attempt;
+		if (isSame(table->bucket[index]->word, string))
+			return true;
+	}
+	return false;
 }
 
 void printNumberOfWords(HashTable* table)
