@@ -13,7 +13,9 @@ int main()
 	BinaryTree* tree = createTree();
 	HashTable* table = createTable();
 	Queue* queue = createQueue();
+
 	readingFromFile(inputFile, table, queue);
+	printNumberOfWords(table);
 
 	for (int i = 0; i < table->size; i++)
 	{
@@ -35,8 +37,7 @@ int main()
 	inputFile.open("text.txt");
 	ofstream outputFile("output.txt");
 	writingToFile(inputFile, outputFile, arrayOfCodes, table, tree);
-
-	system("pause");
+	
 	inputFile.close();
 	outputFile.close();
 	for (int i = 0; i < table->size; i++)

@@ -33,6 +33,8 @@ void readingFromFile(ifstream &file, HashTable* table, Queue* queue)
 
 void writingToFile(ifstream &inputFile, ofstream &outputFile, String* arrayOfCodes[], HashTable* table, BinaryTree* tree)
 {
+	preorderPrint(tree, outputFile);
+	outputFile << endl;
 	char currentSymbol;
 	inputFile.get(currentSymbol);
 	while (!inputFile.eof())
@@ -46,12 +48,4 @@ void writingToFile(ifstream &inputFile, ofstream &outputFile, String* arrayOfCod
 		}
 		inputFile.get(currentSymbol);
 	}
-	outputFile << endl;
-	for (int i = 0; i < table->size; i++)
-	{
-		if (table->bucket[i].countOfSame != 0)
-			outputFile << table->bucket[i].symbol << ":" << table->bucket[i].countOfSame << "\n";
-	}
-	outputFile << endl;
-	preorderPrint(tree, outputFile);
 }
