@@ -10,11 +10,11 @@ int main()
 	char previous {' '};
 	bool isInOneStringComment = false;
 	bool isInManyStringComment = false;
+	previous = current;
+	file.get(current);
 	while (!file.eof())
 	{
 		//std::cout << "Hey";
-		previous = current;
-		file.get(current);
 		//std::cout << previous << current << " ";
 		if (isInOneStringComment)
 			std::cout << current;
@@ -31,6 +31,8 @@ int main()
 			//if (!(isInManyStringComment) && !(isInOneStringComment))
 			isInOneStringComment = true;
 		}
+		previous = current;
+		file.get(current);
 	}
 	system("pause");
 	file.close();
