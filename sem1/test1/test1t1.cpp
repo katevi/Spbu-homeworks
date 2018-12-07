@@ -12,6 +12,7 @@ int main()
 	bool isInManyStringComment = false;
 	previous = current;
 	file.get(current);
+	std::cout << "//";
 	while (!file.eof())
 	{
 		//std::cout << "Hey";
@@ -33,6 +34,7 @@ int main()
 		}
 		previous = current;
 		file.get(current);
+
 	}
 	system("pause");
 	file.close();
