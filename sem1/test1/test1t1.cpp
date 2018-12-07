@@ -15,21 +15,21 @@ int main()
 		//std::cout << "Hey";
 		previous = current;
 		file.get(current);
-		std::cout << previous << current << " ";
+		//std::cout << previous << current << " ";
 		if (isInOneStringComment)
 			std::cout << current;
 		if (current == '*' && previous == '/')
 			isInManyStringComment = true;
 		if (current == '/' && previous == '*')
 			isInManyStringComment = false;
-		if (current == previous && current == '/' && !(isInManyStringComment) && !(isInOneStringComment))
-		{
-			//if (!(isInManyStringComment) && !(isInOneStringComment))
-				isInOneStringComment = true;
-		}
 		if (current == previous && current == '/' && ((isInOneStringComment) || (isInManyStringComment)))
 		{
 			isInOneStringComment = false;
+		}
+		if (current == previous && current == '/' && !(isInManyStringComment) && !(isInOneStringComment))
+		{
+			//if (!(isInManyStringComment) && !(isInOneStringComment))
+			isInOneStringComment = true;
 		}
 	}
 	system("pause");
