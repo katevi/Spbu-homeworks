@@ -72,9 +72,9 @@ void add(List *list, int x)
 ListElement* previous(List* list, ListElement* element)
 {
 	ListElement* current = list->first;
-	if (current == nullptr || current->value == element->value)
+	if (current == nullptr || current == element)
 		return nullptr;
-	while (current->next->value != element->value && current->next)
+	while (current->next != element && current->next)
 	{
 		current = current->next;
 	}
