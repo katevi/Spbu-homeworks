@@ -1,9 +1,7 @@
 #include <iostream>
 #include <fstream>
-
-using namespace std;
-
-int main()
+ using namespace std;
+ int main()
 {
 	ifstream file("input.txt");
 	char current {' '};
@@ -34,8 +32,7 @@ int main()
 		}
 		previous = current;
 		file.get(current);
-
-	}
+ 	}
 	system("pause");
 	file.close();
 }
