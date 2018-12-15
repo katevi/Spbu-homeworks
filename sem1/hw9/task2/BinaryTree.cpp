@@ -142,10 +142,10 @@ void preorderPrint(Node* node, ofstream &file)
 {
 	if (node != nullptr)
 	{
-		file << " (" << node->element->symbol;
+		file << "(" << node->element->symbol << " ";
 		if (node->left == nullptr)
 		{
-			file << " null ";
+			file << "null ";
 		}
 		else
 		{
@@ -153,13 +153,13 @@ void preorderPrint(Node* node, ofstream &file)
 		}
 		if (node->right == nullptr)
 		{
-			file << " null";
+			file << "null";
 		}
 		else
 		{
 			preorderPrint(node->right, file);
 		}
-		file << ") ";
+		file << ")";
 	}
 }
 
