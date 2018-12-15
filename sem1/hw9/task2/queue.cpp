@@ -1,91 +1,89 @@
 #include "queue.h"
 #include "BinaryTree.h"
 
-Queue *createQueue()
+struct Node
 {
-	Queue *newQueue = new Queue;
-	newQueue->head = nullptr;
-	newQueue->tail = nullptr;
-	return newQueue;
+	int key;
+	Tree *value;
+	Node *next;
+};
+
+struct PriorityQueue
+{
+	Node *head;
+};
+
+
+PriorityQueue *createPriorityQueue()
+{
+	PriorityQueue *newPriorityQueue = new PriorityQueue;
+	newPriorityQueue->head = nullptr;
+	return newPriorityQueue;
 }
 
-void deleteQueue(Queue *queue)
+
+Node *createNode(int key, Tree *value, Node *next)
 {
-	while (!isEmpty(queue))
-	{
-		pop(queue);
-	}
-	delete queue;
+	Node *newNode = new Node;
+	newNode->key = key;
+	newNode->value = value;
+	newNode->next = next;
+	return newNode;
 }
 
-void print(Queue* queue)
+void insert(PriorityQueue *priorityQueue, int key, Tree *value)
 {
-	QueueElement* current = queue->head;
-	while (current)
+	if (isEmpty(priorityQueue))
 	{
-		std::cout << current->tree->root->element->symbol << " ";
-		current = current->next;
-	}
-}
-
-void push(Queue* queue, BinaryTree* tree)
-{
-	QueueElement* current = queue->head;
-	if ((queue->head == nullptr) || (current->tree->root->element->countOfSame > tree->root->element->countOfSame))
-	{
-		QueueElement* newElement = new QueueElement{ tree, queue->head };
-		queue->head = newElement;
+		priorityQueue->head = createNode(key, value, nullptr);
 		return;
 	}
-	while ((current->next) && (current->next->tree->root->element->countOfSame <= tree->root->element->countOfSame))
-	{
-		current = current->next;
-	}
-	QueueElement* newElement = new QueueElement {tree, current->next};
-	current->next = newElement;
-}
 
-void push(Queue *queue, TableElement* element)
-{
-	BinaryTree* newTree = createTree();
-	addNode(newTree, element);
-	QueueElement* current = queue->head;
-	if ((queue->head == nullptr) || (current->tree->root->element->countOfSame > element->countOfSame))
+	if (priorityQueue->head->key > key)
 	{
-		QueueElement* newElement = new QueueElement{newTree, queue->head};
-		queue->head = newElement;
+		priorityQueue->head = createNode(key, value, priorityQueue->head);
 		return;
 	}
-	while ((current->next) && (current->next->tree->root->element->countOfSame <= element->countOfSame))
+
+	Node *temp = priorityQueue->head;
+	while ((temp->next != nullptr) && (temp->next->key < key))
+		temp = temp->next;
+
+	temp->next = createNode(key, value, temp->next);
+}
+
+Tree *extractMinimum(PriorityQueue *priorityQueue, int &key)
+{
+	if (isEmpty(priorityQueue))
+		return nullptr;
+
+	Node *temp = priorityQueue->head;
+	Tree *answer = temp->value;
+	key = temp->key;
+	priorityQueue->head = temp->next;
+	delete temp;
+	
+	return answer;
+}
+
+bool isEmpty(PriorityQueue *priorityQueue)
+{
+	return priorityQueue->head == nullptr;
+}
+
+
+void deletePriorityQueue(PriorityQueue *&priorityQueue)
+{
+	Node *temp = priorityQueue->head;
+
+	while (temp != nullptr)
 	{
-		current = current->next;
+		Node *toDelete = temp;
+		temp = temp->next;
+		deleteTree(toDelete->value);
+		delete toDelete;
 	}
-	QueueElement* newElement = new QueueElement {newTree, current->next};
-	current->next = newElement;
-}
 
-QueueElement* pop(Queue *queue)
-{
-	QueueElement* element = new QueueElement {queue->head->tree, nullptr };
-	QueueElement *tmp = queue->head->next;
-	delete queue->head;
-	queue->head = tmp;
-	return element;
-}
-
-bool isEmpty(Queue *queue)
-{
-	return queue->head == nullptr;
-}
-
-int length(Queue *queue)
-{
-	int result = 0;
-	QueueElement *currentElement = queue->head;
-	while (currentElement != nullptr)
-	{
-		currentElement = currentElement->next;
-		result++;
-	}
-	return result;
+	delete priorityQueue;
+	priorityQueue = nullptr;
 }

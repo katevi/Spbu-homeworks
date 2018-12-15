@@ -1,27 +1,12 @@
 #pragma once
-#include "HashTable.h"
 #include "BinaryTree.h"
 
-struct QueueElement
-{
-	BinaryTree* tree {nullptr};
-	QueueElement *next;
-};
+struct PriorityQueue;
 
-struct Queue
-{
-	QueueElement *head;
-	QueueElement *tail;
-};
+PriorityQueue *createPriorityQueue();
 
-Queue *createQueue();
-void deleteQueue(Queue *queue);
+void insert(PriorityQueue *priorityQueue, int key, Tree *value);
+Tree *extractMinimum(PriorityQueue *priorityQueue, int &key);
+bool isEmpty(PriorityQueue *priorityQueue);
 
-void push(Queue *queue, TableElement* element);
-void push(Queue* queue, BinaryTree* tree);
-QueueElement* pop(Queue *queue);
-
-void print(Queue* queue);
-int length(Queue *queue);
-
-bool isEmpty(Queue *queue); 
+void deletePriorityQueue(PriorityQueue *&priorityQueue);

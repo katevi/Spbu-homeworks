@@ -1,176 +1,144 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "BinaryTree.h"
-#include "queue.h"
-#include "String.h"
-#include "HashTable.h"
-#include <fstream>
+#include <string.h>
 
-using namespace std;
+int const stringSize = 1024;
+int const charSize = 256;
 
-BinaryTree *createTree()
+struct Node
 {
-	return new BinaryTree{ nullptr };
+	char symbol;
+	Node *left;
+	Node *right;
+};
+
+struct Tree
+{
+	Node *root;
+};
+
+
+Node *createNode(char symbol, Node *left, Node *right)
+{
+	Node *newNode = new Node;
+
+	newNode->left = left;
+	newNode->right = right;
+	newNode->symbol = symbol;
+
+	return newNode;
 }
 
-void removeTree(BinaryTree* tree)
+Tree *createTree(char symbol)
 {
-	if (tree && tree->root)
-	{
-		removeTree(tree->root);
-	}
-	delete tree;
-}
+	Tree *newTree = new Tree;
 
-void removeTree(Node* node)
-{
-	if (node == nullptr)
-	{
-		return;
-	}
-	removeTree(node->left);
-	removeTree(node->right);
-	delete node;
-}
+	newTree->root = createNode(symbol, nullptr, nullptr);
 
-void addNode(Node *&node, TableElement* element)
-{
-	if (node == nullptr)
-	{
-		node = new Node {element, nullptr, nullptr};
-		node->element->symbol = element->symbol;
-		node->element->countOfSame = element->countOfSame;
-		return;
-	}
-	if (element->countOfSame > node->element->countOfSame)
-	{
-		addNode(node->right, element);
-	}
-	if (element->countOfSame <= node->element->countOfSame)
-	{
-		addNode(node->left, element);
-	}
-}
-
-void addNode(BinaryTree* &tree, TableElement* element)
-{
-	addNode(tree->root, element);
-}
-
-BinaryTree* mergeTree(BinaryTree* tree1, BinaryTree* tree2)
-{
-	BinaryTree* newTree = createTree();
-	TableElement* newElement = new TableElement { '#', 0 };
-	Node* newNode = new Node{ newElement, 0 };
-	QueueElement* newRoot = new QueueElement {newTree, nullptr};
-	newTree->root = newNode;
-	newRoot->tree->root->element->countOfSame = tree1->root->element->countOfSame + tree2->root->element->countOfSame;
-	newTree->root->left = tree1->root;
-	newTree->root->right = tree2->root;
-	tree1->root = nullptr;
-	tree2->root = nullptr;
 	return newTree;
 }
 
-bool isLeaf(Node* node)
+Tree *mergeTrees(Tree *&left, Tree *&right)
 {
-	return ((node->left == nullptr) && (node->right == nullptr));
+	Tree *newTree = new Tree;
+
+	newTree->root = createNode('\0', left->root, right->root);
+
+	delete left;
+	left = nullptr;
+	delete right;
+	right = nullptr;
+	
+	return newTree;
 }
 
-void getCodes(Node* node, String **codes, String *currentCode)
+
+void addSymbol(char *string, char symbol)
 {
-	if (isLeaf(node))
+	if (symbol == '\0')
 	{
-		if (length(currentCode) == 0)
-		{
-			char leftSuffixLine[2] = { '0', '\0' };
-			String *leftSuffix = createString(leftSuffixLine);
-			concatenate(currentCode, leftSuffix);
-			deleteString(leftSuffix);
-		}
-		codes[(int)node->element->symbol] = currentCode;
+		strcat(string, "'\\0'");
 		return;
 	}
 
-	String *leftCode = currentCode;
-	String *rightCode = clone(currentCode);
-
-	char leftSuffixLine[2] = { '0', '\0' };
-	char rightSuffixLine[2] = { '1', '\0' };
-	String *leftSuffix = createString(leftSuffixLine);
-	String *rightSuffix = createString(rightSuffixLine);
-	concatenate(leftCode, leftSuffix);
-	concatenate(rightCode, rightSuffix);
-	deleteString(leftSuffix);
-	deleteString(rightSuffix);
-
-	getCodes(node->left, codes, leftCode);
-	getCodes(node->right, codes, rightCode);
+	char temp[4] = {'\0'};
+	temp[0] = '\'';
+	temp[1] = symbol;
+	temp[2] = '\'';
+	strcat(string, temp);
 }
 
-String **codes(BinaryTree* tree, int tableSize)
+void addString(char *string, char *toAdd)
 {
-	String **codes = new String*[tableSize];
-	for (int i = 0; i < tableSize; i++)
-		codes[i] = nullptr;
+	strcat(string, toAdd);
+	delete[] toAdd;
+}
 
-	char emptyLine[1] = { '\0' };
-	getCodes(tree->root, codes, createString(emptyLine));
+char *outputABC(Node *node)
+{
+	char *answer = new char[stringSize];
+	
+	if (node == nullptr)
+	{
+		strcpy(answer, "null");
+		return answer;
+	}
+	
+	strcpy(answer, "(");
+	addSymbol(answer, node->symbol);
+	strcat(answer, " ");
+
+	addString(answer, outputABC(node->left));
+	strcat(answer, " ");
+
+	addString(answer, outputABC(node->right));
+	strcat(answer, ")");
+	
+	return answer;
+}
+
+char *outputABC(Tree *tree)
+{
+	return outputABC(tree->root);
+}
+
+void countCodes(Node *node, int *codes, int code)
+{
+	if (node == nullptr)
+		return;
+	
+	if (node->symbol != '\0')
+		codes[(unsigned char)node->symbol] = code;
+	
+	countCodes(node->left, codes, code * 10);
+	countCodes(node->right, codes, code * 10 + 1);
+}
+
+int *countCodes(Tree *tree)
+{
+	int *codes = new int[charSize];
+	int code = 2;
+	countCodes(tree->root, codes, code);
 	return codes;
 }
-void ascendingOrderPrint(Node* node)
+
+
+void deleteTree(Node *node)
 {
-	if (node != nullptr)
-	{
-		ascendingOrderPrint(node->left);
-		std::cout << node->element->symbol << " ";
-		ascendingOrderPrint(node->right);
-	}
+	if (node == nullptr)
+		return;
+
+	deleteTree(node->left);
+	deleteTree(node->right);
+	delete node;
 }
 
-void ascendingOrderPrint(BinaryTree* tree)
+void deleteTree(Tree *&tree)
 {
-	if (tree->root != nullptr)
-	{
-		ascendingOrderPrint(tree->root);
-	}
-	else
-	{
-		std::cout << "Tree is empty.";
-	}
-}
+	if (tree == nullptr)
+		return;
 
-void preorderPrint(Node* node, ofstream &file)
-{
-	if (node != nullptr)
-	{
-		file << "(" << node->element->symbol << " ";
-		if (node->left == nullptr)
-		{
-			file << "null ";
-		}
-		else
-		{
-			preorderPrint(node->left, file);
-		}
-		if (node->right == nullptr)
-		{
-			file << "null";
-		}
-		else
-		{
-			preorderPrint(node->right, file);
-		}
-		file << ")";
-	}
-}
-
-void preorderPrint(BinaryTree* tree, ofstream &file)
-{
-	if (tree->root != nullptr)
-	{
-		preorderPrint(tree->root, file);
-	}
-	else
-	{
-		file << "Tree is empty.";
-	}
+	deleteTree(tree->root);
+	delete tree;
+	tree = nullptr;
 }
