@@ -5,11 +5,9 @@
 #include <string.h>
 #include "queue.h"
 #include "BinaryTree.h"
+#include <iostream>
 
 using namespace std;
-
-int const stringSize = 1024;
-int const charSize = 256;
 
 struct HuffmanCode
 {
@@ -45,42 +43,41 @@ HuffmanCode *readFile(char *path)
 }
 
 
-int *countFrequency(HuffmanCode *huffman)
+void countFrequency(HuffmanCode *huffman, int frequency[])
 {
-	int *frequency = new int[charSize];
-
-	for (int i = 0; i < charSize; i++)
+	for (int i = 0; i < maximumCharCode; i++)
+	{
 		frequency[i] = 0;
+	}
 
 	for (int i = 0; i < huffman->size; i++)
+	{
 		frequency[(unsigned char)huffman->string[i]]++;
-	
-	return frequency;
+	}
 }
 
 void performHuffman(HuffmanCode *huffman)
 {
-	int *frequency = countFrequency(huffman);
-	
+	int frequency[maximumCharCode] {0};
+	countFrequency(huffman, frequency);
+
 	PriorityQueue *queue = createPriorityQueue();
-	for (int i = 0; i < charSize; i++)
+	for (int i = 0; i < maximumCharCode; i++)
 		if (frequency[i] != 0)
 			insert(queue, frequency[i], createTree(i));
-	
-	delete[] frequency;
-	
+
 	int key = 0;
-	Tree *tree = extractMinimum(queue, key);
+	Tree *tree = pop(queue, key);
 	while (!isEmpty(queue))
 	{
 		int tempKey = 0;
-		Tree *temp = extractMinimum(queue, tempKey);
+		Tree *temp = pop(queue, tempKey);
 		tree = mergeTrees(tree, temp);
 		key += tempKey;
 		insert(queue, key, tree);
-		tree = extractMinimum(queue, key);
+		tree = pop(queue, key);
 	}
-	
+
 	huffman->tree = tree;
 	deletePriorityQueue(queue);
 }
@@ -104,7 +101,7 @@ void saveFile(HuffmanCode *huffman, char *path)
 	fstream file;
 	file.open(path, ios::out);
 	
-	char *temp = outputABC(huffman->tree);
+	char *temp = printTreeToFile(huffman->tree);
 	file << temp << endl;
 	delete[] temp;
 	

@@ -1,19 +1,6 @@
 #include "queue.h"
 #include "BinaryTree.h"
 
-struct Node
-{
-	int key;
-	Tree *value;
-	Node *next;
-};
-
-struct PriorityQueue
-{
-	Node *head;
-};
-
-
 PriorityQueue *createPriorityQueue()
 {
 	PriorityQueue *newPriorityQueue = new PriorityQueue;
@@ -52,7 +39,7 @@ void insert(PriorityQueue *priorityQueue, int key, Tree *value)
 	temp->next = createNode(key, value, temp->next);
 }
 
-Tree *extractMinimum(PriorityQueue *priorityQueue, int &key)
+Tree *pop(PriorityQueue *priorityQueue, int &key)
 {
 	if (isEmpty(priorityQueue))
 		return nullptr;
@@ -62,7 +49,7 @@ Tree *extractMinimum(PriorityQueue *priorityQueue, int &key)
 	key = temp->key;
 	priorityQueue->head = temp->next;
 	delete temp;
-	
+
 	return answer;
 }
 
