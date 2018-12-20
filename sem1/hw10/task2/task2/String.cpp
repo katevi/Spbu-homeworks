@@ -9,7 +9,11 @@ String* createString(char* currentString)
 	newString->length = strlen(currentString);
 	newString->string = new char[newString->length + 1];
 	newString->string[newString->length] = '\0';
-	strcpy(newString->string, currentString);
+	for (int i = 0; i < newString->length; i++)
+	{
+		newString->string[i] = currentString[i];
+	}
+	delete[] currentString;
 	return newString;
 }
 

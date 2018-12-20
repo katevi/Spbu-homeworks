@@ -1,13 +1,15 @@
 #include <iostream>
 #include "String.h"
 
+int const prime = 7;
+int const intSize = 2147483647;
+
 int hash(String* string)
 {
-	int const prime = 7;
 	int result = 0;
-	for (int i = length(string) - 1; i >= 0; i--)
+	for (int i = string->length - 1; i >= 0; i--)
 	{
-		result = result * prime + int(string->string[i]);
+		result = (result * prime % intSize + int(string->string[i])) % intSize;
 	}
 	return result;
 }
@@ -20,7 +22,7 @@ void inputLength(int &lengthString, int &lengthSubstring)
 	std::cin >> lengthSubstring;
 }
 
-void inputStrings(char* &stringChar, char* &substringChar)
+void inputStrings(char* stringChar, char* substringChar)
 {
 	std::cout << "Enter string:\n";
 	std::cin >> stringChar;
@@ -32,10 +34,10 @@ int main()
 {
 	int lengthString = 0;
 	int lengthSubstring = 0;
-	inputLength(lengthString, lengthSubstring);
 
-	char* stringChar = new char[lengthString] {' '};
-	char* substringChar = new char[lengthSubstring] {' '};
+	inputLength(lengthString, lengthSubstring);
+	char* stringChar = new char[lengthString + 1];
+	char* substringChar = new char[lengthSubstring + 1];
 	inputStrings(stringChar, substringChar);
 
 	String* string = createString(stringChar);
@@ -44,15 +46,24 @@ int main()
 	int hashSubstring = hash(substring);
 
 	std::cout << "First indices of all occurrences of a substring in a string:\n";
+	String* currentString = substring;
+	int currentHash = 0;
 	for (int i = lengthSubstring - 1; i < lengthString; i++)
 	{
-		String* currentString = createSubstring(string, i - substring->length + 1, i);
-		if (hash(currentString) == hashSubstring)
+		for (int k = i; k >= i - substring->length + 1; k--)
+		{
+			currentHash = ((currentHash * prime) % intSize + (int)(string->string[k])) % intSize;
+		}
+		if (currentHash == hashSubstring)
+		{
+			currentString = createSubstring(string, i - substring->length + 1, i);
 			if (isSame(currentString, substring))
 				std::cout << i - substring->length + 1 << " ";
-		deleteString(currentString);
+		}
+		currentHash = 0;
 	}
-
+	
+	deleteString(currentString);
 	deleteString(string);
 	deleteString(substring);
 }
