@@ -1,9 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "BinaryTree.h"
+#include "Huffman.h"
 #include <string.h>
 
-int const stringSize = 1024;
-int const charSize = 256;
 
 struct Node
 {
@@ -16,7 +15,6 @@ struct Tree
 {
 	Node *root;
 };
-
 
 Node *createNode(char symbol, Node *left, Node *right)
 {
@@ -74,7 +72,7 @@ void addString(char *string, char *toAdd)
 	delete[] toAdd;
 }
 
-char *outputABC(Node *node)
+char *printTreeToFile(Node *node)
 {
 	char *answer = new char[stringSize];
 	
@@ -88,18 +86,18 @@ char *outputABC(Node *node)
 	addSymbol(answer, node->symbol);
 	strcat(answer, " ");
 
-	addString(answer, outputABC(node->left));
+	addString(answer, printTreeToFile(node->left));
 	strcat(answer, " ");
 
-	addString(answer, outputABC(node->right));
+	addString(answer, printTreeToFile(node->right));
 	strcat(answer, ")");
 	
 	return answer;
 }
 
-char *outputABC(Tree *tree)
+char *printTreeToFile(Tree *tree)
 {
-	return outputABC(tree->root);
+	return printTreeToFile(tree->root);
 }
 
 void countCodes(Node *node, int *codes, int code)
@@ -116,7 +114,7 @@ void countCodes(Node *node, int *codes, int code)
 
 int *countCodes(Tree *tree)
 {
-	int *codes = new int[charSize];
+	int *codes = new int[maximumCharCode];
 	int code = 2;
 	countCodes(tree->root, codes, code);
 	return codes;
