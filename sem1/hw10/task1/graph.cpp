@@ -9,14 +9,13 @@ Graph* loadGraph(const char* path)
 	Graph* graph = new Graph;
 	ifstream file(path);
 	file >> graph->weight >> graph->height;
-	graph->map = new int*[graph->height];
+	graph->map = new int*[graph->weight];
+	for (int i = 0; i < graph->weight; i++)
+		graph->map[i] = new int[graph->height];
 	for (int i = 0; i < graph->height; i++)
 	{
-		graph->map[i] = new int[graph->weight];
-	}
-	for (int j = 0; j < graph->weight; j++)
-	{
-		for (int i = 0; i < graph->height; i++)
+		for (int j = 0; j < graph->weight; j++)
+
 			file >> graph->map[j][i];
 	}
 	file.close();
@@ -25,7 +24,7 @@ Graph* loadGraph(const char* path)
 
 void deleteGraph(Graph* graph)
 {
-	for (int i = 0; i < graph->weight; i++)
+	for (int i = 0; i < graph->weight - 1; i++)
 	{
 		delete[] graph->map[i];
 	}

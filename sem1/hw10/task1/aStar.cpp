@@ -9,17 +9,17 @@ int heuristicFunction(int x1, int y1, int x2, int y2)
 
 void printPath(Graph* graph)
 {
-	for (int j = 0; j < graph->weight; j++)
+	for (int j = 0; j < graph->height; j++)
 	{
-		for (int i = 0; i < graph->height; i++)
+		for (int i = 0; i < graph->weight; i++)
 		{
-			if (graph->map[j][i] == 1000)
+			if (graph->map[i][j] == 1000)
 			{
 				std::cout << "* ";
 			}
 			else
 			{
-				std::cout << graph->map[j][i] << " ";
+				std::cout << graph->map[i][j] << " ";
 			}
 		}
 		std::cout << "\n";
@@ -29,9 +29,9 @@ void printPath(Graph* graph)
 void findMinimumDistance(int &x, int &y, int **heuristics, int **currents, int **used, int height, int weight)
 {
 	int minValue = infinity;
-	for (int i = 0; i < height; i++)
+	for (int i = 0; i < weight; i++)
 	{
-		for (int j = 0; j < weight; j++)
+		for (int j = 0; j < height; j++)
 		{
 			if ((minValue > heuristics[i][j]) && (!used[i][j] && currents[i][j]))
 			{

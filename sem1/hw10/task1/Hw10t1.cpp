@@ -11,9 +11,9 @@ int main()
 
 	int xStart = 0;
 	int yStart = 0;
-	std::cout << "Enter a starting point. x (from 0 to " << graph->weight - 1 << "), y (from 0 to " << graph->height - 1 << "\n";
+	std::cout << "Enter a starting point. x (from 0 to " << graph->weight - 1 << "), y (from 0 to " << graph->height - 1 << ")\n";
 	std::cin >> xStart >> yStart;
-	std::cout << "Enter an endpoint. x (from 0 to " << graph->weight - 1 << "), y (from 0 to " << graph->height - 1 << "\n";
+	std::cout << "Enter an endpoint. x (from 0 to " << graph->weight - 1 << "), y (from 0 to " << graph->height - 1 << ")\n";
 	int xFinish = 0;
 	int yFinish = 0;
 	std::cin >> xFinish >> yFinish;
@@ -27,11 +27,11 @@ int main()
 	std::cout << "* - path algorithm founded:\n\n";
 	aStar(graph, used, distance, previous, heuristic, currents, xStart, yStart, xFinish, yFinish);
 
-	deleteAuxiliaryMatrix(used, graph->height);
-	deleteAuxiliaryMatrix(distance, graph->height);
-	deleteAuxiliaryMatrix(previous, graph->height);
-	deleteAuxiliaryMatrix(currents, graph->height);
-	deleteAuxiliaryMatrix(heuristic, graph->height);
+	deleteAuxiliaryMatrix(used, graph->weight);
+	deleteAuxiliaryMatrix(distance, graph->weight);
+	deleteAuxiliaryMatrix(previous, graph->weight);
+	deleteAuxiliaryMatrix(currents, graph->weight);
+	deleteAuxiliaryMatrix(heuristic, graph->weight);
 
 	deleteGraph(graph);
 }
