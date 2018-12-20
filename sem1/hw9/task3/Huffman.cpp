@@ -5,9 +5,6 @@
 
 using namespace std;
 
-int const stringSize = 1024;
-int const charSize = 256;
-
 struct HuffmanCode
 {
 	char *string;

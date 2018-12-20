@@ -1,9 +1,6 @@
 #include "BinaryTree.h"
 #include <string.h>
 
-int const stringSize = 1024;
-int const charSize = 256;
-
 struct Node
 {
 	char symbol;
