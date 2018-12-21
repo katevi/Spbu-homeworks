@@ -16,7 +16,7 @@ Graph* createGraph(const char* path)
 	}
 	fin >> graph->vertex >> graph->edge;
 	graph->vertices = new List*[graph->vertex];
-	std::cout << graph->vertex << " " << graph->edge << "\n";
+	//std::cout << graph->vertex << " " << graph->edge << "\n";
 	int **adjacencyMatrix = new int*[graph->edge];
 	for (int i = 0; i < graph->edge; i++)
 		adjacencyMatrix[i] = new int[graph->vertex];
@@ -28,14 +28,14 @@ Graph* createGraph(const char* path)
 			fin >> adjacencyMatrix[j][i];
 		}
 	}
-	for (int i = 0; i < graph->vertex; i++)
+	/*for (int i = 0; i < graph->vertex; i++)
 	{
 		for (int j = 0; j < graph->edge; j++)
 		{
 			std::cout << adjacencyMatrix[j][i];
 		}
 		std::cout << "\n";
-	}
+	}*/
 	int fromCity = -1;
 	int toCity = -1;
 	for (int i = 0; i < graph->vertex; i++)
@@ -62,10 +62,10 @@ Graph* createGraph(const char* path)
 			}
 		}
 	}
-	for (int i = 0; i < graph->vertex; i++)
+	/*for (int i = 0; i < graph->vertex; i++)
 	{
 		print(graph->vertices[i]);
-	}
+	}*/
 	for (int i = 0; i < graph->edge; i++)
 	{
 		delete[] adjacencyMatrix[i];
@@ -77,11 +77,8 @@ Graph* createGraph(const char* path)
 
 void dfs(List** adjacencyMatrix, int amount, bool* isUsed, int current)
 {
-	if (isUsed[current])
-		return;
-
 	isUsed[current] = true;
-	std::cout << current + 1 << ' ';
+	//std::cout << current + 1 << ' ';
 	ListElement* currentElement = adjacencyMatrix[current]->first;
 	int i = 0;
 	while (currentElement)

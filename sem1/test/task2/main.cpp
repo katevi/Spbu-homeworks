@@ -19,21 +19,23 @@ int main()
 {
 	Graph* graph = createGraph("in.txt");
 	bool* isUsed = new bool[graph->vertex];
-	/*for (int i = 0; i < graph->vertex; i++)
+	for (int i = 0; i < graph->vertex; i++)
 	{
 		isUsed[i] = false;
-	}*/
-	/*for (int i = 0; i < graph->vertex; i++)
+	}
+	for (int i = 0; i < graph->vertex; i++)
 	{
 		dfs(graph->vertices, graph->vertex, isUsed, 0);
 		if (isAllVisited(isUsed, graph->vertex))
 			std::cout << i << " ";
-		for (int i = 0; i < graph->vertex; i++)
+		for (int k = 0; k < graph->vertex; k++)
 		{
+			std::cout << isUsed[i] << " ";
 			isUsed[i] = false;
 		}
-	}*/
-	//deleteGraph(graph);
+		std::cout << "\n";
+	}
+	deleteGraph(graph);
 	system("pause");
 	return 0;
 }
