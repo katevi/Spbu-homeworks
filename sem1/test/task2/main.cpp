@@ -39,7 +39,14 @@ int main()
 		}
 	}
 	bool isAchieved = false;
-
+	for (int i = 0; i < graph->vertex; i++)
+	{
+		for (int j = 0; j < graph->vertex; j++)
+		{
+			std::cout <<  allVisited[j][i] << " ";
+		}
+		std::cout << "\n";
+	}
 	for (int i = 0; i < graph->vertex; i++)
 	{
 		isAchieved = true;
@@ -56,6 +63,5 @@ int main()
 	delete[] allVisited;
 	delete[] isUsed;
 	deleteGraph(graph);
-	system("pause");
 	return 0;
 }
