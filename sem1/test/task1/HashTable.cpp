@@ -86,27 +86,6 @@ void debugPrinting(HashTable* table, int index, int shift, int attempt)
 	std::cout << table->bucket[index + shift]->word->string << " index=" << index << " shift=" << shift << " attempt=" << attempt << " finalIndex=" << (index + shift) % table->size << "\n";
 }
 
-bool exists(HashTable* table, String* string)
-{
-	int index = hash(string, table->size);
-	TableElement* tmp = table->bucket[index];
-	if (table->bucket[index] == nullptr)
-	{
-		return false;
-	}
-	else
-	{
-		if (isSame(table->bucket[index]->word, string))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-}
-
 int numberOfWords(HashTable* table)
 {
 	int result = 0;

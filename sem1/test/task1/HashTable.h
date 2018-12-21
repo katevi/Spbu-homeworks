@@ -26,8 +26,6 @@ int hash(String* string, int mod);
 void addElement(HashTable* table, String* string);
 void deleteElement(TableElement* element);
 
-bool exists(HashTable* table, String* string);
-
 //void printNumberOfWords(HashTable* table);
 
 int numberOfWords(HashTable* table);
