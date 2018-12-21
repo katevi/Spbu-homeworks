@@ -13,30 +13,61 @@ Graph* createGraph(const char* path)
 	if (!fin.good())
 	{
 		cout << "error, file not opened";
-		//return;
 	}
-	int vertex = 0;
-	int edge = 0;
 	fin >> graph->vertex >> graph->edge;
-	int **adjacencyMatrix = new int*[edge];
-	bool *isUsed = new bool[vertex];
-	for (int i = 0; i < vertex; i++)
+	std::cout << graph->vertex << " " << graph->edge << "\n";
+	int **adjacencyMatrix = new int*[graph->edge];
+	for (int i = 0; i < graph->edge; i++)
+		adjacencyMatrix[i] = new int[graph->vertex];
+
+	for (int i = 0; i < graph->vertex; i++)
 	{
-		isUsed[i] = false;
-	}
-
-	for (int i = 0; i < edge; i++)
-		adjacencyMatrix[i] = new int[vertex];
-
-	for (int i = 0; i < vertex; i++)
-		for (int j = 0; j < edge; j++)
+		for (int j = 0; j < graph->edge; j++)
+		{
 			fin >> adjacencyMatrix[j][i];
-	for (int i = 0; i < vertex; i++)
+		}
+	}
+	for (int i = 0; i < graph->vertex; i++)
 	{
-		for (int j = 0; j < edge; j++)
+		for (int j = 0; j < graph->edge; j++)
+		{
 			std::cout << adjacencyMatrix[j][i];
+		}
 		std::cout << "\n";
 	}
+	int fromCity = -1;
+	int toCity = -1;
+	for (int i = 0; i < graph->vertex; i++)
+	{
+		graph->vertices[i] = createList();
+	}
+	for (int i = 0; i < graph->edge; i++)
+	{
+		for (int j = 0; j < graph->vertex; j++)
+		{
+			if (adjacencyMatrix[i][j] == 1)
+			{
+				fromCity = j;
+			}
+			if (adjacencyMatrix[i][j] == -1)
+			{
+				toCity = i;
+			}
+			if (fromCity != -1 && toCity != -1)
+			{
+				add(graph->vertices[fromCity], toCity);
+			}
+		}
+	}
+	for (int i = 0; i < graph->vertex; i++)
+	{
+		print(graph->vertices[i]);
+	}
+	for (int i = 0; i < graph->edge; i++)
+	{
+		delete[] adjacencyMatrix;
+	}
+	delete adjacencyMatrix;
 	fin.close();
 	return graph;
 }

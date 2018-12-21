@@ -19,11 +19,11 @@ int main()
 {
 	Graph* graph = createGraph("in.txt");
 	bool* isUsed = new bool[graph->vertex];
-	for (int i = 0; i < graph->vertex; i++)
+	/*for (int i = 0; i < graph->vertex; i++)
 	{
 		isUsed[i] = false;
-	}
-	for (int i = 0; i < graph->vertex; i++)
+	}*/
+	/*for (int i = 0; i < graph->vertex; i++)
 	{
 		dfs(graph->vertices, graph->vertex, isUsed, 0);
 		if (isAllVisited(isUsed, graph->vertex))
@@ -32,7 +32,7 @@ int main()
 		{
 			isUsed[i] = false;
 		}
-	}
+	}*/
 	//deleteGraph(graph);
 	system("pause");
 	return 0;
