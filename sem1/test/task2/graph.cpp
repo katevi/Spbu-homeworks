@@ -15,6 +15,7 @@ Graph* createGraph(const char* path)
 		cout << "error, file not opened";
 	}
 	fin >> graph->vertex >> graph->edge;
+	graph->vertices = new List*[graph->vertex];
 	std::cout << graph->vertex << " " << graph->edge << "\n";
 	int **adjacencyMatrix = new int*[graph->edge];
 	for (int i = 0; i < graph->edge; i++)
@@ -56,6 +57,8 @@ Graph* createGraph(const char* path)
 			if (fromCity != -1 && toCity != -1)
 			{
 				add(graph->vertices[fromCity], toCity);
+				fromCity = -1;
+				toCity = -1;
 			}
 		}
 	}
@@ -65,7 +68,7 @@ Graph* createGraph(const char* path)
 	}
 	for (int i = 0; i < graph->edge; i++)
 	{
-		delete[] adjacencyMatrix;
+		delete[] adjacencyMatrix[i];
 	}
 	delete adjacencyMatrix;
 	fin.close();
