@@ -91,6 +91,9 @@ void deleteGraph(Graph* graph)
 {
 
 	for (int i = 0; i < graph->vertex; i++)
-		delete[] graph->vertices[i];
+	{
+		deleteList(graph->vertices[i]);
+	}
 	delete[] graph->vertices;
+
 }

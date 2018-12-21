@@ -58,6 +58,7 @@ int main()
 		if (isAchieved == true)
 			std::cout << i << " ";
 	}
+	system("pause");
 	for (int i = 0; i < graph->vertex; i++)
 		delete[] allVisited[i];
 	delete[] allVisited;
