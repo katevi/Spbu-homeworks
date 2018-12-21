@@ -52,6 +52,7 @@ int main()
 	}
 
 	delete[] strings;
+	delete[] currentString;
 	deleteTable(table);
 	output.close();
 	file.close();
