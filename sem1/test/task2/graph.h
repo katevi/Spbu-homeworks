@@ -9,7 +9,7 @@ struct Graph
 	int edge;
 };
 
-void dfs(List** adjacencyMatrix, int amount, bool* isUsed, int current);
+void dfs(List** adjacencyMatrix, int amount, bool* &isUsed, int &current);
 
 Graph* createGraph(const char* path);
 void deleteGraph(Graph* graph);

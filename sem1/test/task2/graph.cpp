@@ -52,7 +52,7 @@ Graph* createGraph(const char* path)
 			}
 			if (adjacencyMatrix[i][j] == -1)
 			{
-				toCity = i;
+				toCity = j;
 			}
 			if (fromCity != -1 && toCity != -1)
 			{
@@ -62,10 +62,6 @@ Graph* createGraph(const char* path)
 			}
 		}
 	}
-	/*for (int i = 0; i < graph->vertex; i++)
-	{
-		print(graph->vertices[i]);
-	}*/
 	for (int i = 0; i < graph->edge; i++)
 	{
 		delete[] adjacencyMatrix[i];
@@ -75,20 +71,19 @@ Graph* createGraph(const char* path)
 	return graph;
 }
 
-void dfs(List** adjacencyMatrix, int amount, bool* isUsed, int current)
+void dfs(List** adjacencyMatrix, int amount, bool* &isUsed, int &current)
 {
 	isUsed[current] = true;
-	//std::cout << current + 1 << ' ';
+	//std::cout << current << ' ';
 	ListElement* currentElement = adjacencyMatrix[current]->first;
-	int i = 0;
 	while (currentElement)
 	{
-		if (!isUsed[i])
+		if (!(isUsed[currentElement->value]))
 		{
-			dfs(adjacencyMatrix, amount, isUsed, i);
+			//std::cout << currentElement->value;
+			dfs(adjacencyMatrix, amount, isUsed, currentElement->value);
 		}
 		currentElement = currentElement->next;
-		i++;
 	}
 }
 
@@ -99,32 +94,3 @@ void deleteGraph(Graph* graph)
 		delete[] graph->vertices[i];
 	delete[] graph->vertices;
 }
-
-/*void dijkstra(Graph *graph)
-{
-	createSupportArray(graph);
-
-	bool *flag = new bool[graph->size];
-	for (int i = 0; i < graph->size; i++)
-		flag[i] = false;
-
-	int min = 0;
-	while (min < graph->size)
-	{
-		flag[min] = true;
-		for (int i = 0; i < graph->size; i++)
-		{
-			int len = graph->matrix[min][i];
-			if ((len != 0) && (graph->length[i] > graph->length[min] + len))
-			{
-				graph->length[i] = graph->length[min] + len;
-				graph->way[i] = min;
-			}
-		}
-
-		while ((min < graph->size) && !((flag[min] == false) && (graph->length[min] != INT_MAX)))
-			min++;
-	}
-
-	delete[] flag;
-}*/

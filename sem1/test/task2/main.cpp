@@ -7,9 +7,9 @@ using namespace std;
 
 bool isAllVisited(bool* used, int amount)
 {
-	for (int i = 0; i < amount; i++)
+	for (int k = 0; k < amount; k++)
 	{
-		if (used[i] == false)
+		if (!used[k])
 			return false;
 	}
 	return true;
@@ -23,18 +23,38 @@ int main()
 	{
 		isUsed[i] = false;
 	}
+	bool** allVisited = new bool*[graph->vertex];
 	for (int i = 0; i < graph->vertex; i++)
 	{
-		dfs(graph->vertices, graph->vertex, isUsed, 0);
-		if (isAllVisited(isUsed, graph->vertex))
-			std::cout << i << " ";
+		allVisited[i] = new bool[graph->vertex];
+	}
+	for (int i = 0; i < graph->vertex; i++)
+	{
+		dfs(graph->vertices, graph->vertex, isUsed, i);
+		//std::cout << "\n";
 		for (int k = 0; k < graph->vertex; k++)
 		{
-			std::cout << isUsed[i] << " ";
-			isUsed[i] = false;
+			allVisited[k][i] = isUsed[k];
+			isUsed[k] = false;
 		}
-		std::cout << "\n";
 	}
+	bool isAchieved = false;
+
+	for (int i = 0; i < graph->vertex; i++)
+	{
+		isAchieved = true;
+		for (int j = 0; j < graph->vertex; j++)
+		{
+			if (allVisited[i][j] == 0)
+				isAchieved = false;
+		}
+		if (isAchieved == true)
+			std::cout << i << " ";
+	}
+	for (int i = 0; i < graph->vertex; i++)
+		delete[] allVisited[i];
+	delete[] allVisited;
+	delete[] isUsed;
 	deleteGraph(graph);
 	system("pause");
 	return 0;
