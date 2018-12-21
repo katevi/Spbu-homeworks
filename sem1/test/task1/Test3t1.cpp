@@ -1,6 +1,7 @@
 #include <iostream>
 #include "String.h"
 #include "HashTable.h"
+#include <string.h>
 #include <fstream>
 
 using namespace std;
