@@ -89,11 +89,11 @@ void dfs(List** adjacencyMatrix, int amount, bool* &isUsed, int &current)
 
 void deleteGraph(Graph* graph)
 {
-
 	for (int i = 0; i < graph->vertex; i++)
 	{
 		deleteList(graph->vertices[i]);
 	}
 	delete[] graph->vertices;
+	delete graph;
 
 }
