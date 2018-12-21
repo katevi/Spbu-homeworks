@@ -4,7 +4,7 @@
 #include <iostream>
 
 struct TableElement {
-	int value;
+	String* word;
 	int countOfSame;
 	TableElement* nextElement;
 	int numberOfSamples;
@@ -21,14 +21,18 @@ void deleteTable(HashTable* table);
 
 double loadFactor(HashTable* table);
 
-int hash(int value, int mod);
+int hash(String* string, int mod);
 
-void addElement(HashTable* table, int value);
+void addElement(HashTable* table, String* string);
 void deleteElement(TableElement* element);
 
-bool exists(HashTable* table, int value);
+bool exists(HashTable* table, String* string);
 
-void printNumberOfWords(HashTable* table);
+//void printNumberOfWords(HashTable* table);
 
+int numberOfWords(HashTable* table);
 int emptyCells(HashTable* table);
 double averageNumberOfSamples(HashTable* table);
+void outputWordWithMaxSample(HashTable* table);
+
+void debugPrinting(HashTable* table, int index, int shift, int attempt);
