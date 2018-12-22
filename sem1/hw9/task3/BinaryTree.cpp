@@ -1,5 +1,6 @@
 #include "BinaryTree.h"
 #include <string.h>
+#include <iostream>
 
 struct Node
 {
@@ -34,19 +35,30 @@ void loadTree(Node *&node, char *string, int &i)
 		node = createNode('\0');
 	}
 	else
+	{
+		//std::cout << string[i];
 		node = createNode(string[i]);
+	}
 
 	i += 3;
 	if (string[i] == '(')
+	{
 		loadTree(node->left, string, i);
+	}
 	else
+	{
 		i += 3;
+	}
 
 	i += 2;
 	if (string[i] == '(')
+	{
 		loadTree(node->right, string, i);
+	}
 	else
+	{
 		i += 3;
+	}
 	
 	i++;
 }
@@ -59,6 +71,28 @@ Tree *loadTree(char *string)
 	loadTree(newTree->root, string, i);
 
 	return newTree;
+}
+
+void descendingOrderPrint(Node* node)
+{
+	if (node != nullptr)
+	{
+		descendingOrderPrint(node->right);
+		std::cout << node->symbol << " ";
+		descendingOrderPrint(node->left);
+	}
+}
+
+void descendingOrderPrint(Tree* tree)
+{
+	if (tree->root != nullptr)
+	{
+		descendingOrderPrint(tree->root);
+	}
+	else
+	{
+		std::cout << "Tree is empty.";
+	}
 }
 
 void decryptSymbol(Node *node, char *coded, int &i, char *result, int &j)
@@ -79,7 +113,7 @@ void decryptSymbol(Node *node, char *coded, int &i, char *result, int &j)
 
 void decryptString(Tree *tree, char *&string)
 {
-	char *answer = new char[stringSize];
+	char *answer = new char[textSize];
 	int size = strlen(string);
 
 	int i = 0;

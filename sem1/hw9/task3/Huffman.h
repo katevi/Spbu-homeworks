@@ -1,6 +1,12 @@
 #pragma once
+#include "BinaryTree.h"
 
-struct HuffmanCode;
+struct HuffmanCode
+{
+	char *string;
+	int size;
+	Tree *tree;
+};
 
 HuffmanCode *loadFile(char *path);
 

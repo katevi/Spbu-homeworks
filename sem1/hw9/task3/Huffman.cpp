@@ -1,16 +1,11 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Huffman.h"
 #include <fstream>
+#include <iostream>
 #include <string.h>
 #include "BinaryTree.h"
 
 using namespace std;
-
-struct HuffmanCode
-{
-	char *string;
-	int size;
-	Tree *tree;
-};
 
 
 HuffmanCode *createHuffmanCode()
@@ -24,21 +19,41 @@ HuffmanCode *createHuffmanCode()
 	return newHuffmanCode;
 }
 
+char* concatenate(char* baseString, char addedSymbol)
+{
+	int length = strlen(baseString) + 1;
+	char* concatenated = new char[length + 1];
+
+	strcpy(concatenated, baseString);
+	//strcat(concatenated, addedSymbol);
+	concatenated[length - 1] = addedSymbol;
+	concatenated[length] = '\0';
+	//concatenated[length + 1] = '\0';
+	return concatenated;
+}
+
 HuffmanCode *loadFile(char *path)
 {
 	HuffmanCode *answer = createHuffmanCode();
 	fstream file;
 	file.open(path, ios::in);
-
-	char *string = new char[stringSize];
-	file.getline(string, stringSize);
-	answer->tree = loadTree(string);
-	delete[] string;
-
+	char* currentString = new char[1] {};
+	char c = file.get();
+	while (c != '#')
+	{
+		currentString = concatenate(currentString, c);
+		file.get(c);
+	}
+	file.get();
+	file.get();
+	answer->tree = loadTree(currentString);
 	answer->string = new char[stringSize];
 	file.getline(answer->string, stringSize);
+	std::cout << answer->string << "\n";
+	//delete[] string;
+	//file.getline(answer->string, stringSize);
 	answer->size = strlen(answer->string);
-
+	//std::cout <<  answer->string << "!!!!!\n";
 	file.close();
 	return answer;
 }
