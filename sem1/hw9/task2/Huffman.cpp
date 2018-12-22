@@ -52,6 +52,7 @@ HuffmanCode *readFile(char *path)
 		file.getline(currentString, stringSize);
 		answer->string = concatenate(answer->string, currentString);
 	}
+	delete[] currentString;
 	answer->size = strlen(answer->string);
 	file.close();
 	return answer;
