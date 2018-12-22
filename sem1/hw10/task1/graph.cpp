@@ -24,7 +24,7 @@ Graph* loadGraph(const char* path)
 
 void deleteGraph(Graph* graph)
 {
-	for (int i = 0; i < graph->weight - 1; i++)
+	for (int i = 0; i < graph->weight; i++)
 	{
 		delete[] graph->map[i];
 	}
