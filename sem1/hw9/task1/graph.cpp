@@ -68,16 +68,12 @@ bool isIsolated(List* list, int* accessory)
 bool isOwnedByCurrentCapital(int numberOfCity, int numberOfCapital, Graph* graph)
 {
 	//checking city belongs to the current capital
-	if ((graph->accessory[numberOfCity] == numberOfCapital))
-		return true;
-	return false;
+	return ((graph->accessory[numberOfCity] == numberOfCapital));
 }
 
 bool isCapital(int* accessory, int value)
 {
-	if (accessory[value] == value)
-		return true;
-	return false;
+	return (accessory[value] == value);
 }
 
 bool isForeign(Graph* graph, int numberOfCity, int numberOfCapital)
@@ -173,4 +169,5 @@ void deleteGraph(Graph* graph)
 	delete[] graph->cities;
 	delete[] graph->accessory;
 	graph->size = 0;
+	delete graph;
 }

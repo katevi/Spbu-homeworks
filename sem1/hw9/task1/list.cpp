@@ -4,7 +4,7 @@
 
 List *createList()
 {
-	return new List{ nullptr };
+	return new List {nullptr};
 }
 
 void deleteList(List *list)
