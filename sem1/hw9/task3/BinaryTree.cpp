@@ -36,7 +36,6 @@ void loadTree(Node *&node, char *string, int &i)
 	}
 	else
 	{
-		//std::cout << string[i];
 		node = createNode(string[i]);
 	}
 
