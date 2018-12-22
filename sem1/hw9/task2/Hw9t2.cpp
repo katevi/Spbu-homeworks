@@ -11,7 +11,6 @@ int main()
 	char output[] = "huffmanCode.txt";
 	performHuffman(huffman);
 	saveFile(huffman, output);
-
 	deleteHuffmanCode(huffman);
 	return 0;
 }

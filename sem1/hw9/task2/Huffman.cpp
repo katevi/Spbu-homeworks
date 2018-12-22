@@ -16,6 +16,18 @@ struct HuffmanCode
 	Tree *tree;
 };
 
+char* concatenate(char* baseString, char* addedString)
+{
+	int length = strlen(baseString) + strlen(addedString);
+	char* concatenated = new char[length + 2];
+
+	strcpy(concatenated, baseString);
+	strcat(concatenated, addedString);
+	concatenated[length] = '\n';
+	concatenated[length + 1] = '\0';
+	delete[] baseString;
+	return concatenated;
+}
 
 HuffmanCode *createHuffmanCode()
 {
@@ -33,11 +45,14 @@ HuffmanCode *readFile(char *path)
 	HuffmanCode *answer = createHuffmanCode();
 	fstream file;
 	file.open(path, ios::in);
-
-	answer->string = new char[stringSize];
-	file.getline(answer->string, stringSize);
+	answer->string = new char[1] {};
+	char* currentString = new char[stringSize];
+	while (!file.eof())
+	{
+		file.getline(currentString, stringSize);
+		answer->string = concatenate(answer->string, currentString);
+	}
 	answer->size = strlen(answer->string);
-	
 	file.close();
 	return answer;
 }
@@ -84,8 +99,8 @@ void performHuffman(HuffmanCode *huffman)
 
 char *codeToChar(int number)
 {
-	char *answer = new char[stringSize];
-	char *temp = new char[stringSize];
+	char *answer = new char[textSize];
+	char *temp = new char[textSize];
 
 	sprintf(temp, "%d", number);
 	temp++;

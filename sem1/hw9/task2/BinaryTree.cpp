@@ -74,7 +74,7 @@ void addString(char *string, char *toAdd)
 
 char *printTreeToFile(Node *node)
 {
-	char *answer = new char[stringSize];
+	char *answer = new char[textSize];
 	
 	if (node == nullptr)
 	{
