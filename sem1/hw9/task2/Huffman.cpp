@@ -117,7 +117,7 @@ void saveFile(HuffmanCode *huffman, char *path)
 	file.open(path, ios::out);
 	
 	char *temp = printTreeToFile(huffman->tree);
-	file << temp << endl;
+	file << temp << "#" << endl;
 	delete[] temp;
 	
 	int *codes = countCodes(huffman->tree);
