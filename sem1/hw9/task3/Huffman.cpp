@@ -27,6 +27,7 @@ char* concatenate(char* baseString, char addedSymbol)
 	strcpy(concatenated, baseString);
 	concatenated[length - 1] = addedSymbol;
 	concatenated[length] = '\0';
+	delete[] baseString;
 	return concatenated;
 }
 
@@ -46,8 +47,8 @@ HuffmanCode *loadFile(char *path)
 	answer->tree = loadTree(currentString);
 	answer->string = new char[stringSize];
 	file.getline(answer->string, stringSize);
-	std::cout << answer->string << "\n";
 	answer->size = strlen(answer->string);
+	delete[] currentString;
 	file.close();
 	return answer;
 }

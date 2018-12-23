@@ -7,7 +7,6 @@ int main()
 {
 	char input[] = "huffmanCode.txt";
 	HuffmanCode *huffman = loadFile(input);
-	descendingOrderPrint(huffman->tree);
 	decryptHuffman(huffman);
 	char output[] = "text.txt";
 	saveOriginalFile(huffman, output);
