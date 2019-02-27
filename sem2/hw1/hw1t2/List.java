@@ -34,26 +34,31 @@ public class List<Type>{
         current.next = new ListElement(value);
     }
 
+    public int size() {
+        ListElement current = first;
+        int size = 0;
+        while (current != null){
+            size++;
+            current = current.next;
+        }
+        return size;
+    }
+
     /**
      * Deletes the list element by the entered value.
      *
-     * @param value value of the list element to be deleted
+     * @param index value of the list element to be deleted
      */
-    public void removeElement(Type value){
+    public void removeElement(int index) {
         ListElement current = first;
-
-        if (first.value == value){
-            first = first.next;
+        if (index > size()) {
             return;
         }
-
-        while (current.next != null) {
-            if (current.next.value == value){
-                current.next = current.next.next;
-                return;
-            }
+        for (int i = 0; i < index - 1; i++) {
             current = current.next;
         }
+        current.next = current.next.next;
+
         System.out.println("No such element");
     }
 
@@ -83,9 +88,6 @@ public class List<Type>{
         return (first == null);
     }
 
-    /**
-     * Prints a list. (no parameters)
-     */
     public void print() {
         ListElement current = first;
         while (current != null) {
