@@ -5,16 +5,9 @@ package Vinnik.g144;
  *
  * @param <Type> type of elements of list
  */
-public class List<Type>{
-    private class ListElement{
-        public Type value;
-        public ListElement next;
-        public ListElement(Type value) {
-            this.value = value;
-            this.next = null;
-        }
-    }
+public class List<Type> {
 
+    private int size;
     ListElement first = null;
 
     /**
@@ -22,9 +15,10 @@ public class List<Type>{
      *
      * @param value the value of the element to add to the list
      */
-    public void addElement(Type value){
+    public void addElement(Type value) {
         if (isEmpty()){
             first = new ListElement(value);
+            size++;
             return;
         }
         ListElement current = first;
@@ -32,15 +26,10 @@ public class List<Type>{
             current = current.next;
         }
         current.next = new ListElement(value);
+        size++;
     }
 
     public int size() {
-        ListElement current = first;
-        int size = 0;
-        while (current != null){
-            size++;
-            current = current.next;
-        }
         return size;
     }
 
@@ -51,15 +40,15 @@ public class List<Type>{
      */
     public void removeElement(int index) {
         ListElement current = first;
-        if (index > size()) {
+        if (index > size) {
+            System.out.println("No such element");
             return;
         }
         for (int i = 0; i < index - 1; i++) {
             current = current.next;
         }
         current.next = current.next.next;
-
-        System.out.println("No such element");
+        size--;
     }
 
     /**
@@ -68,10 +57,10 @@ public class List<Type>{
      * @param value the value of the element whose presence in the list should be checked
      * @return true if there is such an element in the list, false otherwise
      */
-    public boolean isExists(Type value) {
+    public boolean exists(Type value) {
         ListElement current = first;
         while (current != null) {
-            if (current.value == value){
+            if (current.value.equals(value)) {
                 return true;
             }
             current = current.next;
@@ -95,5 +84,14 @@ public class List<Type>{
             current = current.next;
         }
         System.out.println();
+    }
+
+    private class ListElement {
+        private Type value;
+        private ListElement next;
+        private ListElement(Type value) {
+            this.value = value;
+            this.next = null;
+        }
     }
 }

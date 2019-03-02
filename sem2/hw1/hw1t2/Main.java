@@ -1,8 +1,6 @@
 package Vinnik.g144;
 
-/**
- * The example of work with list.
- */
+/** The example of work with list. */
 public class Main {
     public static void main(String args[]) {
         List list = new List<Integer>();
@@ -17,10 +15,10 @@ public class Main {
         list.removeElement(3);
         list.print();
         System.out.println("Try to remove 7th element:");
-        list.removeElement(7);
+       list.removeElement(7);
         list.print();
         System.out.println("Size of list: " + list.size());
-        System.out.println("value 3 is exists, isn't it? " + list.isExists(3));
-        System.out.println("value 2 is exists, isn't it? " + list.isExists(2));
+        System.out.println("value 3 is exists, isn't it? " + list.exists(3));
+        System.out.println("value 2 is exists, isn't it? " + list.exists(2));
     }
 }
