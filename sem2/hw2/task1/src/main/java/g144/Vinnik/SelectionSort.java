@@ -1,5 +1,7 @@
 package g144.Vinnik;
-public class SelectionSort implements Sorter{
+
+/** Implements simple SelectionSort**/
+public class SelectionSort implements Sorter {
     @Override
     public void sort(int[] numbers) {
         for (int i = 0; i < numbers.length; i++) {

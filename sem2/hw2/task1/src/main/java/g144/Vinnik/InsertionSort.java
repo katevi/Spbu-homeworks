@@ -1,6 +1,7 @@
 package g144.Vinnik;
 
-public class InsertionSort implements Sorter{
+/** Implements simple InsertionSort**/
+public class InsertionSort implements Sorter {
     @Override
     public void sort(int[] numbers) {
         for (int i = 1; i < numbers.length; i++) {

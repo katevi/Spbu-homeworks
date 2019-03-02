@@ -1,6 +1,7 @@
 package g144.Vinnik;
 
-public class BubbleSort implements Sorter{
+/** Implements simple BubbleSort**/
+public class BubbleSort implements Sorter {
     @Override
     public void sort(int[] numbers) {
         for(int i = numbers.length - 1; i > 0 ; i--) {
