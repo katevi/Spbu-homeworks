@@ -3,6 +3,7 @@ package Vinnik.g144;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**Example of printing traversal of the array coil (snail).*/
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner input = new Scanner(System.in);

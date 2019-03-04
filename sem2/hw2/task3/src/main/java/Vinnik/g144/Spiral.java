@@ -1,7 +1,6 @@
 package Vinnik.g144;
 
-//import static jdk.nashorn.internal.objects.NativeArray.reverse;
-
+/**Implementation of traversal of the array coil*/
 public class Spiral {
     public static int[] resultArray(int[][] originalArray) {
         int originalLength = originalArray.length;
