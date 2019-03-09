@@ -43,7 +43,7 @@ public class LinkedStack <Type> implements Stack <Type> {
 
     /** @return - return the value of the top element */
     @Override
-    public Type top(){
+    public Type top() {
         if (!isEmpty()) {
             return head.value;
         }
