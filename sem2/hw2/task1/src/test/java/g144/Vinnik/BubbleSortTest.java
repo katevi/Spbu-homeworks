@@ -16,7 +16,7 @@ class BubbleSortTest {
     }
 
     @Test
-    void sortSameNumbers(){
+    void sortSameNumbers() {
         int numbersToSort[] = {42};
         int numbersResult[] = {42};
         Sorter sampleBubbleSort = new BubbleSort();
@@ -25,7 +25,7 @@ class BubbleSortTest {
     }
 
     @Test
-    void sortSortedNumbers(){
+    void sortSortedNumbers() {
         int numbersToSort[] = {0, 7, 8, 9, 10};
         int numbersResult[] = {0, 7, 8, 9, 10};
         Sorter sampleBubbleSort = new BubbleSort();
