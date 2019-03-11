@@ -1,16 +1,16 @@
 package Vinnik.g144;
 
 /** Implements simple stack. */
-public class Stack<Type>{
+public class Stack<Type> {
 
     private StackElement head = null;
 
     /** @param value - value of adding element */
-    public void push(Type value){
+    public void push(Type value) {
         head = new StackElement(value, head);
     }
 
-    /** @return - returns value of the top element, removed element before. */
+    /** Returns value of the top element, removed element before, if list is empty returns null.*/
     public Type pop() {
         if (!isEmpty()) {
             Type value = head.value;
@@ -20,13 +20,13 @@ public class Stack<Type>{
         return null;
     }
 
-    /** @return - returns true if the stack is empty and false otherwise. */
+    /** Returns true if the stack is empty and false otherwise. */
     public boolean isEmpty() {
         return (head == null);
     }
 
-    /** @return - return the value of the top element */
-    public Type top(){
+    /** Returns the value of the top element */
+    public Type top() {
         return head.value;
     }
 

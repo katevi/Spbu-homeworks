@@ -4,8 +4,7 @@ package Vinnik.g144;
  * Example of work with simple stack.
  */
 public class Main {
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         Stack <Integer> stack = new Stack <>();
         System.out.println(stack.isEmpty());
         stack.push(5);
