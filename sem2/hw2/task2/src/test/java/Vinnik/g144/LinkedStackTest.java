@@ -22,14 +22,6 @@ public class LinkedStackTest {
         assertEquals(true, result);
     }
 
-    /*@Test
-    public void size() {
-        LinkedStack stack = new LinkedStack();
-        stack.push(4);
-        stack.push(3);
-        assertEquals(2, stack.size());
-    }*/
-
     @Test
     public void top() {
         LinkedStack stack = new LinkedStack();
