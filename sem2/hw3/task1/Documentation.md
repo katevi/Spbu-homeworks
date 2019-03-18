@@ -8,4 +8,5 @@
 * **ListHashTable** - simple hash table with collisition resolution through separate chaining by **List**
 * **Main** class, which implements communication with user
 * **input.txt** - file from which the table reads information
+
 Also there are tests for hash table, list and hash functions and ListIsEmptyException, which used in the delete element from list (cannot delete an element from an empty list) and print (cannot print an empty list).
