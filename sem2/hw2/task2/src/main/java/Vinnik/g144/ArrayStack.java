@@ -10,6 +10,8 @@ public class ArrayStack <Type> implements Stack <Type> {
 
     /**Returns number of elements in stack*/
     public int currentSize() {
+    /** @return - returns number of elements in stack*/
+    public int currentSize() {
         return (this.top + 1);
     }
 
@@ -31,6 +33,7 @@ public class ArrayStack <Type> implements Stack <Type> {
     }
 
     /** Returns value of the last element and removes it after. */
+    /** @return - returns value of the last element and removes it after */
     @Override
     public Type pop() throws EmptyStackException {
         if (isEmpty()) {
@@ -41,12 +44,14 @@ public class ArrayStack <Type> implements Stack <Type> {
     }
 
     /** Only returns value of the last element. */
+    /** @return - only returns value of the last element*/
     @Override
     public Type top() {
         return stack[this.top];
     }
 
     /** Returns true if the stack is empty and false otherwise. */
+    /** @return - returns true if the stack is empty and false otherwise. */
     @Override
     public boolean isEmpty() {
         return (this.top == -1);

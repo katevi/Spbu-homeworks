@@ -13,6 +13,7 @@ public class Calculator {
     }
 
     /** The user enters an expression that he wants to calculate.*/
+    /** The user enters an expression that he wants to calculate*/
     public String input() {
         System.out.println("Enter expression:");
         Scanner scan = new Scanner(System.in);
@@ -130,6 +131,7 @@ public class Calculator {
     }
 
     /** Returns result of computing of arithmetic expression.*/
+    /** returns result of computing of arithmetic expression*/
     public Float calculate(String expression) {
         String postfix = convertToPostfix(expression);
         Float result = calculateResultFromPostfix(postfix);
