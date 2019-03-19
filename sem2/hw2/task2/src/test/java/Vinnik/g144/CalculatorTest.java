@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class CalculatorTest {
 
     @Test
-    public void calculate() {
+    public void calculateTest() {
+      public void calculate() {
         LinkedStack<Character> stack1 = new LinkedStack();
         LinkedStack<Float> stack2 = new LinkedStack();
         Calculator calculator = new Calculator(stack1, stack2);

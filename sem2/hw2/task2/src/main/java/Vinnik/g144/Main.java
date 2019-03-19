@@ -2,7 +2,7 @@ package Vinnik.g144;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/** Implements a simple calculator of arithmetic expressions. (Example (5+3-2*6))**/
+/** Implements a simple calculator of arithmetic expressions with digits. (Example (5+3-2*6))*/
 public class Main {
 
     public static void main(String args[]) {

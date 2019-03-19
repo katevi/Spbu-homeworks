@@ -9,7 +9,6 @@ public class LinkedStack <Type> implements Stack <Type> {
         public Type value;
         public StackElement next;
         public int syze;
-
         public StackElement(Type value, StackElement next) {
             this.value = value;
             this.next = next;
@@ -24,6 +23,7 @@ public class LinkedStack <Type> implements Stack <Type> {
         head = new StackElement(value, head);
     }
 
+    /** Returns value of the top element, removed element before. */
     /** @return - returns value of the top element, removed element before. */
     @Override
     public Type pop() {
@@ -35,12 +35,14 @@ public class LinkedStack <Type> implements Stack <Type> {
         return value;
     }
 
+    /** Returns true if the stack is empty and false otherwise. */
     /** @return - returns true if the stack is empty and false otherwise. */
     @Override
     public boolean isEmpty() {
         return (head == null);
     }
 
+    /** Returns the value of the top element. */
     /** @return - return the value of the top element */
     @Override
     public Type top(){

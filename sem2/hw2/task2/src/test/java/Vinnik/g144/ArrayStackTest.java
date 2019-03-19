@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ArrayStackTest {
 
     @Test
-    public void pop() {
+    public void popTest() {
         ArrayStack stack = new ArrayStack();
         stack.push(4);
         stack.push(3);
@@ -16,7 +16,7 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void top() {
+    public void topTest() {
         ArrayStack stack = new ArrayStack();
         stack.push(2);
         stack.push(4);
@@ -25,14 +25,14 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void isEmpty() {
+    public void isEmptyTest() {
         ArrayStack stack = new ArrayStack();
         boolean result = stack.isEmpty();
         assertEquals(true, result);
     }
 
     @Test
-    public void currentSize() {
+    public void currentSizeTest() {
         ArrayStack stack = new ArrayStack();
         stack.push(2);
         stack.push(4);
@@ -41,7 +41,7 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void doubleSize() {
+    public void doubleSizeTest() {
         ArrayStack stack = new ArrayStack();
         stack.push(2);
         stack.push(4);

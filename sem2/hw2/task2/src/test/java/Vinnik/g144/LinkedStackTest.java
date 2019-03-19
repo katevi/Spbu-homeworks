@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LinkedStackTest {
 
     @Test
-    public void pop() {
+    public void popTest() {
         LinkedStack stack = new LinkedStack();
         stack.push(4);
         stack.push(3);
@@ -16,22 +16,14 @@ public class LinkedStackTest {
     }
 
     @Test
-    public void isEmpty() {
+    public void isEmptyTest() {
         LinkedStack stack = new LinkedStack();
         boolean result = stack.isEmpty();
         assertEquals(true, result);
     }
 
-    /*@Test
-    public void size() {
-        LinkedStack stack = new LinkedStack();
-        stack.push(4);
-        stack.push(3);
-        assertEquals(2, stack.size());
-    }*/
-
     @Test
-    public void top() {
+    public void topTest() {
         LinkedStack stack = new LinkedStack();
         stack.push(2);
         stack.push(4);
