@@ -19,7 +19,7 @@ class SpiralTest {
                 count++;
             }
         }
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < result.length; i++) {
             assertEquals(result[i], (spiral.resultArray(array))[i]);
         }
     }
