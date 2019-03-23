@@ -13,7 +13,7 @@
 
  (**LinkedStack** and **ArrayStack** implements simple single-linked stack and stack, based on array).
 
- ## Calculator
+## Calculator
 
  **Constructor**:
 
@@ -28,9 +28,9 @@
 
  **private char[] removeTabsFromPostfixForm(String stringExpressionInPostfixForm)** : outputs a string whose non-empty part (up to #) matches the string of the Postfix form (**finalString**).
 
-  **private Float calculateResultFromPostfix(String stringExpressionInPostfix)**
-: By the string obtained in the method **convertToPostfix**, calculates the original arithmetic expression, returns Float type. The calculation algorithm can be found here [https://habr.com/ru/post/100869/].
+ **private Float calculateResultFromPostfix(String stringExpressionInPostfix)**
+ : By the string obtained in the method **convertToPostfix**, calculates the original arithmetic expression, returns Float type. The calculation algorithm can be found here [https://habr.com/ru/post/100869/].
 
  **private Float operate(Float a, Float b, char operator)**: the method applies an arithmetic operation to two given numbers according to the given operator and returns the result.
 
-  **public Float calculate(String expression)**: using previous methods, returns the value of the entered expression.
+ **public Float calculate(String expression)**: using previous methods, returns the value of the entered expression.
