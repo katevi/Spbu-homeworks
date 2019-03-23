@@ -9,7 +9,7 @@
 
 	* **getRoot** - causes **getOperator** from the tree root.
 
-    	* **getOperator** - parses the string into tree (the algorithm is based on the fact that after each bracket there is an operand, and then - two of its arguments. The operand is the root of the subtree and the numbers are its leafs. The method runs recursively from the left and right subtrees.)
+	* **getOperator** - parses the string into tree (the algorithm is based on the fact that after each bracket there is an operand, and then - two of its arguments. The operand is the root of the subtree and the numbers are its leafs. The method runs recursively from the left and right subtrees.)
     
 	* **getNumber** - converts string like "1234" to int number
     
