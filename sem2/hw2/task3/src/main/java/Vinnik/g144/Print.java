@@ -1,7 +1,7 @@
 package Vinnik.g144;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public interface Print {
-    int[] printSpiral(int[][] array) throws FileNotFoundException;
+    int[] printSpiral(int[][] array) throws IOException;
 }

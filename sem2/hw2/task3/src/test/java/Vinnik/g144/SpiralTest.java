@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SpiralTest {
 
     @Test
-    void resultArray() {
+    void resultArrayTest() {
         int[] result = {5, 4, 7, 8, 9, 6, 3, 2, 1};
         int[][] array = new int[3][3];
         int count = 1;

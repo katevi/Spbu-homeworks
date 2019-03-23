@@ -1,11 +1,11 @@
 package Vinnik.g144;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**Example of printing traversal of the array coil (snail).*/
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter length of array:");
