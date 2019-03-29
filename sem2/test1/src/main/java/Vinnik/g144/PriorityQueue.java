@@ -66,7 +66,7 @@ public class PriorityQueue <Type> {
 
     /** Class, implementing element of the queue. */
     private class QueueElement {
-        public Type value;
+        private Type value;
         private int priority;
         private QueueElement next;
 
