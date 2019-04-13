@@ -1,6 +1,6 @@
 language: java
 jdk: oraclejdk8
 script: 
-  - cd term2
+  - cd sem2
   - ./buildscript
 os: linux
