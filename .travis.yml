@@ -2,6 +2,5 @@ language: java
 os:
 - linux
 env:
-- PROJECT_DIR=sem2/hw5/task1/
-script:
-  - ./gradlew build --scan -s
+- PROJECT_DIR=sem2/hw5/task1
+script: cd $PROJECT_DIR && ./gradlew check
