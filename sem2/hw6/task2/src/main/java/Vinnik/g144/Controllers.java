@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-/** Handles communication with user (button pressed). */
+/** Handles communication with user (if button pressed). */
 public class Controllers {
 
     private Button[] buttons;
