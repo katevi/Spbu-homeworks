@@ -1,22 +1,25 @@
 package Vinnik.g144;
 
-import java.io.*;
 
 /** Builds the tree according to the parse tree from the file. */
 public class ExpressionTree {
     private Operator root;
-
+    int numberOfCharactersProcessed = 0;
     /**
      * Loading tree from file.
      *
      * @param expression print of parse tree from file
      * */
 
-    public ExpressionTree(String expression) {
-        root = getRoot(convertToSuitableForm(expression));
+    public ExpressionTree(String expression) throws IncorrectFormException {
+        if (expression.charAt(expression.length() - 1) == ')') {
+            root = getRoot(convertToSuitableForm(expression));
+        } else {
+            throw new IncorrectFormException();
+        }
     }
 
-    //Replaces "( " to "*" and added tab after
+    //Replaces "( " to "*" and adds tab after
     private String convertToSuitableForm(String expression) {
         char[] convertExpression = expression.toCharArray();
         for (int i = 0; i < expression.length() - 1; i++) {
@@ -45,18 +48,15 @@ public class ExpressionTree {
     }
 
 
-    private Operator getRoot(String expression) {
-        int[] i = new int[1];
-        i[0] = 0;
-
-        return getOperator(expression, i);
+    private Operator getRoot(String expression) throws IncorrectFormException {
+        return getOperator(expression);
     }
 
-    private Operator getOperator(String string, int[] i) {
+    private Operator getOperator(String string) throws IncorrectFormException {
         Operator operator = null;
-        i[0]++;
+        numberOfCharactersProcessed++;
 
-        switch (string.charAt(i[0])) {
+        switch (string.charAt(numberOfCharactersProcessed)) {
             case '+': {
                 operator = new Addition();
                 break;
@@ -73,34 +73,37 @@ public class ExpressionTree {
                 operator = new Division();
                 break;
             }
+            default: {
+                throw new IncorrectFormException();
+            }
         }
-        i[0] += 2;
+        numberOfCharactersProcessed += 2;
 
-        if (string.charAt(i[0]) == '(') {
-            operator.setLeft(getOperator(string, i));
+        if (string.charAt(numberOfCharactersProcessed) == '(') {
+            operator.setLeft(getOperator(string));
         } else {
-            operator.setLeft(new Number(getNumber(string, i)));
+            operator.setLeft(new Number(getNumber(string)));
         }
 
-        i[0]++;
-        if (string.charAt(i[0]) == '(') {
-            operator.setRight(getOperator(string, i));
+        numberOfCharactersProcessed++;
+        if (string.charAt(numberOfCharactersProcessed) == '(') {
+            operator.setRight(getOperator(string));
         } else {
-            operator.setRight(new Number(getNumber(string, i)));
+            operator.setRight(new Number(getNumber(string)));
         }
 
-        i[0]++;
+        numberOfCharactersProcessed++;
 
         return operator;
     }
 
-    private int getNumber(String str, int[] i) {
+    private int getNumber(String str) {
         int answer = 0;
 
-        while ((str.charAt(i[0]) > '0') && (str.charAt(i[0]) < '9')) {
+        while ((str.charAt(numberOfCharactersProcessed) > '0') && (str.charAt(numberOfCharactersProcessed) < '9')) {
             answer *= 10;
-            answer += str.charAt(i[0]) - '0';
-            i[0]++;
+            answer += str.charAt(numberOfCharactersProcessed) - '0';
+            numberOfCharactersProcessed++;
         }
 
         return answer;
