@@ -2,7 +2,7 @@ package Vinnik.g144;
 
 public interface HashTable {
     void addElement(String value);
-    void removeElement(String value) throws ListIsEmptyException;
+    void removeElement(String value) throws Exception;
     boolean exists(String string);
     void printStatistics();
     int numberOfOccupiedCells();

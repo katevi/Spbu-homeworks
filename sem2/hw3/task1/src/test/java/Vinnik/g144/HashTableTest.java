@@ -17,7 +17,7 @@ class HashTableTest {
     }
 
     @Test
-    void removeElementTest() throws ListIsEmptyException {
+    void removeElementTest() throws Exception {
         HashTable table = new ListHashTable(new HashFunctionSum());
         table.addElement("abc");
         table.addElement("5_r");
@@ -31,7 +31,7 @@ class HashTableTest {
     }
 
     @Test
-    void existsTest() throws ListIsEmptyException {
+    void existsTest() throws Exception {
         HashTable table = new ListHashTable(new HashFunctionSum());
         assertFalse(table.exists("5_r"));
         assertFalse(table.exists("abc"));

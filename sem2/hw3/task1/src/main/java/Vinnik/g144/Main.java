@@ -7,7 +7,7 @@ import java.io.File;
 /** Implements intercative example of work with hash table. */
 public class Main {
     /** Implementation communication with the user. */
-    public static void main(String args[]) throws FileNotFoundException, ListIsEmptyException {
+    public static void main(String args[]) throws Exception {
 
         System.out.println("Enter 1 if you want to choose hash function with polynom, " +
                 "2 if you want to choose hash function with sum");
@@ -18,14 +18,15 @@ public class Main {
             inputHashFunction = input.next();
         }
         HashTable table;
+        HashFunction hashFunction;
         if (inputHashFunction.equals("1")) {
-            table = new ListHashTable(new HashFunctionPolynom());
+            hashFunction = new HashFunctionPolynom();
             System.out.println("You have chosen hash function with polynom");
         } else {
-            table = new ListHashTable(new HashFunctionSum());
+            hashFunction = new HashFunctionSum();
             System.out.println("You have chosen hash function with sum");
         }
-
+        table = new ListHashTable(hashFunction);
         menu();
         String option = input.next();
         while (!option.equals("0")) {
@@ -66,7 +67,7 @@ public class Main {
     }
 
     private static void loadFile(HashTable table) throws FileNotFoundException {
-        File file = new File("/Users/Katinka/IdeaProjects/Hw3t1_gradle/src/main/java/Vinnik/g144/input.txt");
+        File file = new File("src/main/java/Vinnik/g144/input.txt");
         Scanner in = new Scanner(file);
         while (in.hasNext()) {
             table.addElement(in.next());
