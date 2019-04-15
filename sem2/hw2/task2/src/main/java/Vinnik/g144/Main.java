@@ -1,6 +1,6 @@
 package Vinnik.g144;
-import java.util.Arrays;
 import java.util.Scanner;
+
 
 /** Implements a simple calculator of arithmetic expressions with digits. (Example (5+3-2*6))**/
 public class Main {
@@ -9,7 +9,15 @@ public class Main {
         LinkedStack<Character> stack1 = new LinkedStack();
         LinkedStack<Float> stack2 = new LinkedStack();
         Calculator calculator = new Calculator(stack1, stack2);
-        String expression = calculator.input();
+        String expression = input();
         System.out.println("Value of this expression = " + calculator.calculate(expression));
+    }
+
+    /** The user enters an expression that he wants to calculate.*/
+    public static String input() {
+        System.out.println("Enter expression:");
+        Scanner scan = new Scanner(System.in);
+        String expression = scan.nextLine();
+        return expression;
     }
 }

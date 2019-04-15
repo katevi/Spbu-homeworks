@@ -12,14 +12,6 @@ public class Calculator {
         result = integerStack;
     }
 
-    /** The user enters an expression that he wants to calculate.*/
-    public String input() {
-        System.out.println("Enter expression:");
-        Scanner scan = new Scanner(System.in);
-        String expression = scan.nextLine();
-        return expression;
-    }
-
     private String convertToPostfix(String expression) {
         char expressionInPostfix[] = new char[100];
         Integer count = 0;
