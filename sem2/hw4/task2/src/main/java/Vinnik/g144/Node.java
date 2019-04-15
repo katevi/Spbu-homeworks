@@ -65,22 +65,22 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
 
     private void rotateLeft(BalanceTree<Type> tree) {
         Node<Type> current = getRight();
-        setRight( current.getLeft());
+        setRight (current.getLeft());
         if (current.getLeft() != null) {
              current.getLeft().setParent(this);
         }
-         current.setLeft(this);
+        current.setLeft(this);
         if (getParent() == null) {
-            tree.setRoot( current);
+            tree.setRoot(current);
         } else {
             if (equals(getParent().getLeft())) {
-                parent.setLeft( current);
+                parent.setLeft(current);
             } else {
-                parent.setRight( current);
+                parent.setRight(current);
             }
         }
-         current.setParent(parent);
-        setParent( current);
+        current.setParent(parent);
+        setParent(current);
 
         updateHeight();
         current.updateHeight();

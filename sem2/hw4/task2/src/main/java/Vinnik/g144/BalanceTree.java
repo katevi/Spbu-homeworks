@@ -9,16 +9,16 @@ public class BalanceTree<Type extends Comparable<Type>> implements Collection<Ty
     private Node<Type> root;
     private int size;
 
-    BalanceTree() {
+    public BalanceTree() {
         root = null;
         size = 0;
     }
 
-    void setRoot(Node<Type> node) {
+    protected void setRoot(Node<Type> node) {
         root = node;
     }
 
-    Node<Type> getRoot() {
+    protected Node<Type> getRoot() {
         return root;
     }
 
