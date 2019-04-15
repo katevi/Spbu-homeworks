@@ -6,14 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UniqueListTest {
     @Test
-    void addRepeatingElementTest() throws RepeatingElementException {
+    void addRepeatingElementTest() throws Exception {
         List <Integer> list = new UniqueList<>();
         list.addElement(5);
         assertThrows(RepeatingElementException.class, ()->list.addElement(5));
     }
 
     @Test
-    void addElementTest() throws RepeatingElementException {
+    void addElementTest() throws Exception {
         List <Integer> list = new UniqueList<>();
         list.addElement(5);
         list.addElement(6);

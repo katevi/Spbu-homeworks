@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ListTest {
     @Test
-    void addElementTest() throws RepeatingElementException {
+    void addElementTest() throws Exception {
         List <Integer> list = new LinkedList<>();
         list.addElement(12);
         assertTrue(list.exists(12));
@@ -19,7 +19,7 @@ class ListTest {
     }
 
     @Test
-    void removeExistingElementInTest() throws IndexOutOfBorderException, ListIsEmptyException, RepeatingElementException {
+    void removeExistingElementInTest() throws Exception {
         List <Integer> list = new LinkedList<>();
         list.addElement(12);
         list.removeElement(0);
@@ -33,7 +33,7 @@ class ListTest {
     }
 
     @Test
-    void existsTest() throws IndexOutOfBorderException, ListIsEmptyException, RepeatingElementException {
+    void existsTest() throws Exception {
         List <Integer> list = new LinkedList<>();
         assertFalse(list.exists(12));
         assertFalse(list.exists(125));
@@ -44,7 +44,7 @@ class ListTest {
     }
 
     @Test
-    void isEmptyTest() throws IndexOutOfBorderException, ListIsEmptyException, RepeatingElementException {
+    void isEmptyTest() throws Exception {
         List <Integer> list = new LinkedList<>();
         assertTrue(list.isEmpty());
         list.addElement(5);
@@ -60,7 +60,7 @@ class ListTest {
     }
 
     @Test
-    void sizeTest() throws RepeatingElementException {
+    void sizeTest() throws Exception {
         List <Integer> list = new LinkedList<>();
         list.addElement(12);
         list.addElement(13);
