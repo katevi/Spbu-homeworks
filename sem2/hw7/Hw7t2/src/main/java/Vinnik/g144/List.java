@@ -1,6 +1,6 @@
 package Vinnik.g144;
 
-public interface List<Type, S, M> {
+public interface List<Type> {
     void addElement(Type value);
     void removeElement(int index) throws IndexOutOfBorderException, ListIsEmptyException;
     void print() throws ListIsEmptyException;

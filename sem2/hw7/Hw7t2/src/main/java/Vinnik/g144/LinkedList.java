@@ -15,7 +15,7 @@ public class LinkedList <Type> implements List <Type> {
      *
      * @param value the value of the element to add to the list
      */
-    public void addElement(Type value) throws RepeatingElementException {
+    public void addElement(Type value) {
         if (isEmpty()) {
             first = new ListElement(value);
             size++;

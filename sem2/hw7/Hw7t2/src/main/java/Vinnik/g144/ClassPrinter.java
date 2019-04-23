@@ -3,202 +3,412 @@ package Vinnik.g144;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.*;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
-
+/**
+ * A class describes an unknown given class by reflection.
+ * Creates a new class that has all the fields, methods, inner classes, and interfaces that a given class has.
+ */
 public class ClassPrinter {
-    public static String printStructure(Class clazz) {
-        return clazz.getPackage() + " ;\n"
-                + getStructure(clazz);
+
+    /**
+     * Prints all the class information obtained by reflection to a file.
+     *
+     * @param clazz - class, whose information will be found through reflection.
+     * @throws IOException - exception, when file to write not found.
+     */
+    public void printStructureToFile(Class clazz) throws IOException {
+        String fileName = "src\\main\\java\\Vinnik\\g144\\ResultOfReflection\\";
+        StringBuilder buildClass = new StringBuilder();
+        fileName = fileName + clazz.getSimpleName() + ".java";
+        FileWriter fileWriter = new FileWriter(fileName);
+        fileWriter.write(printStructure(buildClass, clazz).toString());
+        fileWriter.close();
     }
 
-    private static String getStructure(Class clazz) {
-        return getModifiers(clazz)
-                + " class "
-                + getSimpleNameWithTypeParameters(clazz)
-                + " "
-                + getSuperClass(clazz)
-                + getInterfaces(clazz)
-                + " {\n"
-                + getFields(clazz)
-                + getMethods(clazz)
-                + getInnerClasses(clazz)
-                + "\n}";
+    /**
+     * Prints all the class information obtained by reflection to a console.
+     * @param classBuilder - string, in which will write information about the class.
+     * @param clazz - class, whose information will be found through reflection.
+     * @return - final string with information.
+     */
+    public StringBuilder printStructure(StringBuilder classBuilder, Class clazz) {
+        classBuilder.append("package " + "Vinnik.g144.ResultOfReflection" + ";\n\n");
+
+        classBuilder.append("import Vinnik.g144.*;\n\n");
+
+        getStructure(classBuilder, clazz);
+
+        return classBuilder;
     }
 
-    public static void printToFile(Class clazz) throws IOException {
-        String nameOfFile = "src/main/java/Vinnik/g144/" + clazz.getSimpleName() + ".java";
-        FileWriter file = new FileWriter(nameOfFile);
-        file.write(ClassPrinter.printStructure(clazz));
-        file.close();
+    private void getStructure(StringBuilder buildClass, Class clazz) {
+        //Class declaration
+        getModifiers(buildClass, clazz);
+        buildClass.append("class ");
+        getSimpleNameWithTypeParameters(buildClass, clazz);
+        getSuperclass(buildClass, clazz);
+        getInterfaces(buildClass, clazz);
+        buildClass.append("{\n\t");
+
+        //The contents of the class
+        getFields(buildClass, clazz);
+        getConstructors(buildClass, clazz);
+        getMethods(buildClass, clazz);
+        getInnerClasses(buildClass, clazz);
+
+        buildClass.append("\n}");
+        buildClass.append("\n\n\t");
     }
 
-    private static String getModifiers(Class clazz) {
+    private void getModifiers(StringBuilder classBuilder, Class clazz) {
         if (clazz.getModifiers() != 0) {
-            return Modifier.toString(clazz.getModifiers()) + " ";
+            classBuilder.append(Modifier.toString(clazz.getModifiers()));
+            classBuilder.append(" ");
         }
-        return "";
     }
 
-    private static String getSuperClass(Class clazz) {
+    private void getSuperclass(StringBuilder buildClass, Class clazz) {
         if (clazz.getSuperclass() != null) {
-            return "extends " + getSimpleNameWithTypeParameters(clazz.getSuperclass()) + " ";
+            buildClass.append("extends ");
+            getSimpleNameWithTypeParameters(buildClass, clazz.getSuperclass());
         }
-        return "";
     }
 
-    private static String getSimpleNameWithTypeParameters(Class superclass) {
-        return superclass.getSimpleName() + getTypeParameters(superclass);
+    private void getSimpleNameWithTypeParameters(StringBuilder buildClass, Class clazz) {
+        buildClass.append(clazz.getSimpleName());
+        buildClass.append(" ");
+        setTypeParameters(buildClass, clazz);
     }
 
-    private static String getTypeParameters(Class clazz) {
-        if (clazz.getTypeParameters().length == 0) {
-            return "";
-        }
-        TypeVariable[] parameter = clazz.getTypeParameters();
-        String string = "<";
-        if (parameter.length > 1) {
-            for (int i = 0; i < parameter.length - 1; i++) {
-                string = string + parameter[i].getTypeName() + ",";
+    private void setTypeParameters(StringBuilder buildClass, Class clazz) {
+        if (clazz.getTypeParameters().length != 0) {
+            TypeVariable[] parameters = clazz.getTypeParameters();
+            buildClass.append("<");
+            for (int i = 0; i < parameters.length; i++) {
+                buildClass.append(parameters[i].getName());
+
+                if (i < parameters.length - 1) {
+                    buildClass.append(", ");
+                }
             }
-            string = string + parameter[parameter.length - 1].getTypeName() + ">";
-            return string;
+
+            buildClass.append("> ");
         }
-        return ("<" + parameter[0].getTypeName() + ">");
     }
 
-    private static String getInterfaces(Class clazz) {
-        String string = "";
-        if (clazz.getInterfaces().length == 0) {
-            System.out.println();
-            return string;
-        }
-        Class[] interfaces = clazz.getInterfaces();
-        string = " implements ";
-        if (interfaces.length > 1) {
+    private void getInterfaces(StringBuilder buildClass, Class clazz) {
+        if (clazz.getInterfaces().length != 0) {
+            buildClass.append("implements ");
+
+            Class[] interfaces = clazz.getInterfaces();
             for (int i = 0; i < interfaces.length; i++) {
-                string = interfaces[i].getSimpleName() + getTypeParameters(interfaces[i]);
-            }
-            string = string + interfaces[interfaces.length - 1].getTypeName() + " "
-                    + getTypeParameters(interfaces[interfaces.length - 1]) + ",";
-            return string;
-        }
-        return string + interfaces[0].getSimpleName() + getTypeParameters(interfaces[0]);
-    }
+                buildClass.append(interfaces[i].getSimpleName());
+                setTypeParameters(buildClass, interfaces[i]);
 
-    private static String getFields(Class clazz) {
-        String string = "";
-        if (clazz.getDeclaredFields().length == 0) {
-            return string;
-        }
-        string = "\t";
-        Field[] fields = clazz.getDeclaredFields();
-        if (fields.length > 1) {
-            for (int i = 0; i < fields.length - 1; i++) {
-                string = string + getFieldDeclaration(fields[i]) + "\n\t";
-            }
-            string = string + getFieldDeclaration(fields[fields.length - 1]) + "\n";
-            return string;
-        }
-        return string + getFieldDeclaration(fields[0]) + "\n";
-    }
-
-    private static String getFieldDeclaration(Field field) {
-        String modifiers = field.getModifiers() != 0 ? Modifier.toString(field.getModifiers()) + " " : "";
-        return modifiers + field.getType().getSimpleName() + " "
-                + field.getName() + " = " + writeType(field.getType());
-    }
-
-    private static String getMethods(Class clazz) {
-        String string = "";
-        if (clazz.getDeclaredMethods().length == 0) {
-            return string;
-        }
-        string = "\t";
-        Method[] methods = clazz.getDeclaredMethods();
-        if (methods.length > 1) {
-            for (int i = 0; i < methods.length - 1; i++) {
-                string = string + getMethod(methods[i]) + ";\n\t";
-            }
-            string = string + getMethod(methods[methods.length - 1]) + ";\n";
-            return string;
-        }
-        return string + getMethod(methods[0]) + ";\n";
-    }
-
-    private static String getMethod(Method method) {
-        String modifiers = method.getModifiers() == 0 ? "" : Modifier.toString(method.getModifiers()) + " ";
-        String listOfExceptions = "";
-        Class[] exceptions = method.getExceptionTypes();
-        if (method.getExceptionTypes().length > 1) {
-            listOfExceptions = " throws ";
-            for (int i = 0; i < exceptions.length - 1; i++) {
-                listOfExceptions = listOfExceptions + exceptions[i].getTypeName() + ", ";
-            }
-            listOfExceptions = listOfExceptions + exceptions[exceptions.length - 1].getTypeName();
-        } else {
-            if (method.getExceptionTypes().length == 1) {
-                listOfExceptions = " throws " + exceptions[0].getTypeName();
+                if (i < interfaces.length - 1) {
+                    buildClass.append(", ");
+                }
             }
         }
 
-        return modifiers + method.getReturnType() + " " + method.getName() +
-                Arrays.stream(method.getParameters()).map(p -> p.getParameterizedType() + " " + p.getName())
-                        .collect(Collectors.joining(", ", "(", ")"))
-                                + listOfExceptions + " { return " + writeType(method.getReturnType()) + " }";
-
+        buildClass.append(" ");
     }
 
-    private static String writeType(Type type) {
+    private void getFields(StringBuilder buildClass, Class clazz) {
+        if (clazz.getDeclaredFields().length != 0) {
+            Field[] fields = clazz.getDeclaredFields();
+            for (int i = 0; i < fields.length; i++) {
+                getFieldDeclaration(buildClass, fields[i]);
+                buildClass.append("\n\t");
+            }
+        }
+    }
+
+    private void getFieldDeclaration(StringBuilder buildClass, Field field) {
+        if (field.getModifiers() != 0) {
+            buildClass.append(Modifier.toString(field.getModifiers()));
+            buildClass.append(" ");
+        }
+
+        buildClass.append(field.getType().getSimpleName() + " " + field.getName() + " = ");
+        setReturnType(buildClass, field.getType());
+        buildClass.append("\n");
+    }
+
+    private void setReturnType(StringBuilder buildClass, Type type) {
         switch (type.getTypeName()) {
-            case "Integer":
-                return ("Integer.valueOf(0);");
             case "Boolean":
-                return ("true;");
+                buildClass.append("true;");
+                break;
+            case "Integer":
+                buildClass.append("Integer.valueOf(0);");
+                break;
             case "String":
-                return ("String.valueOf(\"\");");
+                buildClass.append("String.valueOf(\"\");");
+                break;
             case "Double":
-                return ("Double.valueOf(0.0);");
+                buildClass.append("Double.valueOf(0.0);");
+                break;
             case "Character":
-                return ("Character.valueOf('x');");
+                buildClass.append("Character.valueOf('x');");
+                break;
             case "Byte":
-                return ("Byte.valueOf(0);");
-            case "Long":
-                return ("Long.valueOf(0);");
-            case "Short":
-                return ("Short.valueOf(0);");
-            case "Float":
-                return ("Float.valueOf(0);");
-            case "int":
-                return ("0;");
-            case "boolean":
-                return ("true;");
-            case "double":
-                return ("0.0;");
-            case "char":
-                return ("'x';");
-            case "byte":
-                return ("0;");
-            case "long":
-                return ("0;");
-            case "short":
-                return ("0;");
+                buildClass.append("Byte.valueOf(0);");
+                break;
             case "float":
-                return ("0;");
+                buildClass.append("0;");
+                break;
+            case "Long":
+                buildClass.append("Long.valueOf(0);");
+                break;
+            case "Short":
+                buildClass.append("Short.valueOf(0);");
+                break;
+            case "Float":
+                buildClass.append("Float.valueOf(0);");
+                break;
+            case "int":
+                buildClass.append("0;");
+                break;
+            case "boolean":
+                buildClass.append("true;");
+                break;
+            case "double":
+                buildClass.append("0.0;");
+                break;
+            case "char":
+                buildClass.append("'x';");
+                break;
+            case "byte":
+                buildClass.append("0;");
+                break;
+            case "long":
+                buildClass.append("0;");
+                break;
+            case "short":
+                buildClass.append("0;");
+                break;
             case "void":
-                return (";");
+                buildClass.append(";");
+                break;
             default:
-                return ("null;");
+                buildClass.append("null;");
+                break;
         }
     }
 
-    private static String getInnerClasses(Class clazz) {
-        StringBuilder result = new StringBuilder();
-        for (Class<?> innerClass : clazz.getDeclaredClasses()) {
-            result.append(getStructure(innerClass));
+    private void getMethods(StringBuilder buildClass, Class clazz) {
+        if (clazz.getDeclaredMethods().length != 0) {
+            Method[] methods = clazz.getDeclaredMethods();
+            for (int i = 0; i < methods.length; i++) {
+                getOneMethod(buildClass, methods[i]);
+
+                if (i < methods.length - 1) {
+                    buildClass.append("\n\n\t");
+                }
+            }
         }
-        return "\n" + result.toString();
     }
+
+    private void getOneMethod(StringBuilder buildClass, Method method) {
+        if (method.getModifiers() != 0) {
+            buildClass.append(Modifier.toString(method.getModifiers()) + " ");
+        }
+
+        buildClass.append(method.getReturnType().getSimpleName() + " ");
+        buildClass.append(method.getName() + " (");
+
+        Parameter[] parameters = method.getParameters();
+        writeParameters(buildClass, parameters);
+
+        buildClass.append(") ");
+        writeExceptions(buildClass, method);
+        buildClass.append(" {\n\t\treturn ");
+        setReturnType(buildClass, method.getReturnType());
+        buildClass.append("\n\t}");
+    }
+
+    private void writeExceptions(StringBuilder buildClass, Method method) {
+        if (method.getExceptionTypes().length == 0) {
+            buildClass.append(" ");
+        } else {
+            buildClass.append("throws ");
+            Class[] exceptions = method.getExceptionTypes();
+            for (int i = 0; i < exceptions.length; i++) {
+                buildClass.append(exceptions[i].getSimpleName());
+
+                if (i < exceptions.length - 1) {
+                    buildClass.append(", ");
+                }
+            }
+        }
+
+    }
+
+    private void getConstructors(StringBuilder buildClass, Class clazz) {
+        buildClass.append("\n\t");
+        if (clazz.getDeclaredConstructors().length != 0) {
+            Constructor[] constructors = clazz.getDeclaredConstructors();
+            for (int i = 0; i < constructors.length; i++) {
+                writeOneConstructor(buildClass, clazz, constructors[i]);
+                buildClass.append("\n\n\t");
+            }
+        }
+    }
+
+    private void writeOneConstructor(StringBuilder buildClass, Class clazz, Constructor constructor) {
+        if (constructor.getModifiers() != 0) {
+            buildClass.append(Modifier.toString(constructor.getModifiers()) + " ");
+        }
+
+        buildClass.append(clazz.getSimpleName() + "(");
+        Parameter[] parameters = constructor.getParameters();
+        writeParameters(buildClass, parameters);
+        buildClass.append(") { }");
+    }
+
+    private void writeParameters(StringBuilder buildClass, Parameter[] parameters) {
+        for (int i = 0; i < parameters.length; i++) {
+            buildClass.append(parameters[i].getType().getSimpleName() + " " + parameters[i].getName());
+            if (i != parameters.length - 1) {
+                buildClass.append(", ");
+            }
+        }
+    }
+
+    private void getInnerClasses(StringBuilder buildClass, Class clazz) {
+        if (clazz.getDeclaredClasses().length != 0) {
+            buildClass.append("\n\t");
+        }
+        for (Class<?> innerClass : clazz.getDeclaredClasses()) {
+            getStructure(buildClass, innerClass);
+            buildClass.append("\n\n\t");
+        }
+    }
+
+    // Comparison difference classes part
+
+    /** Finds the difference between classes - prints it to the console
+     *
+     * @param first - first class to compare
+     * @param second - second class to compare
+     * @return - true if class are equal, false otherwise
+     */
+    public boolean diffClasses(Class first, Class second) {
+        StringBuilder differenceBetweenClasses = new StringBuilder();
+        getDifference(differenceBetweenClasses, first, second);
+        if (differenceBetweenClasses.length() == 0) {
+            System.out.println("Classes are equal!");
+            return true;
+        }
+        System.out.println("Classes are not equal!");
+        System.out.println(differenceBetweenClasses);
+        return false;
+    }
+
+    private void getDifference(StringBuilder differenceBetweenClasses, Class first, Class second) {
+        areFieldsDiffer(differenceBetweenClasses, first, second);
+        areMethodsDiffer(differenceBetweenClasses, first, second);
+        areInnerClassesDiffer(differenceBetweenClasses, first, second);
+    }
+
+    private void areInnerClassesDiffer(StringBuilder differenceBetweenClasses, Class first, Class second) {
+        if (first.getDeclaredClasses().length != 0 && second.getDeclaredClasses().length != 0) {
+            Class[] innerClassesFirst = first.getDeclaredClasses();
+            Class[] innerClassesSecond = second.getDeclaredClasses();
+            if (innerClassesFirst.equals(innerClassesSecond)) {
+                return;
+            }
+
+            for (int i = 0; i < innerClassesFirst.length; i++) {
+                Class curClass = innerClassesFirst[i];
+
+                for (int j = 0; j < innerClassesSecond.length; j++) {
+                    Class curSecondClass = innerClassesSecond[j];
+                    getDifference(differenceBetweenClasses, curClass, curSecondClass);
+                }
+            }
+        } else if (first.getDeclaredClasses().length != 0 && second.getDeclaredClasses().length == 0) {
+            Class[] innerClasses = first.getDeclaredClasses();
+            for (int i = 0; i < innerClasses.length; i++) {
+                getStructure(differenceBetweenClasses, innerClasses[i]);
+            }
+        } else if (first.getDeclaredClasses().length == 0 && second.getDeclaredClasses().length != 0) {
+            Class[] innerClasses = second.getDeclaredClasses();
+            for (int i = 0; i < innerClasses.length; i++) {
+                getStructure(differenceBetweenClasses, innerClasses[i]);
+            }
+        }
+    }
+
+    private void areFieldsDiffer(StringBuilder differenceBetweenClasses, Class first, Class second) {
+        Field[] fieldsFirst = first.getDeclaredFields();
+        Field[] fieldsSecond = second.getDeclaredFields();
+        if (fieldsFirst.equals(fieldsSecond)) {
+            return;
+        }
+        for (int i = 0; i < fieldsFirst.length; i++) {
+            if (!containsCurrentField(fieldsFirst[i], second)) {
+                getFieldDeclaration(differenceBetweenClasses, fieldsFirst[i]);
+            }
+        }
+        for (int i = 0; i < fieldsSecond.length; i++) {
+            if (!containsCurrentField(fieldsSecond[i], first)) {
+                getFieldDeclaration(differenceBetweenClasses, fieldsSecond[i]);
+            }
+        }
+    }
+
+    private boolean containsCurrentField(Field field, Class clazz) {
+        if (Modifier.isFinal(field.getModifiers()) && field.getName().equals("this$0$")) {
+            return true;
+        }
+        Field[] fields = clazz.getDeclaredFields();
+        StringBuilder givenFieldDeclaration = new StringBuilder();
+        getFieldDeclaration(givenFieldDeclaration, field);
+        for (int i = 0; i < fields.length; i++) {
+            StringBuilder currentFieldDeclaration = new StringBuilder();
+            getFieldDeclaration(currentFieldDeclaration, fields[i]);
+            if (givenFieldDeclaration.toString().equals(currentFieldDeclaration.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void areMethodsDiffer(StringBuilder differenceBetweenClasses, Class first, Class second) {
+        Method[] methodsFirst = first.getDeclaredMethods();
+        Method[] methodsSecond = second.getDeclaredMethods();
+        if (methodsFirst.equals(methodsSecond)) {
+            return;
+        }
+        for (int i = 0; i < methodsFirst.length; i++) {
+            if (!containsCurrentMethod(methodsFirst[i], second)) {
+                getOneMethod(differenceBetweenClasses, methodsFirst[i]);
+                differenceBetweenClasses.append("\n");
+            }
+        }
+        for (int i = 0; i < methodsSecond.length; i++) {
+            if (!containsCurrentMethod(methodsSecond[i], first)) {
+                getOneMethod(differenceBetweenClasses, methodsSecond[i]);
+                differenceBetweenClasses.append("\n");
+            }
+        }
+    }
+
+    private boolean containsCurrentMethod(Method method, Class clazz) {
+        Method[] methods = clazz.getDeclaredMethods();
+        StringBuilder givenMethodDeclaration = new StringBuilder();
+        getOneMethod(givenMethodDeclaration, method);
+        for (int i = 0; i < methods.length; i++) {
+            StringBuilder currentMethodDeclaration = new StringBuilder();
+            getOneMethod(currentMethodDeclaration, methods[i]);
+            if (currentMethodDeclaration.toString().equals(givenMethodDeclaration.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
