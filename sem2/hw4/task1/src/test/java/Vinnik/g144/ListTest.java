@@ -29,7 +29,7 @@ class ListTest {
     @Test
     public void removeNotExistingElementInTest() {
         List <Integer> list = new LinkedList<>();
-        assertThrows(IndexOutOfBorderException.class, ()-> list.removeElement(5));
+        assertThrows(IndexOutOfBoundsException.class, ()-> list.removeElement(5));
     }
 
     @Test
