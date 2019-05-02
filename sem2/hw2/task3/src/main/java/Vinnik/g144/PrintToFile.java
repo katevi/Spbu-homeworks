@@ -3,7 +3,7 @@ package Vinnik.g144;
 import java.io.PrintWriter;
 import java.io.*;
 
-/** Prints traversal of array coil to file*/
+/** Prints traversal of array coil to file. */
 public class PrintToFile implements Print {
     @Override
     public int[] printSpiral(int[][] originalArray) throws FileNotFoundException {

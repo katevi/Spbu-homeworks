@@ -1,6 +1,6 @@
 package Vinnik.g144;
 
-/**Implementation of traversal of the array coil*/
+/**Implementation of traversal of the array coil. */
 public class Spiral {
     public static int[] resultArray(int[][] originalArray) {
         int originalLength = originalArray.length;

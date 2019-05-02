@@ -1,8 +1,6 @@
 package Vinnik.g144;
 
-//import static org.graalvm.compiler.core.CompilationWrapper.ExceptionAction.Print;
-
-/**Prints traversal of array coil to console*/
+/**Prints traversal of array coil to console. */
 class PrintToConsole implements Print {
     @Override
     public int[] printSpiral(int[][] originalArray) {
