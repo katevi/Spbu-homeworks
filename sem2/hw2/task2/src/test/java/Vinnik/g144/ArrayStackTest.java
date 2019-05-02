@@ -38,6 +38,11 @@ public class ArrayStackTest {
         stack.push(4);
         stack.push(3);
         assertEquals(3, stack.currentSize());
+        stack.push(15);
+        stack.push(12);
+        stack.push(14);
+        stack.push(13);
+        assertEquals(7, stack.currentSize());
     }
 
     @Test

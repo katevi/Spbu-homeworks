@@ -2,13 +2,14 @@ package Vinnik.g144;
 
 import java.util.EmptyStackException;
 
-/**Implements simple stack on an array*/
+/** Implements simple stack on an array. */
 public class ArrayStack <Type> implements Stack <Type> {
+    private final int MINIMAL_SIZE_OF_STACK = 3;
     private int maximumSize = 3;
     private int top = -1;
     private Type[] stack = (Type[]) new Object[maximumSize];
 
-    /**Returns number of elements in stack*/
+    /**Returns number of elements in stack. */
     public int currentSize() {
         return (this.top + 1);
     }
@@ -20,7 +21,20 @@ public class ArrayStack <Type> implements Stack <Type> {
         stack = temp;
     }
 
-    /**@param value value of adding element */
+    private void reduceSizeByHalf() {
+        if (maximumSize > MINIMAL_SIZE_OF_STACK) {
+            Type[] temp = (Type[]) new Object[stack.length / 2];
+            System.arraycopy(stack, 0, temp, 0, stack.length / 2);
+            maximumSize = maximumSize / 2;
+            stack = temp;
+        }
+    }
+
+    /**
+     * Pushes given element to the stack.
+     *
+     * @param value value of adding element.
+     */
     @Override
     public void push(Type value) {
         if (maximumSize == currentSize()){
@@ -35,6 +49,9 @@ public class ArrayStack <Type> implements Stack <Type> {
     public Type pop() throws EmptyStackException {
         if (isEmpty()) {
             throw new EmptyStackException();
+        }
+        if (currentSize() == maximumSize / 2) {
+            reduceSizeByHalf();
         }
         this.top--;
         return stack[this.top + 1];

@@ -1,11 +1,11 @@
 package Vinnik.g144;
 
-import java.util.Scanner;
 
-/** Calculates simple arithmetic expressions using the sorting station algorithm */
+/** Calculates simple arithmetic expressions using the sorting station algorithm. */
 public class Calculator {
     private static Stack<Character> operations;
     private static Stack<Float> result;
+    private static int numberOfProcessedCharacters = 0;
 
     Calculator(LinkedStack<Character> symbolStack, LinkedStack<Float> integerStack) {
         operations = symbolStack;
@@ -13,57 +13,63 @@ public class Calculator {
     }
 
     private String convertToPostfix(String expression) {
-        char expressionInPostfix[] = new char[100];
-        Integer count = 0;
+        char expressionInPostfixForm[] = new char[100];
         for (int i = 0; i < expression.length(); i++)
             if ((expression.charAt(i) >= '0') && (expression.charAt(i) <= '9')) {
-                expressionInPostfix[count] = expression.charAt(i);
-                count++;
+                expressionInPostfixForm[numberOfProcessedCharacters] = expression.charAt(i);
+                numberOfProcessedCharacters++;
             } else {
                 if ((expression.charAt(i) == '+') || (expression.charAt(i) == '-')) {
-                    // 2 priority operator
-                    if (operations.isEmpty()) {
-                        operations.push(expression.charAt(i));
-                    } else {
-                        while ((!operations.isEmpty()) && (operations.top() != '(')) {
-                            expressionInPostfix[count] = operations.pop();
-                            count++;
-                        }
-                        operations.push(expression.charAt(i));
-                    }
+                    writeSecondPriorityOperator(expressionInPostfixForm, expression, i);
                 }
-
                 if ((expression.charAt(i) == '*') || (expression.charAt(i) == '/')) {
-                    //1 priority operator
-                    if (operations.isEmpty() || operations.top() == '+' || operations.top() == '-' || operations.top() == '(') {
-                        operations.push(expression.charAt(i));
-                    } else {
-                        expressionInPostfix[count] = operations.pop();
-                        count++;
-                        operations.push(expression.charAt(i));
-                    }
+                    writeFirstPriorityOperator(expressionInPostfixForm, expression, i);
                 }
                 if (expression.charAt(i) == '(') {
                     operations.push(expression.charAt(i));
                 }
                 if (expression.charAt(i) == ')') {
                     while (operations.top() != '(') {
-                        expressionInPostfix[count] = operations.pop();
-                        count++;
+                        expressionInPostfixForm[numberOfProcessedCharacters] = operations.pop();
+                        numberOfProcessedCharacters++;
                     }
                     operations.pop();
                 }
             }
         while (!operations.isEmpty()) {
-            expressionInPostfix[count] = operations.pop();
-            count++;
+            expressionInPostfixForm[numberOfProcessedCharacters] = operations.pop();
+            numberOfProcessedCharacters++;
         }
-        if (count <= expression.length()) {
-            //sign of end of postfix form of expression
-            expressionInPostfix[count] = '#';
+        setEndOfExpressionSymbol(expressionInPostfixForm, expression);
+        return new String(expressionInPostfixForm);
+    }
+
+    private void writeSecondPriorityOperator(char[] expressionInPostfix, String expression, int currentSymbol) {
+        if (operations.isEmpty()) {
+            operations.push(expression.charAt(currentSymbol));
+        } else {
+            while ((!operations.isEmpty()) && (operations.top() != '(')) {
+                expressionInPostfix[numberOfProcessedCharacters] = operations.pop();
+                numberOfProcessedCharacters++;
+            }
+            operations.push(expression.charAt(currentSymbol));
         }
-        String stringExpressionInPostfix = new String(expressionInPostfix);
-        return stringExpressionInPostfix;
+    }
+
+    private void writeFirstPriorityOperator(char[] expressionInPostfix, String expression, int currentSymbol) {
+        if (operations.isEmpty() || operations.top() == '+' || operations.top() == '-' || operations.top() == '(') {
+            operations.push(expression.charAt(currentSymbol));
+        } else {
+            expressionInPostfix[numberOfProcessedCharacters] = operations.pop();
+            numberOfProcessedCharacters++;
+            operations.push(expression.charAt(currentSymbol));
+        }
+    }
+
+    private void setEndOfExpressionSymbol(char[] expressionInPostfixForm, String expression) {
+        if (numberOfProcessedCharacters <= expression.length()) {
+            expressionInPostfixForm[numberOfProcessedCharacters] = '#';
+        }
     }
 
     private int lengthOfPostfixForm(String postfixForm) {
@@ -83,23 +89,26 @@ public class Calculator {
         return finalString;
     }
 
-    private Float calculateResultFromPostfix(String stringExpressionInPostfix) {
+    private Float calculateResultOfExpression(String expressionInPostfixForm) throws IncorrectFormException {
         float a = 0;
         float b = 0;
-        float c = 0;
-        char[] finalString = removeTabsFromPostfixForm(stringExpressionInPostfix);
+        char[] finalString = removeTabsFromPostfixForm(expressionInPostfixForm);
         int countOfNumbersInStack = 0;
         for (int i = 0; i < finalString.length; i++) {
             if (finalString[i] >= '0' && finalString[i] <= '9') {
                 countOfNumbersInStack++;
-                result.push((float) (finalString[i]) - 48);
+                result.push((float) (finalString[i]) - '0');
             } else {
                 if ((finalString[i] == '-') && (countOfNumbersInStack == 1)) {
                     result.push(-result.pop());
                 } else {
-                    a = result.pop();
-                    b = result.pop();
-                    result.push(operate(b,a,finalString[i]));
+                    try {
+                        a = result.pop();
+                        b = result.pop();
+                    } catch (java.util.EmptyStackException e) {
+                        throw new IncorrectFormException();
+                    }
+                    result.push(operate(b, a, finalString[i]));
                     countOfNumbersInStack--;
                 }
             }
@@ -107,7 +116,7 @@ public class Calculator {
         return result.pop();
     }
 
-    private Float operate(Float a, Float b, char operator) {
+    private Float operate(Float a, Float b, char operator) throws IncorrectFormException {
         switch (operator) {
             case '+':
                 return a + b;
@@ -117,14 +126,19 @@ public class Calculator {
                 return a * b;
             case '/':
                 return a / b;
+            default:
+                throw new IncorrectFormException();
         }
-        return (float) -1;
     }
 
-    /** Returns result of computing of arithmetic expression.*/
-    public Float calculate(String expression) {
-        String postfix = convertToPostfix(expression);
-        Float result = calculateResultFromPostfix(postfix);
-        return result;
+    /** Returns result of computing of arithmetic expression. */
+    public Float calculate(String expression) throws IncorrectFormException {
+        try {
+            String postfix = convertToPostfix(expression);
+            Float result = calculateResultOfExpression(postfix);
+            return result;
+        } catch (IncorrectFormException e) {
+            throw new IncorrectFormException();
+        }
     }
 }
