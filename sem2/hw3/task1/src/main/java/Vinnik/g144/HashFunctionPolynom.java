@@ -2,6 +2,7 @@ package Vinnik.g144;
 
 /**Implements a specific hash function (polynomial hash function). */
 public class HashFunctionPolynom implements HashFunction {
+    @Override
     /** For a given string and the maximum hash size calculates hash function. */
     public int hash(String string, int mod) {
         int prime = 7;
