@@ -2,11 +2,13 @@ package Vinnik.g144;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /** Implementation of simple trie (stores strings). */
 public class Trie implements Serializable {
     private TrieNode root;
-    int size = 0;
+    private int size = 0;
+    private LinkedList<String> elements = new LinkedList<>();
 
     public Trie() {
         root = new TrieNode();
@@ -21,6 +23,7 @@ public class Trie implements Serializable {
     public boolean insert(String word) {
         if (!contains(word)) {
             TrieNode current = root;
+            elements.add(word);
             current.numberOfStringsWithPrefixWhichFinishInThisSymbol++;
             for (int i = 0; i < word.length(); i++) {
                 char c = word.charAt(i);
@@ -74,6 +77,7 @@ public class Trie implements Serializable {
     public boolean delete(String word) {
         if (contains(word)) {
             delete(root, word, 0);
+            elements.remove(word);
             size--;
             return true;
         } else {
@@ -128,27 +132,41 @@ public class Trie implements Serializable {
     /**
      * Simple serialize.
      *
-     * @param out stream to write trie in.
+     * @param outputStream stream to write trie in.
      * @throws IOException when there are no opportunity write there.
      */
-    public void serialize(OutputStream out) throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
-        objectOutputStream.writeObject(this);
+    public void serialize(OutputStream outputStream) throws IOException {
+        BufferedWriter outputFile = new BufferedWriter(new OutputStreamWriter(outputStream));
+
+        for (String word: elements) {
+            outputFile.write(word);
+            outputFile.write("\n");
+        }
+
+        outputFile.close();
+        outputStream.close();
     }
 
 
     /**
      * Simple deserialize.
      *
-     * @param in stream to take trie.
-     * @throws IOException when when there are no opportunity read this stream.
-     * @throws ClassNotFoundException when class which serialized in this stream could not be found.
+     * @param inputStream stream to take trie.
+     * @throws IOException when there are no opportunity read this stream.
      */
-    public void deserialize(InputStream in) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectInputStream = new ObjectInputStream(in);
-        Trie trie = (Trie) objectInputStream.readObject();
+    public void deserialize(InputStream inputStream) throws IOException {
+        BufferedReader inputFile = new BufferedReader(new InputStreamReader(inputStream));
+        Trie trie = new Trie();
+
+        while (inputFile.ready()) {
+            trie.insert(inputFile.readLine());
+        }
+
         root = trie.root;
         size = trie.size;
+
+        inputFile.close();
+        inputStream.close();
     }
 
     private class TrieNode implements Serializable {

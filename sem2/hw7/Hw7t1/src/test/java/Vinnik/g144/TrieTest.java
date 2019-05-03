@@ -150,7 +150,7 @@ class TrieTest {
     }
 
     @Test
-    public void serializeAndDeserializeTest() throws IOException, ClassNotFoundException {
+    public void serializeAndDeserializeTest() throws IOException {
         Trie bor = new Trie();
 
         bor.insert("Problem");
