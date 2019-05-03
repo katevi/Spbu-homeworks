@@ -1,7 +1,10 @@
-package Vinnik.g144;
+package g144.Vinnik;
 
+/** Class, responsible for the two numbers multiplication. */
 public class Multiplication extends Operator implements Operand {
+
     @Override
+    /** Multiplies a left leaf number with right. */
     public int calculate() {
         return left.calculate() * right.calculate();
     }

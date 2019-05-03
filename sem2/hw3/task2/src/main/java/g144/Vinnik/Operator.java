@@ -1,4 +1,4 @@
-package Vinnik.g144;
+package g144.Vinnik;
 
 /** Class for operators - symbols of arithmetic expression (signs and numbers). */
 public abstract class Operator implements Operand {
@@ -10,11 +10,13 @@ public abstract class Operator implements Operand {
     protected Operand right;
 
 
+    /** Prints operation of current vertex and numbers in leafs, otherwise runs recursively. */
     @Override
     public String output() {
-        return "(" + Character.toString(operation) + " " + left.output() + " " + right.output() + ")";
+        return "(" + operation + " " + left.output() + " " + right.output() + ")";
     }
 
+    /** Calculates expression from current vertex, otherwise runs recursively. */
     @Override
     public abstract int calculate();
 

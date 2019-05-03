@@ -1,4 +1,4 @@
-package Vinnik.g144;
+package g144.Vinnik;
 
 /** Number operand class. */
 public class Number implements Operand {
@@ -14,6 +14,7 @@ public class Number implements Operand {
         return Integer.toString(number);
     }
 
+    /** When calculating takes number from the leaf. */
     @Override
     public int calculate() {
         return number;

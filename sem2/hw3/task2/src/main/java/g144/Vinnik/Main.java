@@ -1,4 +1,4 @@
-package Vinnik.g144;
+package g144.Vinnik;
 
 import java.io.*;
 import java.io.FileReader;

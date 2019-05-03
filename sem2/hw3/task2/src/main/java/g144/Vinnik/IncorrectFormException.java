@@ -1,4 +1,4 @@
-package Vinnik.g144;
+package g144.Vinnik;
 
 public class IncorrectFormException extends Throwable {
 }
