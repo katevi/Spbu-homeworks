@@ -21,12 +21,12 @@ public class Main {
 
         System.out.println("Enter 1 if you want to print in console, 2 if you want to print in file:");
         int operation = input.nextInt();
+        Print output;
         if (operation == 1) {
-            Print output = new PrintToConsole();
-            output.printSpiral(array);
+            output = new PrintToConsole();
         } else {
-            Print output = new PrintToFile();
-            output.printSpiral(array);
+            output = new PrintToFile();
         }
+        output.printSpiral(array);
     }
 }
