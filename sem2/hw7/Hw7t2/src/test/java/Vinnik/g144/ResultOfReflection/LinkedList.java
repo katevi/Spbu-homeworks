@@ -26,12 +26,12 @@ public class LinkedList <Type> extends Object implements List<Type>  {
 		return ;
 	}
 
-	public boolean exists (Object arg0)   {
-		return true;
-	}
-
 	public void removeElement (int arg0) throws IndexOutOfBorderException, ListIsEmptyException {
 		return ;
+	}
+
+	public boolean exists (Object arg0)   {
+		return true;
 	}
 	private class ListElement extends Object  {
 	private Object value = null;

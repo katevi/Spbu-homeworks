@@ -17,7 +17,7 @@ public class ClassPrinter {
      * @throws IOException - exception, when file to write not found.
      */
     public void printStructureToFile(Class clazz) throws IOException {
-        String fileName = "src\\main\\java\\Vinnik\\g144\\ResultOfReflection\\";
+        String fileName = "src\\test\\java\\Vinnik\\g144\\ResultOfReflection\\";
         StringBuilder buildClass = new StringBuilder();
         fileName = fileName + clazz.getSimpleName() + ".java";
         FileWriter fileWriter = new FileWriter(fileName);
@@ -117,8 +117,8 @@ public class ClassPrinter {
     private void getFields(StringBuilder buildClass, Class clazz) {
         if (clazz.getDeclaredFields().length != 0) {
             Field[] fields = clazz.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                getFieldDeclaration(buildClass, fields[i]);
+            for (Field x: fields){
+                getFieldDeclaration(buildClass, x);
                 buildClass.append("\n\t");
             }
         }
@@ -130,7 +130,10 @@ public class ClassPrinter {
             buildClass.append(" ");
         }
 
-        buildClass.append(field.getType().getSimpleName() + " " + field.getName() + " = ");
+        buildClass.append(field.getType().getSimpleName());
+        buildClass.append(" ");
+        buildClass.append(field.getName());
+        buildClass.append(" = ");
         setReturnType(buildClass, field.getType());
         buildClass.append("\n");
     }
@@ -212,11 +215,14 @@ public class ClassPrinter {
 
     private void getOneMethod(StringBuilder buildClass, Method method) {
         if (method.getModifiers() != 0) {
-            buildClass.append(Modifier.toString(method.getModifiers()) + " ");
+            buildClass.append(Modifier.toString(method.getModifiers()));
+            buildClass.append(" ");
         }
 
-        buildClass.append(method.getReturnType().getSimpleName() + " ");
-        buildClass.append(method.getName() + " (");
+        buildClass.append(method.getReturnType().getSimpleName());
+        buildClass.append(" ");
+        buildClass.append(method.getName());
+        buildClass.append(" (");
 
         Parameter[] parameters = method.getParameters();
         writeParameters(buildClass, parameters);
@@ -249,8 +255,8 @@ public class ClassPrinter {
         buildClass.append("\n\t");
         if (clazz.getDeclaredConstructors().length != 0) {
             Constructor[] constructors = clazz.getDeclaredConstructors();
-            for (int i = 0; i < constructors.length; i++) {
-                writeOneConstructor(buildClass, clazz, constructors[i]);
+            for (Constructor i : constructors) {
+                writeOneConstructor(buildClass, clazz, i);
                 buildClass.append("\n\n\t");
             }
         }
@@ -258,10 +264,12 @@ public class ClassPrinter {
 
     private void writeOneConstructor(StringBuilder buildClass, Class clazz, Constructor constructor) {
         if (constructor.getModifiers() != 0) {
-            buildClass.append(Modifier.toString(constructor.getModifiers()) + " ");
+            buildClass.append(Modifier.toString(constructor.getModifiers()));
+            buildClass.append(" ");
         }
 
-        buildClass.append(clazz.getSimpleName() + "(");
+        buildClass.append(clazz.getSimpleName());
+        buildClass.append("(");
         Parameter[] parameters = constructor.getParameters();
         writeParameters(buildClass, parameters);
         buildClass.append(") { }");
@@ -320,23 +328,19 @@ public class ClassPrinter {
                 return;
             }
 
-            for (int i = 0; i < innerClassesFirst.length; i++) {
-                Class curClass = innerClassesFirst[i];
+            for (Class i : innerClassesFirst) {
+                Class curClass = i;
 
-                for (int j = 0; j < innerClassesSecond.length; j++) {
-                    Class curSecondClass = innerClassesSecond[j];
+                for (Class j : innerClassesSecond) {
+                    Class curSecondClass = j;
                     getDifference(differenceBetweenClasses, curClass, curSecondClass);
                 }
             }
-        } else if (first.getDeclaredClasses().length != 0 && second.getDeclaredClasses().length == 0) {
+        } else if (first.getDeclaredClasses().length != 0 && second.getDeclaredClasses().length == 0
+                    || first.getDeclaredClasses().length == 0 && second.getDeclaredClasses().length != 0) {
             Class[] innerClasses = first.getDeclaredClasses();
-            for (int i = 0; i < innerClasses.length; i++) {
-                getStructure(differenceBetweenClasses, innerClasses[i]);
-            }
-        } else if (first.getDeclaredClasses().length == 0 && second.getDeclaredClasses().length != 0) {
-            Class[] innerClasses = second.getDeclaredClasses();
-            for (int i = 0; i < innerClasses.length; i++) {
-                getStructure(differenceBetweenClasses, innerClasses[i]);
+            for (Class i : innerClasses) {
+                getStructure(differenceBetweenClasses, i);
             }
         }
     }
@@ -347,14 +351,14 @@ public class ClassPrinter {
         if (fieldsFirst.equals(fieldsSecond)) {
             return;
         }
-        for (int i = 0; i < fieldsFirst.length; i++) {
-            if (!containsCurrentField(fieldsFirst[i], second)) {
-                getFieldDeclaration(differenceBetweenClasses, fieldsFirst[i]);
+        for (Field i : fieldsFirst) {
+            if (!containsCurrentField(i, second)) {
+                getFieldDeclaration(differenceBetweenClasses, i);
             }
         }
-        for (int i = 0; i < fieldsSecond.length; i++) {
-            if (!containsCurrentField(fieldsSecond[i], first)) {
-                getFieldDeclaration(differenceBetweenClasses, fieldsSecond[i]);
+        for (Field i : fieldsSecond) {
+            if (!containsCurrentField(i, first)) {
+                getFieldDeclaration(differenceBetweenClasses, i);
             }
         }
     }
@@ -366,9 +370,9 @@ public class ClassPrinter {
         Field[] fields = clazz.getDeclaredFields();
         StringBuilder givenFieldDeclaration = new StringBuilder();
         getFieldDeclaration(givenFieldDeclaration, field);
-        for (int i = 0; i < fields.length; i++) {
+        for (Field i : fields) {
             StringBuilder currentFieldDeclaration = new StringBuilder();
-            getFieldDeclaration(currentFieldDeclaration, fields[i]);
+            getFieldDeclaration(currentFieldDeclaration, i);
             if (givenFieldDeclaration.toString().equals(currentFieldDeclaration.toString())) {
                 return true;
             }
@@ -382,15 +386,15 @@ public class ClassPrinter {
         if (methodsFirst.equals(methodsSecond)) {
             return;
         }
-        for (int i = 0; i < methodsFirst.length; i++) {
-            if (!containsCurrentMethod(methodsFirst[i], second)) {
-                getOneMethod(differenceBetweenClasses, methodsFirst[i]);
+        for (Method i : methodsFirst) {
+            if (!containsCurrentMethod(i, second)) {
+                getOneMethod(differenceBetweenClasses, i);
                 differenceBetweenClasses.append("\n");
             }
         }
-        for (int i = 0; i < methodsSecond.length; i++) {
-            if (!containsCurrentMethod(methodsSecond[i], first)) {
-                getOneMethod(differenceBetweenClasses, methodsSecond[i]);
+        for (Method i : methodsSecond) {
+            if (!containsCurrentMethod(i, first)) {
+                getOneMethod(differenceBetweenClasses, i);
                 differenceBetweenClasses.append("\n");
             }
         }
@@ -400,9 +404,9 @@ public class ClassPrinter {
         Method[] methods = clazz.getDeclaredMethods();
         StringBuilder givenMethodDeclaration = new StringBuilder();
         getOneMethod(givenMethodDeclaration, method);
-        for (int i = 0; i < methods.length; i++) {
+        for (Method i : methods) {
             StringBuilder currentMethodDeclaration = new StringBuilder();
-            getOneMethod(currentMethodDeclaration, methods[i]);
+            getOneMethod(currentMethodDeclaration, i);
             if (currentMethodDeclaration.toString().equals(givenMethodDeclaration.toString())) {
                 return true;
             }

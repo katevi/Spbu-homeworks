@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClassPrinterTest {
     @Test
     public void tripleCharClassTest() {
-        TripleChar sample = new TripleChar('a');
+        Vinnik.g144.TripleChar sample = new Vinnik.g144.TripleChar('a');
         ClassPrinter classPrinter = new ClassPrinter();
         StringBuilder tripleCharStructure = new StringBuilder();
         assertEquals("package Vinnik.g144.ResultOfReflection;\n" +
