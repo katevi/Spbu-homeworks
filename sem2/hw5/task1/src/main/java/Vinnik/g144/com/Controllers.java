@@ -15,7 +15,7 @@ public class Controllers {
     /**
      * Initialization method
      *
-     * Sets the value of progress bar, when slider's value is changing.
+     * Sets the value of progress bar is equal to the value of the slider.
      */
     public void initialize() {
         slider.valueProperty().addListener((observable, oldValue, newValue) -> progressBar.progressProperty().setValue(newValue));

@@ -2,11 +2,22 @@
 
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vinnik.g144.com.Controllers">
-   <children>
-      <Slider fx:id="slider" blockIncrement="2.0" layoutX="107.0" layoutY="272.0" max="1.0" minorTickCount="10" prefHeight="14.0" prefWidth="459.0" />
-      <ProgressBar fx:id="progressBar" layoutX="45.0" layoutY="100.0" prefHeight="133.0" prefWidth="588.0" progress="0.0" style="-fx-background-color: #2E3348;" />
-   </children>
-</AnchorPane>
+<GridPane prefHeight="260.0" prefWidth="590.0"
+          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vinnik.g144.com.Controllers">
+    <columnConstraints>
+        <ColumnConstraints  hgrow="SOMETIMES" minWidth="10.0" prefWidth="590.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Slider fx:id="slider" blockIncrement="1.0" max="1.0" maxWidth="-Infinity" minorTickCount="10" prefHeight="63.0" prefWidth="590.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+        <ProgressBar fx:id="progressBar" prefHeight="223.0" prefWidth="590.0" progress="0.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" style="-fx-background-color: #2E3348;" GridPane.rowIndex="1" />
+    </children>
+</GridPane>

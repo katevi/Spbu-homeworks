@@ -19,7 +19,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("SlideAndProgress.fxml"));
             primaryStage.setTitle("Slider and ProgressBar:)");
-            primaryStage.setScene(new Scene(root, 700, 400));
+            primaryStage.setScene(new Scene(root, 590, 260));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
