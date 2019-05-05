@@ -22,4 +22,10 @@ class NodeTest {
         tree.add(6);
         assertEquals(result, tree.toString());
     }
+
+    @Test
+    void addNodeTest() {
+        BalanceTree tree = new BalanceTree();
+        assertThrows(NullPointerException.class, ()->tree.add(null));
+    }
 }

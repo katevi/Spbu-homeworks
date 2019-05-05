@@ -19,7 +19,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         value = newValue;
     }
 
-    Type getValue() {
+    protected Type getValue() {
         return value;
     }
 
@@ -27,7 +27,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         left = newLeftNode;
     }
 
-    Node<Type> getLeft() {
+    protected Node<Type> getLeft() {
         return left;
     }
 
@@ -35,7 +35,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         right = newRightNode;
     }
 
-    Node<Type> getRight() {
+    protected Node<Type> getRight() {
         return right;
     }
 
@@ -43,7 +43,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         parent = newParent;
     }
 
-    Node<Type> getParent() {
+    protected Node<Type> getParent() {
         return parent;
     }
 
@@ -127,7 +127,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         }
     }
 
-    void addNode(Type value, BalanceTree<Type> tree) {
+    protected void addNode(Type value, BalanceTree<Type> tree) {
         if (value.compareTo(getValue()) < 0) {
             if (getLeft() == null) {
                 setLeft(new Node<>(value, this));
@@ -141,11 +141,10 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
                 getRight().addNode(value, tree);
             }
         }
-
         balance(tree);
     }
 
-    boolean isContainsNode(Type value, BalanceTree<Type> tree) {
+    protected boolean isContainsNode(Type value, BalanceTree<Type> tree) {
         Node<Type> temp = tree.getRoot();
         while (temp != null) {
             if (value.equals(temp.getValue())) {
@@ -167,7 +166,7 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
         return temp;
     }
 
-    void removeNode(Type value, BalanceTree<Type> tree) {
+    protected void removeNode(Type value, BalanceTree<Type> tree) {
         if (value.equals(getValue())) {
             if ((getRight() != null) && (getLeft() != null)) {
                 Node<Type> maxNode = getLeft().findMaximumNode();
@@ -211,22 +210,25 @@ class Node<Type extends Comparable<Type>> implements Comparable<Node<Type>> {
     /**Writes result of tree traversal in string. */
     @Override
     public String toString() {
-        String result = "( " + value.toString() + " ";
+        StringBuilder result = new StringBuilder();
+        result.append("( ");
+        result.append(value.toString());
+        result.append(" ");
         if (getLeft() == null) {
-            result += "null ";
+            result.append("null ");
         } else {
-            result += getLeft().toString() + " ";
+            result.append(getLeft().toString() + " ");
         }
         if (getRight() == null) {
-            result += "null )";
+            result.append("null )");
         } else {
-            result += getRight().toString() + ")";
+            result.append(getRight().toString() + ")");
         }
-        return result;
+        return result.toString();
     }
 
-    /** A class that implements the functionality of tree vertices. */
-    Node(Type value, Node<Type> parent) {
+    /** A class that implements the functionality of tree vertexes. */
+    protected Node(Type value, Node<Type> parent) {
         this.value = value;
         this.left = null;
         this.right = null;

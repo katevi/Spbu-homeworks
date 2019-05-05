@@ -71,17 +71,21 @@ public class BalanceTree<Type extends Comparable<Type>> implements Collection<Ty
      * */
     @Override
     public boolean add(Type value) {
-        if (root == null) {
-            root = new Node<>(value, null);
-            size = 1;
-            return true;
-        } else {
-            if (contains(value)) {
-                return false;
+        if (value != null) {
+            if (root == null) {
+                root = new Node<>(value, null);
+                size = 1;
+                return true;
+            } else {
+                if (contains(value)) {
+                    return false;
+                }
+                size++;
+                root.addNode(value, this);
+                return true;
             }
-            size++;
-            root.addNode(value, this);
-            return true;
+        } else {
+            throw new NullPointerException();
         }
     }
 

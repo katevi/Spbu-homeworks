@@ -26,7 +26,6 @@ class BalanceTreeIteratorTest {
         assertEquals(expected7, iterator.next());
         String expected9 = "9";
         assertEquals(expected9, iterator.next());
-        //assertFalse(iterator.hasNext());
     }
 
     @Test
