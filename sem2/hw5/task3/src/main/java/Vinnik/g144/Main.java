@@ -20,7 +20,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Calculator.fxml"));
             primaryStage.setTitle("Calculator:)");
-            primaryStage.setScene(new Scene(root, 399, 487));
+            primaryStage.setScene(new Scene(root, 400, 500));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
