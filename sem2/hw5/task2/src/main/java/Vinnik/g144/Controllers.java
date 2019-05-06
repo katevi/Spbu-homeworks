@@ -48,28 +48,8 @@ public class Controllers {
     }
 
     private void calculate() {
-        double result = 0;
         int first = firstNumber.getValue();
         int second = secondNumber.getValue();
-        //in the case of division by zero, the result will "infinity".
-        switch (this.operation.getValue()) {
-            case "+": {
-                result = first + second;
-                break;
-            }
-            case "-" : {
-                result = first - second;
-                break;
-            }
-            case "*" : {
-                result = first * second;
-                break;
-            }
-            case "/" : {
-                result = (double) first / second;
-                break;
-            }
-        }
-        outputResult.textProperty().setValue(String.valueOf(result));
+        outputResult.textProperty().setValue(String.valueOf(Calculator.calculate(first, second, this.operation.getValue())));
     }
 }
