@@ -20,7 +20,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("TIC-TAC-toe.fxml"));
             primaryStage.setTitle("TIC-TAC-toe:)");
-            primaryStage.setScene(new Scene(root, 360, 397));
+            primaryStage.setScene(new Scene(root, 300, 400));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

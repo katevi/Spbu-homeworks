@@ -5,11 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-/** Handles communication with user (if button pressed). */
+/** Handles communication with user (button presses). */
 public class Controllers {
 
     private Button[] buttons;
-    int countOfPressedButtons = 0;
+    private int countOfPressedButtons = 0;
+    private int countOfTurnsFirstPlayer = 0;
 
     @FXML
     private void initialize() {
@@ -24,6 +25,7 @@ public class Controllers {
             if (event.getSource().equals(buttons[i])) {
                 if (countOfPressedButtons % 2 == 0) {
                     buttons[i].setText("X");
+                    countOfTurnsFirstPlayer++;
                 } else {
                     buttons[i].setText("O");
                 }
@@ -31,10 +33,26 @@ public class Controllers {
                 buttons[i].setDisable(true);
             }
         }
+        gameEnd();
+    }
+
+    private void gameEnd() {
         CheckWin checkWin = new CheckWin();
         String[][] values = toArrayOfValues(buttons);
         if (checkWin.isWin(values)) {
-            textField.textProperty().setValue("WIN!:)");
+            if (countOfPressedButtons % 2 == 0) {
+                textField.textProperty().setValue("O win:)");
+            } else {
+                textField.textProperty().setValue("X win:)");
+            }
+            for (Button i : buttons) {
+                i.setDisable(true);
+            }
+        } else if (countOfTurnsFirstPlayer == 5) {
+            textField.textProperty().setValue("draw:)");
+            for (Button i : buttons) {
+                i.setDisable(true);
+            }
         }
     }
 
