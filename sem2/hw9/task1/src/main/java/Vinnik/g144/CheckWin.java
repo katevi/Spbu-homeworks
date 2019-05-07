@@ -22,24 +22,38 @@ public class CheckWin {
     }
 
     private static boolean isThreeInRow(String[][] values, int indexRow) {
-        return (values[0][indexRow].equals(values[1][indexRow]))
-                && (values[1][indexRow].equals(values[2][indexRow]))
-                && (!values[0][indexRow].equals(""));
+        boolean result = true;
+        for (int i = 1; i < values.length; i++) {
+            result = result && values[i][indexRow].equals(values[i - 1][indexRow])
+                    && (!values[i][indexRow].equals(""));
+        }
+        return result;
     }
 
     private static boolean isThreeInColumn(String[][] values, int indexOfColumn) {
-        return  (values[indexOfColumn][0].equals(values[indexOfColumn][1]))
-                && (values[indexOfColumn][1].equals(values[indexOfColumn][2]))
-                && (!values[indexOfColumn][0].equals(""));
+        boolean result = true;
+        for (int i = 1; i < values.length; i++) {
+            result = result && values[indexOfColumn][i].equals(values[indexOfColumn][i - 1])
+                    && (!values[indexOfColumn][i].equals(""));
+        }
+        return result;
     }
 
     private static boolean isThreeInFirstDiagonal(String[][] values) {
-        return (values[1][1].equals(values[2][2]) && values[2][2].equals(values[0][0])
-                && !values[1][1].equals("") && !values[2][2].equals("") && !values[0][0].equals(""));
+        boolean result = true;
+        for (int i = 1; i < values.length; i++) {
+            result = result && values[i][i].equals(values[i - 1][i - 1])
+                    && (!values[i][i].equals(""));
+        }
+        return result;
     }
 
     private static boolean isThreeInSecondDiagonal(String[][] values) {
-        return (values[2][0].equals(values[1][1]) && values[1][1].equals(values[0][2])
-                && !values[2][0].equals("") && !values[1][1].equals("") && !values[0][2].equals(""));
+        boolean result = true;
+        for (int i = 1; i < values.length; i++) {
+            result = result && values[i][values.length - 1 - i].equals(values[i - 1][values.length - i])
+                    && (!values[i][values.length - 1 - i].equals(""));
+        }
+        return result;
     }
 }
