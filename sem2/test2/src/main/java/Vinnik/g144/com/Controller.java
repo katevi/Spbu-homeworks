@@ -1,51 +1,50 @@
 package Vinnik.g144.com;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Controller {
 
-    private int lengthArrayStrings = 0;
-
     @FXML
-    private TextField output;
+    private TextArea output;
 
-    public String[][] input() {
-        /*System.out.println("Enter number of arrays");
-        Scanner in = new Scanner(System.in);
-        int length = in.nextInt();
-        for (int i = 0; i < length; i++) {
-
-        }*/
-        lengthArrayStrings = 3;
-        String[][] array = {{"abc abc"}, {"bfg"}, {"dflk lkj"}};
-        return array;
-    }
-
-
-    private SortedSet convertInput(String[][] array, int length) {
+    /** Converts given two-dimension strings-array to list of lists and creates new SortedSet from it.
+     *
+     * @param array - given two-dimension array of strings.
+     * @return - new SortedSet.
+     */
+    public SortedSet convertInput(String[][] array) {
         LinkedList<LinkedList<String>> lists = new LinkedList<>();
-        int count = 0;
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < array.length; i++) {
+            LinkedList<String> currentList = new LinkedList();
             for (int j = 0; j < array[i].length; j++) {
                 String[] words = array[i][j].split(" ");
-                LinkedList currentList = new LinkedList();
-                currentList.add(words);
-                lists.add(currentList);
+                for (int k = 0; k < words.length; k++) {
+                    currentList.add(words[k]);
+                }
             }
+            lists.add(currentList);
         }
         SortedSet set = new SortedSet();
-        set.add(lists);
+        for (int i = 0; i < lists.size(); i++) {
+            set.add(lists.get(i));
+        }
         return set;
     }
 
+    /** Starts application, outputs set. */
     public void initialize() {
-        String[][] arrays = input();
-        SortedSet<String> set = convertInput(arrays, lengthArrayStrings);
-        output.setText(set.strings.toString());
+        // I am sorry a lot, but it is hard code:(
+        String[][] arrays = {{}, {"abckjh vcmvnc mmnmnv"}, {"fdkjlkj dflkjgldfjg"}, {"mvmvmvmv"}, {"kf kf kf kf"}};
+        SortedSet<String> set = convertInput(arrays);
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i < set.getStrings().size(); i++) {
+            string.append(set.getStrings().get(i).toString());
+            string.append("\n");
+        }
+        output.setText(string.toString());
     }
 }
