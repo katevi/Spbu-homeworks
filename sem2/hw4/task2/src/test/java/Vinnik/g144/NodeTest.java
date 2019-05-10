@@ -26,6 +26,6 @@ class NodeTest {
     @Test
     void addNodeTest() {
         BalanceTree tree = new BalanceTree();
-        assertThrows(NullPointerException.class, ()->tree.add(null));
+        assertThrows(IllegalArgumentException.class, ()->tree.add(null));
     }
 }

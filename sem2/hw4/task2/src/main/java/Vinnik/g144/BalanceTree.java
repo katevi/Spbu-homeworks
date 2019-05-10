@@ -65,10 +65,12 @@ public class BalanceTree<Type extends Comparable<Type>> implements Collection<Ty
         return arrayList.toArray(array);
     }
 
-    /**Adds one element to the collection - return true, if element was added successful, false otherwise.
+    /**
+     * Adds one element to the collection - return true, if element was added successful, false otherwise.
      *
      * @param value - value of adding element
-     * */
+     *
+     */
     @Override
     public boolean add(Type value) {
         if (value != null) {
@@ -85,7 +87,7 @@ public class BalanceTree<Type extends Comparable<Type>> implements Collection<Ty
                 return true;
             }
         } else {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
     }
 
