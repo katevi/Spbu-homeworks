@@ -9,21 +9,6 @@ public class SortedSet<Type> implements ListComparator<Type> {
     private LinkedList<LinkedList<String>> strings = new LinkedList<LinkedList<String>>();
     private int size = 0;
 
-    /** Sorts lists with strings in set in ascending order. */
-    public <Type> void sort(LinkedList<LinkedList<String>> lists) {
-        for (int i = lists.size() - 1; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (compare(lists.get(j), lists.get(j + 1)) > 0) {
-                    LinkedList tmp = lists.get(j);
-                    lists.add(j, lists.get(j + 1));
-                    lists.remove(j + 1);
-                    lists.add(j + 1, tmp);
-                    lists.remove(j + 2);
-                }
-            }
-        }
-    }
-
     /** Returns current list with strings. */
     public LinkedList<LinkedList<String>> getStrings() {
         return strings;
@@ -48,8 +33,19 @@ public class SortedSet<Type> implements ListComparator<Type> {
 
     /** Add new list with strings to current set. */
     public void add(LinkedList<String> list) {
+        if (getSize() ==  0) {
+            strings.add(list);
+            size = size + list.size();
+            return;
+        }
+        for (int i = 0; i < strings.size(); i++) {
+            if (compare(list, strings.get(i)) <= 0) {
+                strings.add(i, list);
+                size = size + list.size();
+                return;
+            }
+        }
         strings.add(list);
         size = size + list.size();
-        sort(strings);
     }
 }

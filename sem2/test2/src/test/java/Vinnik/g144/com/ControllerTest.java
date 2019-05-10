@@ -18,21 +18,21 @@ class ControllerTest {
         result.add(first);
 
         LinkedList<String> second = new LinkedList<>();
-        second.add("bfg");
+        second.add("mnsdbmb");
         result.add(second);
 
         LinkedList<String> third = new LinkedList<>();
-        third.add("mnsdbmb");
+        third.add("bfg");
         result.add(third);
 
         LinkedList<String> fourth = new LinkedList<>();
-        fourth.add("abc");
-        fourth.add("abc");
+        fourth.add("dflk");
+        fourth.add("lkj");
         result.add(fourth);
 
         LinkedList<String> fifth = new LinkedList<>();
-        fifth.add("dflk");
-        fifth.add("lkj");
+        fifth.add("abc");
+        fifth.add("abc");
         result.add(fifth);
 
         LinkedList<String> sixth = new LinkedList<>();
