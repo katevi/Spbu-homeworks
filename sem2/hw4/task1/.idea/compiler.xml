@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Hw4t1_gradle.Vinnik.main" target="1.8" />
+      <module name="Hw4t1_gradle.Vinnik.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
