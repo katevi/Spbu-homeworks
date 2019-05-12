@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class LazyTest {
     @Test
     public void singleThreadNumberValueTest() {
-        Lazy<Integer> lazy = new LazyFactory().createLazySingleThread(() -> 123);
+        Lazy<Integer> lazy = LazyFactory.createLazySingleThread(() -> 123);
         assertEquals(123, (int) lazy.get());
         lazy.get();
         lazy.get();
@@ -20,7 +20,7 @@ class LazyTest {
 
     @Test
     public void singleThreadNullValueTest() {
-        Lazy<Integer> lazy = new LazyFactory().createLazySingleThread(() -> null);
+        Lazy<Integer> lazy = LazyFactory.createLazySingleThread(() -> null);
         assertEquals(null, lazy.get());
         lazy.get();
         lazy.get();
@@ -29,7 +29,7 @@ class LazyTest {
 
     @Test
     public void singleNullThreadTest() {
-        Lazy<Integer> lazy = new LazyFactory().createLazySingleThread(null);
+        Lazy<Integer> lazy = LazyFactory.createLazySingleThread(null);
         assertEquals(null, lazy.get());
         lazy.get();
         lazy.get();
@@ -39,7 +39,7 @@ class LazyTest {
 
     @Test
     public void multiNullThreadTest() {
-        Lazy<Integer> lazy = new LazyFactory().createLazyMultiThread(null);
+        Lazy<Integer> lazy = LazyFactory.createLazyMultiThread(null);
         assertEquals(null, lazy.get());
         lazy.get();
         assertEquals(null, lazy.get());
@@ -48,7 +48,7 @@ class LazyTest {
     @Test
     public void multiThreadNullValueTest() throws InterruptedException {
         final boolean[] isFailed = {false};
-        Lazy<Integer> lazy = new LazyFactory().createLazyMultiThread(() -> null);
+        Lazy<Integer> lazy = LazyFactory.createLazyMultiThread(() -> null);
         Runnable check = () -> isFailed[0] = isFailed[0] || (lazy.get() != null);
 
         Thread first = new Thread(check);
