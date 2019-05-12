@@ -1,4 +1,4 @@
 package Vinnik.g144;
 
-public class IncorrectFormException extends Throwable {
+public class IncorrectFormException extends Exception {
 }
