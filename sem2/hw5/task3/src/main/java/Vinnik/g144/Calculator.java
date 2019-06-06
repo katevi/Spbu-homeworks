@@ -29,7 +29,7 @@ public class Calculator {
     private String[] convertToPostfix(String expression) throws IncorrectFormException {
         String[] expressionInArray = expression.split(" ");
         if (isCorrectExpression(expressionInArray)) {
-            String expressionInPostfix[] = new String[expressionInArray.length];
+            String[] expressionInPostfix = new String[expressionInArray.length];
             numberOfCharactersProcessed = 0;
             for (String i : expressionInArray) {
                 if (isNumber(i)) {
