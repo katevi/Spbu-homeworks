@@ -1,0 +1,137 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane  prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vinnik.g144.Controllers">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <GridPane prefHeight="400.0" prefWidth="400.0" GridPane.rowIndex="2">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="button1" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button2" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button3" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="plus" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="+" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button4" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button5" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="5" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button6" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="6" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="minus" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="-" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button7" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="7" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button8" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button9" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="9" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="mult" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="*" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="button0" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="clear" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="200.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="CL" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="div" mnemonicParsing="false" onAction="#handleButtonEvent" prefHeight="100.0" prefWidth="100.0"
+                        maxWidth="Infinity"  maxHeight="Infinity" style="-fx-background-color: pink; -fx-border-color: red;" text="/" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <TextField id="result" fx:id="resultOfCalculating" alignment="CENTER_RIGHT" editable="false" prefHeight="50.0" prefWidth="400.0"
+                     maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #FAFAD2; -fx-border-color: orange;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <TextField id="result" fx:id="enteredExpression" alignment="CENTER_RIGHT" editable="false" prefHeight="50.0" prefWidth="400.0"
+                     maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #FAFAD2; -fx-border-color: orange;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+   </children>
+</GridPane>
