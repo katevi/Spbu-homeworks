@@ -1,5 +1,7 @@
 language: java
 dist: trusty
+services: 
+  - docker
 jdk: oraclejdk8
 script: 
   - cd sem2
