@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="363.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vinnik.g144.com.Controllers">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="590.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="260.0" minHeight="10.0" prefHeight="197.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="136.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <ProgressBar fx:id="progressBar" maxHeight="Infinity" maxWidth="Infinity" prefHeight="223.0" prefWidth="590.0" progress="0.0" style="-fx-background-color: #2E3348;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Slider fx:id="slider" blockIncrement="1.0" max="1.0" maxHeight="Infinity" maxWidth="Infinity" minorTickCount="10" prefHeight="63.0" prefWidth="590.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+    </children>
+</GridPane>
