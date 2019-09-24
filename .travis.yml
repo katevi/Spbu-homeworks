@@ -2,7 +2,7 @@ language: java
 dist: trusty
 services: 
   - docker
-jdk: oraclejdk10
+jdk: oraclejdk11
 script: 
   - cd sem3
 os: linux
