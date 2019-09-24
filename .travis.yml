@@ -4,6 +4,5 @@ services:
   - docker
 jdk: oraclejdk8
 script: 
-  - cd sem2
   - cd sem3
 os: linux
