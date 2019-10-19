@@ -2,7 +2,7 @@ package g144.Vinnik.cannon.game;
 
 import java.awt.*;
 
-public abstract class Sprite implements Helper {
+public abstract class Sprite implements GameParams {
     private int x;
     private int y;
     private int speed;
@@ -38,4 +38,5 @@ public abstract class Sprite implements Helper {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
 }

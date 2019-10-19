@@ -16,7 +16,6 @@ public class Main {
                 gameFrame.pack();
                 gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gameFrame.setLocationRelativeTo(null);
-                //gameFrame.setSize(450, 650);
                 gameFrame.setVisible(true);
             }
         });

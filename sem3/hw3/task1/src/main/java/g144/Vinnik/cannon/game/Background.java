@@ -1,21 +1,59 @@
 package g144.Vinnik.cannon.game;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class Background extends Sprite {
     private final Image image;
 
+    private final int[] changePointsX = {0, 100, 150, 200, 300, 350, 400, 470, 530, 590, 650};
+    private final int[] changePointsY = {400, 400, 300, 400, 400, 350, 400, 400, 340, 400, 400};
+
     public Background(int newX, int newY, int newSpeed) {
         super(newX, newY, newSpeed);
-        this.image = new ImageIcon(getClass().getResource("/land.jpg")).getImage();
+        this.image = new ImageIcon(getClass().getResource("/land.png")).getImage();
     }
 
     @Override
     protected void draw(Graphics2D graphics2D) {
-        graphics2D.drawImage(this.image, getX(), getY(), null);
+        graphics2D.drawImage(this.image, getX(), (int) getY(), null);
+    }
+
+    protected boolean isChangePoint(int x) {
+        for (int i = 0; i < changePointsX.length; i++) {
+            if (x == changePointsX[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected double returnEquationForLeftDirection(int firstPointX) {
+        double result = 0;
+
+        for (int i = changePointsX.length - 1; i > 0; i--) {
+            if (changePointsX[i] < firstPointX) {
+                double deltaY = changePointsY[i + 1] - changePointsY[i];
+                double deltaX = changePointsX[i + 1] - changePointsX[i];
+                result = deltaY / deltaX;
+                break;
+            }
+        }
+        return result;
+    }
+
+    protected double returnEquationForRightDirection(int firstPointX) {
+        double result = 0;
+
+        for (int i = 0; i < changePointsX.length; i++) {
+            if (changePointsX[i] > firstPointX) {
+                double deltaY = changePointsY[i - 1] - changePointsY[i];
+                double deltaX = changePointsX[i - 1] - changePointsX[i];
+
+                result = deltaY / deltaX;
+                break;
+            }
+        }
+        return result;
     }
 }

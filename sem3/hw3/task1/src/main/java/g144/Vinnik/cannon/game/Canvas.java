@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public abstract class Canvas extends JPanel implements Helper, KeyListener {
+public abstract class Canvas extends JPanel implements GameParams, KeyListener {
 
     public Canvas() {
         this.addKeyListener(Canvas.this);
