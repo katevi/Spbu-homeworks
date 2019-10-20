@@ -3,8 +3,16 @@ package g144.Vinnik.cannon.game;
 import java.awt.*;
 
 public class Bullet extends Sprite {
-    public Bullet(int newX, int newY, int newSpeed) {
+    private double speedX;
+    private double speedY;
+    private int timer;
+
+
+    public Bullet(int newX, int newY, int newSpeed, int angleSightCannon) {
         super(newX, newY, newSpeed);
+        speedX = getSpeed() * Math.sin(Math.toRadians(angleSightCannon - 90));
+        speedY = getSpeed() * Math.cos(Math.toRadians(angleSightCannon - 90));
+        timer = 0;
     }
 
     @Override
@@ -14,6 +22,15 @@ public class Bullet extends Sprite {
     }
 
     protected void update() {
-        setY(getY() - getSpeed());
+        if ((int) speedX == 1) {
+            setY(getY() + getSpeed());
+        } else {
+            System.out.println("HAHA");
+            double g = 0.1;
+            setX(getX() + (int) (speedY * timer));
+            setY((getY()) + (int) (speedX * timer) + (int) (g * timer * timer / 2));
+            System.out.println(getX() + " " + getY() + " " + timer);
+            timer++;
+        }
     }
 }

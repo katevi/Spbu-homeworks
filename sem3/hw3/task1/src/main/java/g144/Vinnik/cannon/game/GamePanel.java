@@ -33,7 +33,7 @@ public class GamePanel extends Canvas implements Runnable {
     protected void onKeyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             // cannon.getX() - left top corner of cannon image, cannon.getCannonWifth / 2 - half of width cannon image, 4 - half of bullet radius
-            bullets.add(new Bullet(cannon.getX() + cannon.getCannonWidth() / 2 - 4, cannon.getY(), 3));
+            bullets.add(new Bullet(cannon.getX() + cannon.getCannonWidth() / 2 - 4, cannon.getY(), 1, cannon.getAngleInDegrees()));
             //cannon.shoot(background);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             cannon.moveLeft(background);
@@ -87,7 +87,7 @@ public class GamePanel extends Canvas implements Runnable {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
             bullet.update();
-            if (bullet.getY() < 0) {
+            if (bullet.getY() < 0 || bullet.getX() < 0 || bullet.getX() > GAME_WIDTH || bullet.getY() > GAME_HEIGHT) {
                 bullets.remove(bullet);
             }
         }

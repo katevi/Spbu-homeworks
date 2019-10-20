@@ -39,6 +39,16 @@ public class Cannon extends Sprite {
                         Math.toRadians(angleInDegrees), line.getX1(), line.getY1());
 
         graphics2D.draw(at.createTransformedShape(line));
+        //x2=((int)(x1*Math.cos(angleInDegrees)))-((int)(y1* Math.sin(angleInDegrees)));
+        //y2=((int)(x1*Math.sin(angleInDegrees)))+((int)(y1* Math.cos(angleInDegrees)));
+        //graphics2D.drawLine(x1, y1, x2, y2);
+        /*line.setLine(getX(), getY(), getX() + Math.cos(Math.PIangleInDegrees), getY() + Math.sin(angleInDegrees));
+        graphics2D.draw(line);*/
+        //at.invert();
+    }
+
+    protected int getAngleInDegrees() {
+        return angleInDegrees;
     }
 
     protected int getCannonWidth() {
