@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+/** Implements interaction with user. */
 public class GamePanel extends Canvas implements Runnable {
     private Thread gameThread;
     private Background background = new Background(0,0,0);
@@ -11,10 +12,12 @@ public class GamePanel extends Canvas implements Runnable {
     private boolean isRunning;
     private final ArrayList<Bullet> bullets = new ArrayList<>();
 
+    /** Creates new window with given size. */
     public GamePanel() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
     }
 
+    /** {@inheritDoc} */
     @Override
     public void addNotify() {
         super.addNotify();
@@ -24,15 +27,17 @@ public class GamePanel extends Canvas implements Runnable {
         gameThread.start();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void onKeyUp(KeyEvent e) {
 
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void onKeyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            // cannon.getX() - left top corner of cannon image, cannon.getCannonWifth / 2 - half of width cannon image, 4 - half of bullet radius
+            // cannon.getX() - left top corner of cannon image, cannon.getCannonWidth / 2 - half of width cannon image, 4 - half of bullet radius
             bullets.add(new Bullet(cannon.getX() + cannon.getCannonWidth() / 2 - 4, cannon.getY(), 1, cannon.getAngleInDegrees()));
             //cannon.shoot(background);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -46,6 +51,8 @@ public class GamePanel extends Canvas implements Runnable {
         }
     }
 
+
+    /** Draws all bullets flight. */
     @Override
     protected void onDraw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.GREEN);
@@ -58,6 +65,7 @@ public class GamePanel extends Canvas implements Runnable {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void run() {
         init();

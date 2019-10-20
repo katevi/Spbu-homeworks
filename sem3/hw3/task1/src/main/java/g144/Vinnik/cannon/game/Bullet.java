@@ -7,7 +7,7 @@ public class Bullet extends Sprite {
     private double speedY;
     private int timer;
 
-
+    /** Creates new bullet in the middle of cannon top with given shot direction and given flying speed.*/
     public Bullet(int newX, int newY, int newSpeed, int angleSightCannon) {
         super(newX, newY, newSpeed);
         speedX = getSpeed() * Math.sin(Math.toRadians(angleSightCannon - 90));
@@ -21,16 +21,11 @@ public class Bullet extends Sprite {
         graphics2D.fillOval(getX(), getY(), 8, 8);
     }
 
+    /** Paints bullet flight in current period of time. (Bullet flies in a parabola). */
     protected void update() {
-        if ((int) speedX == 1) {
-            setY(getY() + getSpeed());
-        } else {
-            System.out.println("HAHA");
-            double g = 0.1;
-            setX(getX() + (int) (speedY * timer));
-            setY((getY()) + (int) (speedX * timer) + (int) (g * timer * timer / 2));
-            System.out.println(getX() + " " + getY() + " " + timer);
-            timer++;
-        }
+        double g = 0.1;
+        setX(getX() + (int) (speedY * timer));
+        setY((getY()) + (int) (speedX * timer) + (int) (g * timer * timer / 2));
+        timer++;
     }
 }

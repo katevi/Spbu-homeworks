@@ -4,6 +4,7 @@ import g144.Vinnik.cannon.game.GamePanel;
 
 import javax.swing.*;
 
+/** Starts game. */
 public class Main {
     public static void main(String[] args) {
 
