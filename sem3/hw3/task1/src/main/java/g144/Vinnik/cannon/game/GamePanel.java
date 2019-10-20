@@ -2,12 +2,14 @@ package g144.Vinnik.cannon.game;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class GamePanel extends Canvas implements Runnable {
     private Thread gameThread;
     private Background background = new Background(0,0,0);
     private Cannon cannon = new Cannon(220,GAME_HEIGHT - 100 - 30,1);
     private boolean isRunning;
+    private final ArrayList<Bullet> bullets = new ArrayList<>();
 
     public GamePanel() {
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
@@ -30,24 +32,30 @@ public class GamePanel extends Canvas implements Runnable {
     @Override
     protected void onKeyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            cannon.shoot(background);
+            // cannon.getX() - left top corner of cannon image, cannon.getCannonWifth / 2 - half of width cannon image, 4 - half of bullet radius
+            bullets.add(new Bullet(cannon.getX() + cannon.getCannonWidth() / 2 - 4, cannon.getY(), 3));
+            //cannon.shoot(background);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             cannon.moveLeft(background);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             cannon.moveRight(background);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            cannon.changeSightRight(background);
+            cannon.changeSightRight();
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            cannon.changeSightLeft(background);
+            cannon.changeSightLeft();
         }
     }
 
     @Override
     protected void onDraw(Graphics2D graphics2D) {
-        graphics2D.setColor(Color.BLUE);
-        //graphics2D.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        graphics2D.setColor(Color.GREEN);
         background.draw(graphics2D);
         cannon.draw(graphics2D);
+        if (bullets != null) {
+            for (Bullet bullet : bullets) {
+                bullet.draw(graphics2D);
+            }
+        }
     }
 
     @Override
@@ -76,6 +84,12 @@ public class GamePanel extends Canvas implements Runnable {
     }
 
     private void updateGame() {
-
+        for (int i = 0; i < bullets.size(); i++) {
+            Bullet bullet = bullets.get(i);
+            bullet.update();
+            if (bullet.getY() < 0) {
+                bullets.remove(bullet);
+            }
+        }
     }
 }
