@@ -17,8 +17,8 @@ public class LocalNetwork {
 
     /** Adds computer with given OS to current network. */
     public void addComputer(String nameOS) {
-        matrix[countOfAddedComputers][countOfAddedComputers] = true;
         if (countOfAddedComputers <= matrix.length) {
+            matrix[countOfAddedComputers][countOfAddedComputers] = true;
             computers[countOfAddedComputers] = new Computer(nameOS);
             countOfAddedComputers++;
         }
@@ -59,19 +59,32 @@ public class LocalNetwork {
 
     /** Shows one pass in infected computers set: each infect computer from set tries to infect not infected computers. */
     public String showOneStepOfInfection(Virus virus) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         infectedComputersInCurrentStep[virus.getKeyFirstOfInfected()] = true;
         if (!allInfected()) {
             for (int i = 0; i < countOfAddedComputers; i++) {
                 if (infectedComputersInCurrentStep[i]) {
                     for (int j = 0; j < countOfAddedComputers; j++) {
                         if (j != i && matrix[i][j] == true && !infectedComputersInCurrentStep[j] && !computers[j].isInfected()) {
-                            output += "Trying to infect computer number " + j + " with OS = " + computers[j].getOS() + "\n";
+
+                            output.append("Trying to infect computer number ");
+                            output.append(j);
+                            output.append(" with OS = ");
+                            output.append(computers[j].getOS());
+                            output.append("\n");
+
                             virus.tryToInfect(computers[j]);
                             if (computers[j].isInfected()) {
-                                output += "Computer number " + j + " infected by computer number " + i + "\n";
+                                output.append("Computer number ");
+                                output.append(j);
+                                output.append(" infected by computer number ");
+                                output.append(i);
+                                output.append("\n");
                             } else {
-                                output += "Computer number " + j + " not infected" + "\n";
+                                output.append("Computer number ");
+                                output.append(j);
+                                output.append(" not infected");
+                                output.append("\n");
                             }
                         }
                     }
@@ -79,9 +92,9 @@ public class LocalNetwork {
             }
             updateInfected();
         } else {
-            output += "All computers infected.";
+            output.append("All computers infected.");
         }
-        return output;
+        return output.toString();
     }
 
     /** Shows which computers already infected. */

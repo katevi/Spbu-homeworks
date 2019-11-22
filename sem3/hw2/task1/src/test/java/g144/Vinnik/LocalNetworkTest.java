@@ -18,6 +18,7 @@ class LocalNetworkTest {
         network.setConnections(1, 2);
 
         SpecialRandom random = new SpecialRandom();
+
         Virus virus = new Virus(network, random, 1);
 
 
