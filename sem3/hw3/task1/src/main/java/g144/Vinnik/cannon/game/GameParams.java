@@ -1,9 +1,9 @@
 package g144.Vinnik.cannon.game;
 
 /** Stores game constants. */
-public interface GameParams {
-    int GAME_WIDTH = 650;
-    int GAME_HEIGHT = 500;
-    long MILLISECOND = 1000L;
-    int FPS = 40;
+public final class GameParams {
+    public static final int GAME_WIDTH = 650;
+    public static final int GAME_HEIGHT = 500;
+    public static final long MILLISECOND = 1000L;
+    public static final int FPS = 40;
 }

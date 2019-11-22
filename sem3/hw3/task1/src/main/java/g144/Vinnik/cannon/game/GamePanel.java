@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import static g144.Vinnik.cannon.game.GameParams.*;
+
 /** Implements interaction with user. */
 public class GamePanel extends Canvas implements Runnable {
     private Thread gameThread;

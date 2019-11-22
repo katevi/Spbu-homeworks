@@ -3,7 +3,7 @@ package g144.Vinnik.cannon.game;
 import java.awt.*;
 
 /** Implements game textures. */
-public abstract class Sprite implements GameParams {
+public abstract class Sprite {
     private int x;
     private int y;
     private int speed;
