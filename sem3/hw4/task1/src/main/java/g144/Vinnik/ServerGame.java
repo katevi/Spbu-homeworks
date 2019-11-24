@@ -37,10 +37,6 @@ public class ServerGame implements Game {
         try {
             server = new ServerSocket(PORT);
         } catch (IOException e) {
-            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Error, the server is already running");
-            alert.showAndWait();*/
             JOptionPane.showMessageDialog(null,
                     "Error, the server is already running",
                     "Error",
