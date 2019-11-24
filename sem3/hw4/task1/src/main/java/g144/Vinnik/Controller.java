@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Controller extends JFrame {
     private static void initialize() {
-        
+
     }
 
     private void serverButtonAction() {
