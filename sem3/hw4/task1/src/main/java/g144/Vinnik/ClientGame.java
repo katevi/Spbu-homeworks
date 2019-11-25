@@ -21,20 +21,7 @@ public class ClientGame implements Game {
     private BufferedReader input;
     private String ipAddress;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame gameFrame = new JFrame("Client");
-                gameFrame.setResizable(false);
-                gameFrame.add(new GamePanel());
-                gameFrame.pack();
-                gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameFrame.setLocationRelativeTo(null);
-                gameFrame.setVisible(true);
-            }
-        });
-    }
+    public static void main(String[] args) { }
 
     /** Assigns IP address of the server. */
     public ClientGame(String ipAddress) {

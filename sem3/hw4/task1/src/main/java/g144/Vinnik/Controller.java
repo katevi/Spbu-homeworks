@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -13,7 +14,7 @@ public class Controller extends JPanel {
     private JPanel contentPane;
     private JButton clientFieldButton;
     private JButton serverFieldButton;
-    private JTextField textField;
+    private JTextField enteredIpAddress;
     private JButton connectButton;
     private JLabel serverIP;
 
@@ -25,6 +26,7 @@ public class Controller extends JPanel {
             public void run() {
                 JFrame frame = new JFrame("Connection");
                 Controller controller = new Controller();
+                frame.setResizable(false);
                 frame.setContentPane(controller.contentPane);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
@@ -33,6 +35,12 @@ public class Controller extends JPanel {
         });
     }
 
+    private void disableConnectionMenu() {
+        Component[] components = contentPane.getComponents();
+        for (int i = 0; i < components.length; i++) {
+            components[i].setEnabled(false);
+        }
+    }
 
     private void serverFieldButtonPerformed(java.awt.event.ActionEvent e) {
         System.out.println("WE ARE HERE");
@@ -41,7 +49,7 @@ public class Controller extends JPanel {
         try {
             thisIp = InetAddress.getLocalHost();
         } catch (UnknownHostException ex) {
-            System.out.println("Can't get IP");
+            JOptionPane.showMessageDialog(contentPane, "Can't get IP");
             System.exit(1);
         }
 
@@ -49,14 +57,6 @@ public class Controller extends JPanel {
         serverIP.setVisible(true);
         serverFieldButton.setEnabled(false);
         gameForServer();
-        disableConnectionMenu();
-    }
-
-    private void disableConnectionMenu() {
-        Component[] components = contentPane.getComponents();
-        for (int i = 0; i < components.length; i++) {
-            components[i].setEnabled(false);
-        }
     }
 
     private void gameForServer() {
@@ -75,8 +75,37 @@ public class Controller extends JPanel {
         });
     }
 
-    private void clientFieldButtonPerformed(java.awt.event.ActionEvent e) {
+    private void connectFieldButtonPerformed(java.awt.event.ActionEvent event) {
+        String ipAddressText = enteredIpAddress.getText();
 
+        try {
+            if (!InetAddress.getLocalHost().getHostAddress().equals(ipAddressText)) {
+                JOptionPane.showMessageDialog(contentPane, "Wrong IP", "Error", JOptionPane.WARNING_MESSAGE);
+                System.exit(1);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(contentPane, "Couldn't get I/O for the connection to: " + ipAddressText, "Error", JOptionPane.WARNING_MESSAGE);
+            System.exit(1);
+        }
+        connectButton.setEnabled(false);
+        enteredIpAddress.setEnabled(false);
+        gameForClient(ipAddressText);
+    }
+
+    private void gameForClient(String ipAddress) {
+        game = new ClientGame(ipAddress);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame gameFrame = new JFrame("Client");
+                gameFrame.setResizable(false);
+                gameFrame.add(new GamePanel());
+                gameFrame.pack();
+                gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gameFrame.setLocationRelativeTo(null);
+                gameFrame.setVisible(true);
+            }
+        });
     }
 
 
@@ -84,19 +113,30 @@ public class Controller extends JPanel {
         contentPane = new JPanel();
         serverFieldButton = new JButton();
         clientFieldButton = new JButton();
-
+        connectButton = new JButton();
+        enteredIpAddress = new JTextField();
+        serverIP = new JLabel();
 
         serverFieldButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 serverFieldButtonPerformed(e);
+                disableConnectionMenu();
             }
         });
-
         clientFieldButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clientFieldButtonPerformed(e);
+                System.out.println("Clicked on clientButton");
+                serverFieldButton.setEnabled(false);
+            }
+        });
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Clicked on connect button");
+                connectFieldButtonPerformed(e);
+                disableConnectionMenu();
             }
         });
     }

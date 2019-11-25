@@ -17,8 +17,7 @@ public class ServerGame implements Game {
     private BufferedReader input;
     private PrintWriter output;
 
-    public static void main(String[] args) {
-    }
+    public static void main(String[] args) { }
 
 
     /** Raises the server with the specified port. */
