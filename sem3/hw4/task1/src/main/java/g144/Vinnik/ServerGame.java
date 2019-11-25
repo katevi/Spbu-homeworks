@@ -18,19 +18,8 @@ public class ServerGame implements Game {
     private PrintWriter output;
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame gameFrame = new JFrame("Server");
-                gameFrame.setResizable(false);
-                gameFrame.add(new GamePanel());
-                gameFrame.pack();
-                gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                gameFrame.setLocationRelativeTo(null);
-                gameFrame.setVisible(true);
-            }
-        });
     }
+
 
     /** Raises the server with the specified port. */
     public ServerGame() {
