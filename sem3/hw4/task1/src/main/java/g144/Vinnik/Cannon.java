@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
-import java.io.Serializable;
 
 import static g144.Vinnik.GameParams.*;
 import static java.lang.Math.abs;
@@ -54,7 +53,7 @@ public class Cannon extends Sprite {
 
 
     /** Implements x offset. */
-    protected void moveLeft(Background background) {
+    public void moveLeft(Background background) {
         if (getX() <= 0) {
             return;
         }
@@ -72,7 +71,7 @@ public class Cannon extends Sprite {
         line.setLine(x1, y1, x2, y2);
     }
 
-    protected void moveRight(Background background) {
+    public void moveRight(Background background) {
         if (getX() >= GAME_WIDTH - cannonWidth) {
             return;
         }
@@ -92,14 +91,14 @@ public class Cannon extends Sprite {
     }
 
     /** Implements y offset. (Used when cannon rides on a mountain). */
-    private void moveUp(double directionTan) {
+    public void moveUp(double directionTan) {
         setY(getY() - (int) ceil(abs(directionTan)));
         y1 = y1 - abs(directionTan);
         y2 = y2 - abs(directionTan);
         line.setLine(x1, y1, x2, y2);
     }
 
-    private void moveDown(double directionTan) {
+    public void moveDown(double directionTan) {
         setY(getY() + (int) ceil(abs(directionTan)));
         y1 = y1 + abs(directionTan);
         y2 = y2 + abs(directionTan);
@@ -107,14 +106,14 @@ public class Cannon extends Sprite {
     }
 
     /** Changes direction of shot (by clockwise). */
-    protected void changeSightRight() {
+    public void changeSightRight() {
         if (angleInDegrees <= 90) {
             angleInDegrees++;
         }
     }
 
     /** Implements direction of shot (by clockwise). */
-    protected void changeSightLeft() {
+    public void changeSightLeft() {
         if (angleInDegrees >= -90) {
             angleInDegrees--;
         }

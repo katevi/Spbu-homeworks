@@ -2,25 +2,27 @@ package g144.Vinnik;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
+import java.security.Key;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static g144.Vinnik.GameParams.*;
 
 public class ClientCannon extends Canvas implements Runnable {
     private Thread gameThread;
     private Background background = new Background(0,0,0);
+
     private Cannon clientCannon = new Cannon(100,GAME_HEIGHT - 100 - 30,1);
     private Cannon serverCannon = new Cannon(220,GAME_HEIGHT - 100 - 30,1);
-    /*private ServerGame server;*/
+
     private ClientGame client;
     private boolean isRunning;
     private String serverIp;
-    private String command;
-    private final ArrayList<Bullet> bullets = new ArrayList<>();
+
+    //private LinkedList<Integer> usedKeys = new LinkedList();
+
+    private final ArrayList<Bullet> clientBullets = new ArrayList<>();
+    private final ArrayList<Bullet> serverBullets = new ArrayList<>();
 
 
     /** Creates new window with given size. */
@@ -54,47 +56,65 @@ public class ClientCannon extends Canvas implements Runnable {
     /** {@inheritDoc} */
     @Override
     protected void onKeyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            // clientCannon.getX() - left top corner of clientCannon image, clientCannon.getCannonWidth / 2 - half of width clientCannon image, 4 - half of bullet radius
-            bullets.add(new Bullet(clientCannon.getX() + clientCannon.getCannonWidth() / 2 - 4, clientCannon.getY(), 1, clientCannon.getAngleInDegrees()));
-            //clientCannon.shoot(background);
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            clientCannon.moveLeft(background);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            clientCannon.moveRight(background);
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            clientCannon.changeSightRight();
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            clientCannon.changeSightLeft();
+        onKeyPressed(e.getKeyCode(), clientCannon);
+        client.send(e.getKeyCode());
+    }
+
+    private void onKeyPressed(int code, Cannon cannon) {
+        if (code != 0) {
+            System.out.println("We are in onkeypressed");
+            if (code == KeyEvent.VK_ENTER) {
+                // clientCannon.getX() - left top corner of clientCannon image, clientCannon.getCannonWidth / 2 - half of width clientCannon image, 4 - half of bullet radius
+                clientBullets.add(new Bullet(clientCannon.getX() + clientCannon.getCannonWidth() / 2 - 4, clientCannon.getY(), 1, clientCannon.getAngleInDegrees()));
+                System.out.println("Enter");
+            } else if (code == KeyEvent.VK_LEFT) {
+                cannon.moveLeft(background);
+                System.out.println("VK_LEFT");
+            } else if (code == KeyEvent.VK_RIGHT) {
+                cannon.moveRight(background);
+                System.out.println("VK_RIGHT");
+            } else if (code == KeyEvent.VK_UP) {
+                cannon.changeSightRight();
+                System.out.println("VK_UP");
+            } else if (code == KeyEvent.VK_DOWN) {
+                cannon.changeSightLeft();
+                System.out.println("VK_DOWN");
+            }
+            //usedKeys.add(code);
         }
     }
 
-
-    /** Draws all bullets flight. */
+    /** Draws all clientBullets flight. */
     @Override
     protected void onDraw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.GREEN);
         background.draw(graphics2D);
         clientCannon.draw(graphics2D);
         serverCannon.draw(graphics2D);
-        if (bullets != null) {
-            for (Bullet bullet : bullets) {
+        if (clientBullets != null) {
+            for (Bullet bullet : clientBullets) {
                 bullet.draw(graphics2D);
             }
         }
+    }
+
+    private void interactWithEnemy() {
+        /*for (int i = 0; i < usedKeys.size(); i++) {
+            client.send(usedKeys.get(i));
+        }*/
+        //client.send(usedKeys);
+        //usedKeys.clear();
     }
 
     /** {@inheritDoc} */
     @Override
     public void run() {
         init();
-        String command;
+        Integer command;
         while (isRunning) {
             long startTime = System.currentTimeMillis();
-
-            client.send( clientCannon.getX() + " " + clientCannon.getY());
             command = client.receive();
-            parseCommand(command);
+            onKeyPressed(command, serverCannon);
 
             updateGame();
             renderGame();
@@ -120,11 +140,11 @@ public class ClientCannon extends Canvas implements Runnable {
     }
 
     private void updateGame() {
-        for (int i = 0; i < bullets.size(); i++) {
-            Bullet bullet = bullets.get(i);
+        for (int i = 0; i < clientBullets.size(); i++) {
+            Bullet bullet = clientBullets.get(i);
             bullet.update();
             if (bullet.getY() < 0 || bullet.getX() < 0 || bullet.getX() > GAME_WIDTH || bullet.getY() > GAME_HEIGHT) {
-                bullets.remove(bullet);
+                clientBullets.remove(bullet);
             }
         }
     }

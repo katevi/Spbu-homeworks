@@ -3,16 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="4326b398-b323-4e9d-9d37-03fbd6aee05d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/Cannon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/Cannon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ClientCannon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ClientCannon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ClientGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ClientGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ServerCannon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/g144/Vinnik/ServerCannon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Background.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Bullet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Cannon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Canvas.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/GamePanel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/GameParams.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Sprite.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -62,10 +63,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="51" column="17" lean-forward="true" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+            <state relative-caret-position="-374">
+              <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="37" column="48" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -74,57 +99,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+            <state relative-caret-position="-612">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4821#4822#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Sprite.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-521">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="136">
+              <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4338#4339#0" expanded="true" />
+                <element signature="e#4363#4364#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Canvas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+            <state>
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#657#658#0" expanded="true" />
+                <element signature="e#688#689#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -158,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/cannon/game/Sprite.java" />
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Controllers.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerPanel.form" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientPanel.form" />
@@ -173,12 +179,13 @@
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/GameParams.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Sprite.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/GamePanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java" />
-        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java" />
       </list>
     </option>
   </component>
@@ -242,6 +249,16 @@
               <item name="g144" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Vinnik" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="Java2_Hw3t1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="task1" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="task1" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="main" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="g144" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Vinnik" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Controller" type="e9f4de52:FormNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -253,7 +270,7 @@
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="343" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574862607022" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574875273521" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
@@ -401,7 +418,7 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.32993197" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32993197" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.19557823" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.30612245" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -426,7 +443,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java</url>
-          <line>121</line>
+          <line>150</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -524,15 +541,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Background.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        <state relative-caret-position="-595">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/GamePanel.java">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-451">
+          <caret line="22" column="27" lean-forward="true" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Bullet.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -541,34 +575,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Background.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Canvas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-521">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="51" column="17" lean-forward="true" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+        <state relative-caret-position="125">
+          <caret line="33" column="101" lean-forward="true" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -577,7 +587,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="-374">
           <caret line="51" column="8" lean-forward="true" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -585,39 +595,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Cannon.java">
+    <entry file="file://$PROJECT_DIR$/../../../sem2/hw9/task1/src/main/java/Vinnik/g144/Controllers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+        <state relative-caret-position="-102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="37" column="48" selection-start-line="37" selection-start-column="48" selection-end-line="37" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        <state relative-caret-position="120">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/Canvas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+        <state>
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#688#689#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ClientCannon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="96" column="34" lean-forward="true" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+        <state relative-caret-position="136">
+          <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4338#4339#0" expanded="true" />
+            <element signature="e#4363#4364#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/g144/Vinnik/ServerCannon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4821#4822#0" expanded="true" />
           </folding>
         </state>
       </provider>

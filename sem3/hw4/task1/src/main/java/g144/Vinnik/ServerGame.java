@@ -8,16 +8,11 @@ import java.net.Socket;
 
 
 /** Class for implementation of game part for server player. */
-public class ServerGame implements Game {
+public class ServerGame extends Game {
 
     public static final int PORT = 12345;
     private ServerSocket server;
     private Socket client;
-    private BufferedReader input;
-    private PrintWriter output;
-
-    public static void main(String[] args) { }
-
 
     /** Raises the server with the specified port. */
     public ServerGame() {
@@ -33,32 +28,14 @@ public class ServerGame implements Game {
     }
 
     @Override
-    /**
-     * Sends given command.
-     * @param command your command
-     */
-    public synchronized void send(String command) {
-        init();
-
-        output.println(command);
-        output.flush();
-
-    }
-
-    @Override
-    /** Returns received command. */
-    public String receive() {
-        init();
-        return input.lines().limit(1).findAny().orElse(null);
-    }
-
-    private void init() {
+    protected void initUnderLock() {
         if (client == null) {
             try {
                 client = server.accept();
-                input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                output = new PrintWriter(client.getOutputStream());
+                in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                out = new PrintWriter(client.getOutputStream());
             } catch (IOException e) {
+                System.out.println("Exception");
                 throw new UncheckedIOException(e);
             }
         }

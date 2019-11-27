@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 
 
 /** Class for implementation of game part for client player. */
-public class ClientGame implements Game {
+public class ClientGame extends Game {
 
     private Socket client;
     private PrintWriter output;
@@ -27,34 +27,16 @@ public class ClientGame implements Game {
     }
 
     @Override
-    /**
-     * Sends given command.
-     * @param command your command
-     */
-    public synchronized void send(String command) {
-        init();
-
-        output.println(command);
-        output.flush();
-    }
-
-    @Override
-    /** Returns received command. */
-    public String receive() {
-        init();
-        return input.lines().limit(1).findAny().orElse(null);
-    }
-
-    private void init() {
-        System.out.println("Trying to connect");
+    protected void initUnderLock() {
         InetAddress inetAddress = null;
         if (client == null) {
             try {
                 client = new Socket(inetAddress = InetAddress.getByName(ipAddress), ServerGame.PORT);
-                output = new PrintWriter(client.getOutputStream());
-                input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                out = new PrintWriter(client.getOutputStream());
+                in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             } catch (UnknownHostException e) {
                 assert ipAddress != null;
+                assert inetAddress != null;
                 System.err.println("Don't know about host: " + inetAddress.getHostAddress());
                 System.exit(1);
             } catch (IOException e) {
