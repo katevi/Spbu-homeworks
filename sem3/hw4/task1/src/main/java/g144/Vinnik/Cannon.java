@@ -1,11 +1,11 @@
-package g144.Vinnik.cannon.game;
-
+package g144.Vinnik;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.io.Serializable;
 
-import static g144.Vinnik.cannon.game.GameParams.*;
+import static g144.Vinnik.GameParams.*;
 import static java.lang.Math.abs;
 import static java.lang.Math.ceil;
 

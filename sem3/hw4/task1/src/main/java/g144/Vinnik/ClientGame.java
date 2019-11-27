@@ -1,7 +1,5 @@
 package g144.Vinnik;
 
-import g144.Vinnik.cannon.game.GamePanel;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +46,7 @@ public class ClientGame implements Game {
     }
 
     private void init() {
+        System.out.println("Trying to connect");
         InetAddress inetAddress = null;
         if (client == null) {
             try {

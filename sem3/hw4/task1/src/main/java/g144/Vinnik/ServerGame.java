@@ -1,6 +1,5 @@
 package g144.Vinnik;
 
-import g144.Vinnik.cannon.game.GamePanel;
 
 import javax.swing.*;
 import java.io.*;

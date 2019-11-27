@@ -1,21 +1,24 @@
-package g144.Vinnik.cannon.game;
+package g144.Vinnik;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import static g144.Vinnik.cannon.game.GameParams.*;
+import static g144.Vinnik.GameParams.*;
 
-/** Implements interaction with user. */
-public class GamePanel extends Canvas implements Runnable {
+public class ServerCannon extends Canvas implements Runnable {
     private Thread gameThread;
     private Background background = new Background(0,0,0);
-    private Cannon cannon = new Cannon(220,GAME_HEIGHT - 100 - 30,1);
+    private Cannon serverCannon = new Cannon(220,GAME_HEIGHT - 100 - 30,1);
+    private Cannon clientCannon = new Cannon(100,GAME_HEIGHT - 100 - 30,1);
+    private ServerGame server;
+    private ClientGame client;
     private boolean isRunning;
     private final ArrayList<Bullet> bullets = new ArrayList<>();
 
     /** Creates new window with given size. */
-    public GamePanel() {
+    public ServerCannon() {
+        //client = new ClientGame("192.168.1.4");
         setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
     }
 
@@ -24,7 +27,7 @@ public class GamePanel extends Canvas implements Runnable {
     public void addNotify() {
         super.addNotify();
         if (gameThread == null) {
-            gameThread = new Thread(GamePanel.this);
+            gameThread = new Thread(ServerCannon.this);
         }
         gameThread.start();
     }
@@ -35,21 +38,27 @@ public class GamePanel extends Canvas implements Runnable {
 
     }
 
+    private void parseCommand(String command) {
+        String[] coordinates = command.split(" ");
+        clientCannon.setX(Integer.parseInt(coordinates[0]));
+        clientCannon.setY(Integer.parseInt(coordinates[1]));
+    }
+
     /** {@inheritDoc} */
     @Override
     protected void onKeyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            // cannon.getX() - left top corner of cannon image, cannon.getCannonWidth / 2 - half of width cannon image, 4 - half of bullet radius
-            bullets.add(new Bullet(cannon.getX() + cannon.getCannonWidth() / 2 - 4, cannon.getY(), 1, cannon.getAngleInDegrees()));
-            //cannon.shoot(background);
+            // serverCannon.getX() - left top corner of serverCannon image, serverCannon.getCannonWidth / 2 - half of width serverCannon image, 4 - half of bullet radius
+            bullets.add(new Bullet(serverCannon.getX() + serverCannon.getCannonWidth() / 2 - 4, serverCannon.getY(), 1, serverCannon.getAngleInDegrees()));
+            //serverCannon.shoot(background);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            cannon.moveLeft(background);
+            serverCannon.moveLeft(background);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            cannon.moveRight(background);
+            serverCannon.moveRight(background);
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            cannon.changeSightRight();
+            serverCannon.changeSightRight();
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            cannon.changeSightLeft();
+            serverCannon.changeSightLeft();
         }
     }
 
@@ -59,7 +68,8 @@ public class GamePanel extends Canvas implements Runnable {
     protected void onDraw(Graphics2D graphics2D) {
         graphics2D.setColor(Color.GREEN);
         background.draw(graphics2D);
-        cannon.draw(graphics2D);
+        serverCannon.draw(graphics2D);
+        clientCannon.draw(graphics2D);
         if (bullets != null) {
             for (Bullet bullet : bullets) {
                 bullet.draw(graphics2D);
@@ -71,8 +81,13 @@ public class GamePanel extends Canvas implements Runnable {
     @Override
     public void run() {
         init();
+        String command;
         while (isRunning) {
             long startTime = System.currentTimeMillis();
+            server.send(serverCannon.getX() + " " + serverCannon.getY());
+            command = server.receive();
+            parseCommand(command);
+
             updateGame();
             renderGame();
             long endTime = System.currentTimeMillis() - startTime;
@@ -87,6 +102,8 @@ public class GamePanel extends Canvas implements Runnable {
 
     private void init() {
         isRunning = true;
+        server = new ServerGame();
+        System.out.println("Created server socket");
     }
 
     private void renderGame() {

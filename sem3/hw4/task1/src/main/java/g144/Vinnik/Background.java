@@ -1,5 +1,4 @@
-package g144.Vinnik.cannon.game;
-
+package g144.Vinnik;
 import javax.swing.*;
 import java.awt.*;
 

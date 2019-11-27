@@ -1,4 +1,4 @@
-package g144.Vinnik.cannon.game;
+package g144.Vinnik;
 
 /** Stores game constants. */
 public final class GameParams {

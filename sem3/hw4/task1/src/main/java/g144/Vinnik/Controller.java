@@ -1,7 +1,5 @@
 package g144.Vinnik;
 
-import g144.Vinnik.cannon.game.GamePanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.EnumSet;
+import java.util.Set;
 
 public class Controller extends JPanel {
     private JPanel contentPane;
@@ -60,13 +60,12 @@ public class Controller extends JPanel {
     }
 
     private void gameForServer() {
-        game = new ServerGame();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 JFrame gameFrame = new JFrame("Server");
                 gameFrame.setResizable(false);
-                gameFrame.add(new GamePanel());
+                gameFrame.add(new ServerCannon());
                 gameFrame.pack();
                 gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gameFrame.setLocationRelativeTo(null);
@@ -93,13 +92,12 @@ public class Controller extends JPanel {
     }
 
     private void gameForClient(String ipAddress) {
-        game = new ClientGame(ipAddress);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 JFrame gameFrame = new JFrame("Client");
                 gameFrame.setResizable(false);
-                gameFrame.add(new GamePanel());
+                gameFrame.add(new ClientCannon(ipAddress));
                 gameFrame.pack();
                 gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 gameFrame.setLocationRelativeTo(null);
