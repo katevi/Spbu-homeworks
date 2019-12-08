@@ -97,7 +97,8 @@ public class GamePanel extends Canvas implements Runnable {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
             bullet.update();
-            if (bullet.getY() < 0 || bullet.getX() < 0 || bullet.getX() > GAME_WIDTH || bullet.getY() > GAME_HEIGHT) {
+            if (bullet.getY() < 0 || bullet.getX() < 0 || bullet.getX() > GAME_WIDTH
+                    || bullet.getY() > GAME_HEIGHT ||  background.ballOnTheGround(bullet.getX(), bullet.getY())) {
                 bullets.remove(bullet);
             }
         }

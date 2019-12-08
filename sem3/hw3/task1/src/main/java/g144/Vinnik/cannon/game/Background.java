@@ -8,7 +8,7 @@ public class Background extends Sprite {
     private final Image image;
 
     private final int[] changePointsX = {0, 100, 150, 200, 300, 350, 400, 470, 530, 590, 650};
-    private final int[] changePointsY = {400, 400, 300, 400, 400, 350, 400, 400, 340, 400, 400};
+    private final int[] changePointsY = {400, 400, 350, 400, 400, 350, 400, 400, 340, 400, 400};
 
     /** Creates background with given image.
      * Speed = 0, as background texture does not move during the game (some background textures moves). */
@@ -26,6 +26,17 @@ public class Background extends Sprite {
     protected boolean isChangePoint(int x) {
         for (int i = 0; i < changePointsX.length; i++) {
             if (x == changePointsX[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected boolean ballOnTheGround(int x, int y) {
+        for (int i = 1; i < changePointsX.length; i++) {
+            float resultY = (changePointsY[i] - changePointsY[i - 1]) * (x - changePointsX[i - 1])
+                    / ((changePointsX[i] - changePointsX[i - 1])) + changePointsY[i-1];
+            if (x > changePointsX[i - 1] && changePointsX[i] > x && y > resultY) {
                 return true;
             }
         }
