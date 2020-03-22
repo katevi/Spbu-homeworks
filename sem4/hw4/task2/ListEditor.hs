@@ -8,23 +8,18 @@ main = do
 adder :: [Int] -> Int -> [Int]
 adder [] y = y : []
 adder (x : xs) y | (y < x) = y : x : xs
-                 | (y >= x) = adder' xs y (x : []) where
-                        adder' :: [Int] -> Int -> [Int] -> [Int]
-                        adder' [] y ys = reverse (y : ys)
-                        adder' (x1 : []) y ys | (x1 > y) = reverse (x1 : y : ys)
-                                              | (x1 <= y) = reverse (y : x1 : ys)
-                        adder' (x1 : x2 : xs) y ys | (x1 < y && x2 > y) = reverse (x2 : y : x1 : ys) ++ xs
-                                                   | (y <= x1) = reverse (x2 : x1 : y : ys) ++ xs
-                                                   | (y >= x2) = adder' (x2 : xs) y (x1 : ys)
+                 | otherwise = x : adder xs y
                                                    
 remover :: [Int] -> Int -> [Int]
 remover [] y = []
 remover xs y | not (elem y xs) = xs
-             | elem y xs = filter (\x -> (x - y) /= 0) xs
+             | elem y xs = filter (\x -> (x /= y) == True) xs
 
 doLoop :: [Int] -> IO ()
 doLoop elements = do
-    putStrLn "Enter a command 1,2,3 or 0 to quit:"
+    putStr "Enter a command 1 - if you want to add element in list,\n"
+    putStr "2 - if you want to remove element from list, \n"
+    putStr "3 - if you want to print list, \n0 - if you want to quit.\n"
     command <- getLine
     
     case command of
@@ -36,5 +31,7 @@ doLoop elements = do
         '3':_ -> do
                 print elements
                 doLoop elements
-        _ -> doLoop elements        
+        _ -> do
+                putStr "Please, enter correct command.\n"
+                doLoop elements        
         
