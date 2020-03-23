@@ -33,11 +33,13 @@ readDataFromFile fileName = do
     contents <- readFile fileName
     return $ lines contents
     
---Parses each line from file to person's parameters, adds new person to current list
+--Parses each line from file to person's parameters, if person does not exist in current list, adds it in list
 addPersonsFromFile :: [String] -> [Person] -> [Person]
 addPersonsFromFile [] persons = persons
-addPersonsFromFile (line:lines) persons = 
-        addPersonsFromFile lines $ Person {name = head $ words line, phoneNumber = last $ words line} : persons
+addPersonsFromFile (line:lines) persons = do
+        let newPerson = Person {name = head $ words line, phoneNumber = last $ words line}
+        if (elem newPerson persons) then addPersonsFromFile lines persons
+                                    else addPersonsFromFile lines $ newPerson : persons 
 
 --Dialogue with the user
 doLoop :: [Person] -> IO ()
