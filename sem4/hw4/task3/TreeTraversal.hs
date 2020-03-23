@@ -4,8 +4,8 @@ data Tree a = Leaf a
             | Branch (Tree a) a (Tree a)
 
 instance Foldable Tree where
-    foldr f z (Leaf x) = f x z
-    foldr f z (Branch l k r) = foldr f (f k (foldr f z r)) l
+    foldr f acc (Leaf value) = f value acc
+    foldr f acc (Branch left value right) = foldr f (f value (foldr f acc right)) left
 
 --test tree 1   
 tree1 = Branch (Branch (Leaf "e") "a" (Leaf "c")) "b" (Branch (Leaf "f") "c" (Leaf "g"))
