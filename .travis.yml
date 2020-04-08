@@ -1,1 +1,8 @@
-language: haskell
+language: java
+dist: trusty
+services: 
+  - docker
+jdk: oraclejdk11
+script: 
+  - cd sem3
+os: linux
