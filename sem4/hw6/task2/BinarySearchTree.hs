@@ -1,3 +1,5 @@
+import System.Random
+
 data BinaryTree a = Null | Node (BinaryTree a) a (BinaryTree a)
         deriving Show
 
@@ -45,6 +47,16 @@ contains x Null = False
 contains x (Node left value right) | x == value = True
                                    | x > value = contains x right
                                    | x < value = contains x left
+
+--Randomize all elements in tree
+randomize :: (Random a, Num a) =>  BinaryTree a -> IO (BinaryTree a)
+randomize Null = return Null
+randomize (Node left value right) = do {
+        value <- randomRIO (1,100);
+        left <- randomize left;
+        right <- randomize right;
+        return (Node left value right)
+        }
 
 --Insert tests
 insertTree = Node (Null) 4 (Null)
