@@ -16,11 +16,14 @@ getDistance costs v = distance $ head $ filter ((== v) . vertex) costs
 
 updateWeights :: [(Int, Int, Int)] -> [Cost Int] -> [Cost Int]
 updateWeights [] costs = costs
-updateWeights (x : xs) costs | ((getDistance costs (from x)) + (weight x) <= (getDistance costs (to x))) = 
-                                updateWeights xs $ (Cost (to x, getDistance costs (from x) + (weight x))) : (filter ((/= (to x)) . vertex) costs)
-                             | ((getDistance costs (to x)) + (weight x) <= (getDistance costs (from x))) = 
-                                updateWeights xs $ (Cost (from x, getDistance costs (to x) + (weight x))) : (filter ((/= (from x)) . vertex) costs)
-                             | otherwise = updateWeights xs costs
+updateWeights (x : xs) costs | getDistance costs u + w <= getDistance costs v = 
+                                updateWeights xs $ (Cost (v, getDistance costs u + w)) : (filter ((/= v) . vertex) costs)
+                             | getDistance costs v + w <= getDistance costs u = 
+                                updateWeights xs $ (Cost (u, getDistance costs v + w)) : (filter ((/= u) . vertex) costs)
+                             | otherwise = updateWeights xs costs where
+                                u = from x
+                                v = to x
+                                w = weight x
 
 initializeCosts :: Int -> [(Int,v)] -> [Cost Int]
 initializeCosts start vertexes = [if x == start then Cost (x, 0) else Cost (x, 100000) | x <- map fst vertexes]
@@ -33,7 +36,7 @@ dijkstra' (Graph vertexes edges) costs = do {
                 else do 
                         let v = minimumBy (\a b -> compare (getDistance costs a) $ getDistance costs b) state
                         put (filter (/= v) state)
-                        dijkstra' (Graph vertexes edges) $ updateWeights (filter (\e -> (from e == v || (to e) == v)) edges) costs
+                        dijkstra' (Graph vertexes edges) $ updateWeights (filter (\e -> (from e == v || to e == v)) edges) costs
         }
 
 dijkstra :: Graph v -> Int -> [Cost Int]
